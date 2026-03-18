@@ -1,0 +1,706 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>Frequently Asked Questions - MoneyTalks</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  
+  <!-- GLOBAL CSS (same as privacy.html) -->
+  <style>
+    .btn { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important; }
+    .btn:active { transform: translateY(2px) !important; }
+    .card { transition: transform 0.3s ease, box-shadow 0.3s ease !important; }
+    .card:hover { transform: translateY(-5px) !important; box-shadow: 0 20px 40px rgba(0,0,0,0.3) !important; }
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: rgba(0,0,0,0.1); }
+    ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #8E2DE2, #00E676); border-radius: 4px; }
+    ::selection { background: rgba(142, 45, 226, 0.3); color: white; }
+    :focus { outline: 2px solid #8E2DE2; outline-offset: 2px; }
+    .gradient-text { background: linear-gradient(90deg, #8E2DE2, #00E676); -webkit-background-clip: text; background-clip: text; color: transparent; display: inline-block; }
+  </style>
+  
+  <style>
+    /* Copy all base styles from privacy.html */
+    :root {
+      --purple: #8E2DE2;
+      --green: #00E676;
+      --text: #ffffff;
+      --muted: #cbd5e1;
+      --bg-dark: #0d0221;
+      --bg-mid: #0a0f2c;
+      --bg-light: #051f1b;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background:
+        radial-gradient(1200px 600px at 80% -10%, rgba(142,45,226,.28), transparent 60%),
+        radial-gradient(1000px 600px at -10% 90%, rgba(0,230,118,.25), transparent 60%),
+        linear-gradient(120deg, var(--bg-dark) 0%, var(--bg-mid) 35%, var(--bg-light) 100%);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
+      position: relative;
+      overflow-x: hidden;
+    }
+    
+    /* Copy all navigation styles from privacy.html */
+    .country-banner { background: rgba(0,0,0,0.3); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,0.1); padding: 8px 20px; text-align: center; font-size: 14px; color: var(--muted); position: sticky; top: 0; z-index: 100; }
+    .country-banner span { color: var(--green); font-weight: 600; }
+    .navbar { background: rgba(13, 2, 33, 0.8); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(142, 45, 226, 0.2); padding: 12px 24px; position: sticky; top: 40px; z-index: 99; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 15px; }
+    .nav-logo { display: flex; align-items: center; gap: 10px; }
+    .nav-logo-mark { width: 40px; height: 40px; border-radius: 10px; background: conic-gradient(from 180deg, var(--purple), var(--green) 60%, var(--purple)); display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 16px; box-shadow: 0 4px 12px rgba(142,45,226,0.3); }
+    .nav-logo-mark span { color: white; }
+    .nav-logo-text { font-weight: 800; font-size: 18px; background: linear-gradient(90deg, var(--purple), var(--green)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .nav-links { display: flex; gap: 20px; flex-wrap: wrap; align-items: center; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-weight: 600; font-size: 15px; transition: all 0.3s ease; padding: 8px 12px; border-radius: 8px; }
+    .nav-links a:hover { color: white; background: rgba(255,255,255,0.05); }
+    .nav-links a.active { color: white; background: rgba(142, 45, 226, 0.2); border-bottom: 2px solid var(--green); }
+    .logout-btn { background: rgba(255, 71, 87, 0.1); color: #ff4757 !important; border: 1px solid rgba(255, 71, 87, 0.3); }
+    .logout-btn:hover { background: rgba(255, 71, 87, 0.2) !important; color: #ff6b81 !important; }
+    .mobile-menu-toggle { display: none; background: none; border: none; color: white; font-size: 24px; cursor: pointer; }
+    .container { max-width: 900px; margin: 30px auto 50px; padding: 0 20px; }
+    .legal-card { background: rgba(255,255,255,0.03); backdrop-filter: blur(10px); border-radius: 20px; padding: clamp(25px, 4vw, 40px); border: 1px solid rgba(142,45,226,0.2); box-shadow: 0 20px 40px rgba(0,0,0,0.3); position: relative; animation: fadeIn 0.8s ease-out; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .legal-card::before { content: ""; display: block; width: 100%; height: 4px; background: linear-gradient(90deg, var(--purple), var(--green)); border-radius: 20px 20px 0 0; position: absolute; top: 0; left: 0; }
+    
+    /* FAQ specific styles */
+    h1 {
+      color: var(--green);
+      margin-bottom: 10px;
+      font-size: clamp(24px, 5vw, 32px);
+      font-weight: 800;
+    }
+    
+    .last-updated {
+      color: var(--muted);
+      margin-bottom: 30px;
+      font-size: 14px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .faq-section {
+      margin-bottom: 30px;
+    }
+    
+    .faq-question {
+      background: rgba(142,45,226,0.1);
+      padding: 15px 20px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      border-left: 4px solid var(--purple);
+      transition: all 0.3s ease;
+    }
+    
+    .faq-question:hover {
+      background: rgba(142,45,226,0.2);
+      transform: translateX(5px);
+    }
+    
+    .faq-question h3 {
+      color: var(--text);
+      font-size: clamp(16px, 3.5vw, 18px);
+      font-weight: 600;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .faq-question h3::after {
+      content: '▼';
+      font-size: 12px;
+      color: var(--green);
+      transition: transform 0.3s ease;
+    }
+    
+    .faq-question.active h3::after {
+      transform: rotate(180deg);
+    }
+    
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      padding: 0 20px;
+      background: rgba(0,0,0,0.2);
+      border-radius: 0 0 10px 10px;
+      margin-top: 0;
+      color: var(--muted);
+    }
+    
+    .faq-answer.show {
+      max-height: 300px;
+      padding: 20px;
+      margin-top: 5px;
+    }
+    
+    .faq-answer p {
+      margin-bottom: 10px;
+    }
+    
+    .faq-answer ul {
+      margin: 10px 0 10px 20px;
+    }
+    
+    .faq-category {
+      display: inline-block;
+      padding: 4px 12px;
+      background: var(--green);
+      color: black;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+    
+    .btn-back {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 12px 24px;
+      background: linear-gradient(90deg, var(--purple), var(--green));
+      color: white;
+      text-decoration: none;
+      border-radius: 999px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-back:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(142,45,226,0.3);
+      text-decoration: none;
+    }
+    
+    .crypto-animation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+    
+    .coin {
+      position: absolute;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--purple), var(--green));
+      opacity: 0.1;
+      animation: float 20s linear infinite;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 8px;
+    }
+    
+    @keyframes float {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 0.1; }
+      100% { transform: translateY(-100px) rotate(360deg); opacity: 0.3; }
+    }
+    
+    .main-footer {
+      margin-top: 60px;
+      padding: 40px 20px 20px;
+      background: rgba(0,0,0,0.3);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid rgba(142,45,226,0.2);
+    }
+    
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+    }
+    
+    .footer-section h4 {
+      color: var(--green);
+      margin-bottom: 15px;
+      font-size: 16px;
+    }
+    
+    .footer-section a {
+      color: var(--muted);
+      text-decoration: none;
+      display: block;
+      margin-bottom: 8px;
+      font-size: 14px;
+      transition: color 0.3s ease;
+    }
+    
+    .footer-section a:hover {
+      color: white;
+    }
+    
+    .footer-section a.active {
+      color: var(--green);
+    }
+    
+    .footer-bottom {
+      text-align: center;
+      padding-top: 20px;
+      margin-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      color: var(--muted);
+      font-size: 13px;
+    }
+    
+    @media (max-width: 768px) {
+      .navbar {
+        padding: 10px 16px;
+      }
+      
+      .mobile-menu-toggle {
+        display: block;
+      }
+      
+      .nav-links {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        gap: 10px;
+        padding: 15px 0;
+      }
+      
+      .nav-links.show {
+        display: flex;
+      }
+      
+      .nav-links a {
+        width: 100%;
+        text-align: center;
+      }
+      
+      .country-banner {
+        font-size: 12px;
+        padding: 6px 12px;
+      }
+      
+      .legal-card {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Country Detector Banner -->
+  <div class="country-banner" id="country-banner">
+    Detecting your location... <span id="country-display"></span>
+  </div>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="nav-logo">
+      <div class="nav-logo-mark"><span>MT</span></div>
+      <div class="nav-logo-text">MoneyTalks</div>
+    </div>
+    
+    <button class="mobile-menu-toggle" id="menu-toggle">☰</button>
+    
+    <div class="nav-links" id="nav-links">
+      <a href="index.html">Home</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="plans.html">Plans</a>
+      <a href="links.html">Earn Links</a>
+      <a href="game.html">Game</a>
+      <a href="#" id="logout-btn" class="logout-btn">🚪 Logout</a>
+    </div>
+  </nav>
+  
+  <!-- Crypto Animation -->
+  <div class="crypto-animation">
+    <div class="coin">₿</div>
+    <div class="coin">Ξ</div>
+    <div class="coin">$</div>
+    <div class="coin">€</div>
+    <div class="coin">£</div>
+    <div class="coin">¥</div>
+  </div>
+
+  <div class="container">
+    <div class="legal-card">
+      <h1>Frequently Asked Questions</h1>
+      <p class="last-updated"><strong>Last Updated:</strong> March 2025</p>
+      
+      <div class="faq-category">💰 ACCOUNT & REGISTRATION</div>
+      
+      <div class="faq-section">
+        <div class="faq-question">
+          <h3>How do I create an account?</h3>
+        </div>
+        <div class="faq-answer">
+          <p>Click the "Register" button on the homepage or go to <a href="auth.html?register=true">auth.html?register=true</a>. Enter your username, email, and create a strong password. You'll receive a verification code via email - enter it to verify your account. That's it!</p>
+        </div>
+        
+        <div class="faq-question">
+          <h3>I didn't receive the verification email</h3>
+        </div>
+        <div class="faq-answer">
+          <p>First, check your spam/junk folder. If it's not there:</p>
+          <ul>
+            <li>Wait 2-3 minutes - sometimes emails are delayed</li>
+            <li>Click "Resend code" on the registration page</li>
+            <li>Make sure you entered the correct email address</li>
+            <li>Add themoneytalks.web@gmail.com to your contacts</li>
+          </ul>
+          <p>If you still don't receive it, contact us on Telegram.</p>
+        </div>
+        
+        <div class="faq-question">
+          <h3>Can I have multiple accounts?</h3>
+        </div>
+        <div class="faq-answer">
+          <p>No. Multiple accounts are strictly prohibited and will result in all accounts being banned. This includes using the same IP address, device, or referral links to create multiple accounts. We have systems to detect this.</p>
+        </div>
+        
+        <div class="faq-question">
+          <h3>I forgot my password</h3>
+        </div>
+        <div class="faq-answer">
+          <p>On the login page, click "Forgot Password". Enter your email address and we'll send you a reset link. Follow the instructions in the email to create a new password.</p>
+        </div>
+      </div>
+      
+      <div class="faq-category">💎 PLANS & PAYMENTS</div>
+      
+      <div class="faq-section">
+        <div class="faq-question">
+          <h3>What plans do you offer?</h3>
+        </div>
+        <div class="faq-answer">
+          <p>We offer 5 plans:</p>
+          <ul>
+            <li><strong>Basic ($1.50)</strong> - 1 earning site, 1x multiplier</li>
+            <li><strong>Starter ($2.90)</strong> - 2 earning sites, 1.2x multiplier</li>
+            <li><strong>Standard ($8.20)</strong> - 6 earning sites, 1.5x multiplier</li>
+            <li><strong>Advanced ($14.00)</strong> - 12 earning sites, 2x multiplier</li>
+            <li><strong>Premium ($25.00)</strong> - Unlimited sites, 2.5x multiplier, VIP support</li>
+          </ul>
+          <p>All plans are lifetime access - no recurring fees!</p>
+        </div>
+        
+        <div class="faq-question">
+          <h3>What payment methods do you accept?</h3>
+        </div>
+        <div class="faq-answer">
+          <p>We accept:</p>
+          <ul>
+            <li><strong>PayPal</strong> - For international users (all countries except India)</li>
+            <li><strong>Razorpay</strong> - For Indian users (INR payments)</li>
+          </ul>
+          <p>Your country is automatically detected and the appropriate payment method is shown.</p>
+        </div>
+        
+        <div class="faq-question">
+          <h3>Is it safe to pay?</h3>
+        </div>
+        <div class="faq-answer">
+          <p>Absolutely! We use:</p>
+          <ul>
+            <li><strong>PayPal</strong> - Industry-standard security, buyer protection</li>
+            <li><strong>Razorpay</strong> - RBI approved, PCI DSS compliant</li>
+          </ul>
+          <p>We never store your payment details on our servers. All payment processing is handled securely by PayPal and Razorpay.</p>
+        </div>
+        
+        <div class="faq-question">
+          <h3>Can I get a refund?</h3>
+        </div>
+        <div class="faq-answer">
+          <p>Due to the digital nature of our services, we generally do not offer refunds. However, if you experience technical issues that prevent you from accessing your plan, contact us within 7 days of purchase and we'll help resolve the issue or consider a refund on a case-by-case basis.</p>
+        </div>
+      </div>
+      
+      <div class="faq-category">🔗 EARNING LINKS</div>
+      
+      <div class="faq-section">
+        <div class="faq-question">
+          <h3>How do I earn money from links?</h3>
+        </div>
+        <div class="faq-answer">
+          <p>When you click on our earning links, you're taken to third-party websites (faucets, PTC sites, etc.). On those sites, you can:</p>
+          <ul>
+            <li>Claim free cryptocurrency every hour (faucets)</li>
+            <li>Click ads and earn (PTC sites)</li>
+            <li>Complete offers and tasks</li>
+            <li>Play games and win crypto</li>
+          </ul>
+          <p>MoneyTalks earns commissions when you sign up or make purchases on these sites - this helps us keep the platform running at no cost to you.</p>
+        </div>
+        
+        <div class="faq-question">
+          <h3>How many links can I access?</h3>
+        </div>
+        <div class="faq-answer">
+          <p>It depends on your plan:</p>
+          <ul>
+            <li><strong>Free users:</strong> Limited access (1 rotational site via casino)</li>
+            <li><strong>Basic:</strong> 1 site</li>
+            <li><strong>Starter:</strong> 2 sites</li>
+            <li><strong>Standard:</strong> 6 sites</li>
+            <li><strong>Advanced:</strong> 12 sites</li>
+            <li><strong>Premium:</strong> Unlimited sites</li>
+          </ul>
+          <p>Links rotate daily for variety!</p>
+        </div>
+        
+        <div class="faq-question">
+          <h3>Are these sites legit?</h3>
+        </div>
+        <div class="faq-answer">
+          <p>We carefully curate and verify all earning sites before adding them to our platform. However, please note:</p>
+          <ul>
+            <li>We cannot control third-party sites' payments or policies</li>
+            <li>Always read their terms and conditions</li>
+            <li>Start with small amounts to test</li>
+            <li>Use unique passwords for each site</li>
+          </ul>
+          <p>If you find a site that's not paying, please report it to us so we can remove it.</p>
+        </div>
+      </div>
+      
+      <div class="faq-category">🎮 CASINO GAME</div>
+      
+      <div class="faq-section">
+        <div class="faq-question">
+          <h3>How does the game work?</h3>
+        </div>
+        <div class="faq-answer">
+          <p>Our roulette-style game costs $0.25 per spin. Outcomes:</p>
+          <ul>
+            <li><strong>60% TRY AGAIN</strong> - You lose your spin</li>
+            <li><strong>20% WIN A SITE</strong> - Get a random crypto faucet link</li>
+            <li><strong>20% WIN $0.15</strong> - Credits added to your balance</li>
+          </ul>
+          <p>You can buy credits via PayPal or Razorpay.</p>
+        </div>
+        
+        <div class="faq-question">
+          <h3>Can I withdraw my game credits?</h3>
+        </div>
+        <div class="faq-answer">
+          <p>Game credits are for entertainment purposes only and cannot be withdrawn as real money. However, winning a site link gives you access to real earning opportunities where you can earn real cryptocurrency!</p>
+        </div>
+        
+        <div class="faq-question">
+          <h3>Is the game fair?</h3>
+        </div>
+        <div class="faq-answer">
+          <p>Yes! The game uses a random number generator with the stated probabilities (60% lose, 20% site, 20% cash). All spins are tracked and logged for transparency. We also have anti-cheat systems to prevent manipulation.</p>
+        </div>
+      </div>
+      
+      <div class="faq-category">👥 REFERRAL PROGRAM</div>
+      
+      <div class="faq-section">
+        <div class="faq-question">
+          <h3>How do referrals work?</h3>
+        </div>
+        <div class="faq-answer">
+          <p>Share your unique referral link (found in your dashboard). When someone signs up using your link:</p>
+          <ul>
+            <li>You get credit for the referral</li>
+            <li>You earn $0.25 in referral bonuses</li>
+            <li>You unlock referral rewards at milestones</li>
+          </ul>
+        </div>
+        
+        <div class="faq-question">
+          <h3>What are the referral rewards?</h3>
+        </div>
+        <div class="faq-answer">
+          <ul>
+            <li><strong>5 referrals</strong> → 1 Free Game Spin</li>
+            <li><strong>10 referrals</strong> → $0.50 Bonus Credits</li>
+            <li><strong>20 referrals</strong> → Free Basic Plan</li>
+            <li><strong>50 referrals</strong> → Free Premium Plan</li>
+          </ul>
+        </div>
+        
+        <div class="faq-question">
+          <h3>Can I refer myself?</h3>
+        </div>
+        <div class="faq-answer">
+          <p>No. Self-referrals are strictly prohibited and will result in both accounts being banned. Our system detects IP addresses, device fingerprints, and other signals to prevent abuse.</p>
+        </div>
+      </div>
+      
+      <div class="faq-category">🛡️ SECURITY & PRIVACY</div>
+      
+      <div class="faq-section">
+        <div class="faq-question">
+          <h3>Is my data safe?</h3>
+        </div>
+        <div class="faq-answer">
+          <p>Yes. We use:</p>
+          <ul>
+            <li>Firebase secure authentication</li>
+            <li>HTTPS encryption for all data transmission</li>
+            <li>Strict access controls to databases</li>
+            <li>Regular security monitoring</li>
+          </ul>
+          <p>We never sell your personal information to third parties. Read our <a href="privacy.html">Privacy Policy</a> for details.</p>
+        </div>
+        
+        <div class="faq-question">
+          <h3>Do you use cookies?</h3>
+        </div>
+        <div class="faq-answer">
+          <p>Yes, we use essential cookies to keep you logged in and maintain your session. We also use analytics cookies to improve our services. You can control cookies through your browser settings.</p>
+        </div>
+      </div>
+      
+      <div class="faq-category">❓ OTHER QUESTIONS</div>
+      
+      <div class="faq-section">
+        <div class="faq-question">
+          <h3>I'm from India - can I use MoneyTalks?</h3>
+        </div>
+        <div class="faq-answer">
+          <p>Absolutely! We have special support for Indian users:</p>
+          <ul>
+            <li>Razorpay for INR payments</li>
+            <li>No PayPal needed</li>
+            <li>All features available</li>
+          </ul>
+          <p>Our system automatically detects your location and shows the appropriate payment method.</p>
+        </div>
+        
+        <div class="faq-question">
+          <h3>Do you have a mobile app?</h3>
+        </div>
+        <div class="faq-answer">
+          <p>Not yet, but our website is fully mobile-responsive! You can access all features from your phone's browser. We're working on a dedicated app for the future.</p>
+        </div>
+        
+        <div class="faq-question">
+          <h3>How do I contact support?</h3>
+        </div>
+        <div class="faq-answer">
+          <p>You can reach us through:</p>
+          <ul>
+            <li><strong>Email:</strong> <a href="mailto:themoneytalks.web@gmail.com">themoneytalks.web@gmail.com</a></li>
+            <li><strong>Telegram:</strong> @MONEYTALKS_OFFICAL</li>
+          </ul>
+          <p>We typically respond within 24 hours.</p>
+        </div>
+      </div>
+      
+      <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-top: 30px;">
+        <a href="index.html" class="btn-back">← Back to Home</a>
+        <a href="dashboard.html" class="btn-back" style="background: transparent; border: 1px solid var(--green);">Go to Dashboard</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="main-footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>MoneyTalks</h4>
+        <a href="about.html">About Us</a>
+        <a href="faq.html" class="active">FAQ</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-section">
+        <h4>Legal</h4>
+        <a href="terms.html">Terms of Service</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="disclaimer.html">Earnings Disclaimer</a>
+        <a href="policy.html">Official Policy</a>
+      </div>
+      <div class="footer-section">
+        <h4>Resources</h4>
+        <a href="plans.html">Plans & Pricing</a>
+        <a href="links.html">Earning Links</a>
+        <a href="game.html">Casino Game</a>
+        <a href="dashboard.html">Dashboard</a>
+      </div>
+      <div class="footer-section">
+        <h4>Connect</h4>
+        <a href="mailto:themoneytalks.web@gmail.com">📧 themoneytalks.web@gmail.com</a>
+        <a href="#">📱 Telegram: @MONEYTALKS_OFFICAL</a>
+        <p style="color: var(--muted); font-size: 13px; margin-top: 10px;">© <span id="year"></span> MoneyTalks. All rights reserved.</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>💰 Crypto earning platform • Best faucet links • Daily payouts</p>
+    </div>
+  </footer>
+
+  <script>
+    // Set current year
+    document.getElementById('year').textContent = new Date().getFullYear();
+    
+    // Mobile Menu Toggle
+    document.getElementById('menu-toggle').addEventListener('click', function() {
+      document.getElementById('nav-links').classList.toggle('show');
+    });
+    
+    // Close menu when clicking outside
+    document.addEventListener('click', function(event) {
+      const navLinks = document.getElementById('nav-links');
+      const menuToggle = document.getElementById('menu-toggle');
+      
+      if (!navLinks.contains(event.target) && !menuToggle.contains(event.target) && navLinks.classList.contains('show')) {
+        navLinks.classList.remove('show');
+      }
+    });
+    
+    // FAQ Accordion
+    document.querySelectorAll('.faq-question').forEach(question => {
+      question.addEventListener('click', function() {
+        this.classList.toggle('active');
+        const answer = this.nextElementSibling;
+        answer.classList.toggle('show');
+      });
+    });
+    
+    // Country Detection
+    async function detectCountry() {
+      try {
+        const response = await fetch('https://ipapi.co/json/');
+        const data = await response.json();
+        const countryDisplay = document.getElementById('country-display');
+        
+        if (data.country_name) {
+          const flag = data.country_code === 'IN' ? '🇮🇳' : '🌍';
+          const currency = data.currency || 'USD';
+          countryDisplay.innerHTML = `${flag} ${data.country_name} (${currency})`;
+          localStorage.setItem('user_country', data.country_code || 'US');
+          localStorage.setItem('user_currency', currency);
+        } else {
+          countryDisplay.innerHTML = '🌍 International (USD)';
+        }
+      } catch (error) {
+        document.getElementById('country-display').innerHTML = '🌍 International (USD)';
+      }
+    }
+    detectCountry();
+    
+    // Logout Function
+    document.getElementById('logout-btn').addEventListener('click', function(e) {
+      e.preventDefault();
+      localStorage.removeItem('userLoggedIn');
+      localStorage.removeItem('mt_username');
+      localStorage.removeItem('mt_balance');
+      localStorage.removeItem('mt_activePlan');
+      localStorage.removeItem('mt_email');
+      window.location.href = 'auth.html';
+    });
+  </script>
+</body>
+</html>

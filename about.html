@@ -1,0 +1,742 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>About Us - MoneyTalks</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+  
+  <!-- GLOBAL CSS -->
+  <style>
+    .btn { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important; position: relative; overflow: hidden; }
+    .btn:active { transform: translateY(2px) !important; }
+    .card { transition: transform 0.3s ease, box-shadow 0.3s ease !important; }
+    .card:hover { transform: translateY(-5px) !important; box-shadow: 0 20px 40px rgba(0,0,0,0.3) !important; }
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: rgba(0,0,0,0.1); }
+    ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #8E2DE2, #00E676); border-radius: 4px; }
+    ::selection { background: rgba(142, 45, 226, 0.3); color: white; }
+    :focus { outline: 2px solid #8E2DE2; outline-offset: 2px; }
+    .gradient-text { background: linear-gradient(90deg, #8E2DE2, #00E676); -webkit-background-clip: text; background-clip: text; color: transparent; display: inline-block; }
+  </style>
+  
+  <style>
+    :root {
+      --purple: #8E2DE2;
+      --green: #00E676;
+      --text: #ffffff;
+      --muted: #cbd5e1;
+      --bg-dark: #0d0221;
+      --bg-mid: #0a0f2c;
+      --bg-light: #051f1b;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background:
+        radial-gradient(1200px 600px at 80% -10%, rgba(142,45,226,.28), transparent 60%),
+        radial-gradient(1000px 600px at -10% 90%, rgba(0,230,118,.25), transparent 60%),
+        linear-gradient(120deg, var(--bg-dark) 0%, var(--bg-mid) 35%, var(--bg-light) 100%);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
+      position: relative;
+      overflow-x: hidden;
+    }
+    
+    /* Country Detector Banner */
+    .country-banner {
+      background: rgba(0,0,0,0.3);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding: 8px 20px;
+      text-align: center;
+      font-size: 14px;
+      color: var(--muted);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    .country-banner span {
+      color: var(--green);
+      font-weight: 600;
+    }
+    
+    /* Navigation Bar */
+    .navbar {
+      background: rgba(13, 2, 33, 0.8);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(142, 45, 226, 0.2);
+      padding: 12px 24px;
+      position: sticky;
+      top: 40px;
+      z-index: 99;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+    
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .nav-logo-mark {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: conic-gradient(from 180deg, var(--purple), var(--green) 60%, var(--purple));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 16px;
+    }
+    
+    .nav-logo-mark span {
+      color: white;
+    }
+    
+    .nav-logo-text {
+      font-weight: 800;
+      font-size: 18px;
+      background: linear-gradient(90deg, var(--purple), var(--green));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 15px;
+      transition: all 0.3s ease;
+      padding: 8px 12px;
+      border-radius: 8px;
+    }
+    
+    .nav-links a:hover {
+      color: white;
+      background: rgba(255,255,255,0.05);
+    }
+    
+    .nav-links a.active {
+      color: white;
+      background: rgba(142, 45, 226, 0.2);
+      border-bottom: 2px solid var(--green);
+    }
+    
+    .logout-btn {
+      background: rgba(255, 71, 87, 0.1);
+      color: #ff4757 !important;
+      border: 1px solid rgba(255, 71, 87, 0.3);
+    }
+    
+    .logout-btn:hover {
+      background: rgba(255, 71, 87, 0.2) !important;
+      color: #ff6b81 !important;
+    }
+    
+    .mobile-menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 30px auto 50px;
+      padding: 0 20px;
+    }
+    
+    .about-card {
+      background: rgba(255,255,255,0.03);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: clamp(30px, 5vw, 50px);
+      border: 1px solid rgba(142,45,226,0.2);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+      animation: fadeIn 0.8s ease-out;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .about-card::before {
+      content: "";
+      display: block;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--purple), var(--green));
+      border-radius: 20px 20px 0 0;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    
+    h1 {
+      font-size: clamp(28px, 5vw, 36px);
+      margin-bottom: 20px;
+      background: linear-gradient(90deg, var(--purple), var(--green));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      display: inline-block;
+    }
+    
+    .logo-large {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+    
+    .logo-mark-large {
+      width: 80px;
+      height: 80px;
+      border-radius: 20px;
+      background: conic-gradient(from 180deg, var(--purple), var(--green) 60%, var(--purple));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      font-weight: 900;
+      color: white;
+      box-shadow: 0 10px 30px rgba(142,45,226,0.3);
+    }
+    
+    .mission-box {
+      background: rgba(0,230,118,0.1);
+      border-left: 4px solid var(--green);
+      padding: 25px;
+      border-radius: 10px;
+      margin: 30px 0;
+    }
+    
+    h2 {
+      color: var(--purple);
+      margin: 30px 0 15px 0;
+      font-size: clamp(20px, 4vw, 24px);
+    }
+    
+    h3 {
+      color: var(--green);
+      margin: 20px 0 10px;
+      font-size: clamp(18px, 3.5vw, 20px);
+    }
+    
+    p {
+      margin-bottom: 15px;
+      color: var(--text);
+    }
+    
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin: 30px 0;
+    }
+    
+    .stat-item {
+      background: rgba(255,255,255,0.05);
+      padding: 25px;
+      border-radius: 15px;
+      text-align: center;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .stat-number {
+      font-size: 36px;
+      font-weight: 900;
+      background: linear-gradient(90deg, var(--purple), var(--green));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 10px;
+    }
+    
+    .stat-label {
+      color: var(--muted);
+      font-size: 14px;
+    }
+    
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin: 30px 0;
+    }
+    
+    .team-member {
+      background: rgba(255,255,255,0.05);
+      padding: 20px;
+      border-radius: 15px;
+      text-align: center;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .member-avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--purple), var(--green));
+      margin: 0 auto 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+      color: white;
+    }
+    
+    .member-name {
+      font-weight: 800;
+      margin-bottom: 5px;
+    }
+    
+    .member-role {
+      color: var(--green);
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+    
+    .feature-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin: 30px 0;
+    }
+    
+    .feature {
+      background: rgba(255,255,255,0.03);
+      padding: 20px;
+      border-radius: 15px;
+      border: 1px solid rgba(142,45,226,0.2);
+    }
+    
+    .feature-icon {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+    
+    .feature-title {
+      font-weight: 800;
+      margin-bottom: 10px;
+      color: var(--green);
+    }
+    
+    .btn-back {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 12px 30px;
+      background: linear-gradient(90deg, var(--purple), var(--green));
+      color: white;
+      text-decoration: none;
+      border-radius: 999px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-back:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(142,45,226,0.3);
+    }
+    
+    .crypto-animation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+    
+    .coin {
+      position: absolute;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--purple), var(--green));
+      opacity: 0.1;
+      animation: float 20s linear infinite;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 8px;
+    }
+    
+    @keyframes float {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 0.1; }
+      100% { transform: translateY(-100px) rotate(360deg); opacity: 0.3; }
+    }
+    
+    .main-footer {
+      margin-top: 60px;
+      padding: 40px 20px 20px;
+      background: rgba(0,0,0,0.3);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid rgba(142,45,226,0.2);
+    }
+    
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+    }
+    
+    .footer-section h4 {
+      color: var(--green);
+      margin-bottom: 15px;
+      font-size: 16px;
+    }
+    
+    .footer-section a {
+      color: var(--muted);
+      text-decoration: none;
+      display: block;
+      margin-bottom: 8px;
+      font-size: 14px;
+      transition: color 0.3s ease;
+    }
+    
+    .footer-section a:hover {
+      color: white;
+    }
+    
+    .footer-section a.active {
+      color: var(--green);
+    }
+    
+    .footer-bottom {
+      text-align: center;
+      padding-top: 20px;
+      margin-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      color: var(--muted);
+      font-size: 13px;
+    }
+    
+    @media (max-width: 768px) {
+      .navbar {
+        padding: 10px 16px;
+      }
+      
+      .mobile-menu-toggle {
+        display: block;
+      }
+      
+      .nav-links {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        gap: 10px;
+        padding: 15px 0;
+      }
+      
+      .nav-links.show {
+        display: flex;
+      }
+      
+      .nav-links a {
+        width: 100%;
+        text-align: center;
+      }
+      
+      .country-banner {
+        font-size: 12px;
+        padding: 6px 12px;
+      }
+      
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .team-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Country Detector Banner -->
+  <div class="country-banner" id="country-banner">
+    Detecting your location... <span id="country-display"></span>
+  </div>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="nav-logo">
+      <div class="nav-logo-mark"><span>MT</span></div>
+      <div class="nav-logo-text">MoneyTalks</div>
+    </div>
+    
+    <button class="mobile-menu-toggle" id="menu-toggle">☰</button>
+    
+    <div class="nav-links" id="nav-links">
+      <a href="index.html">Home</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="plans.html">Plans</a>
+      <a href="links.html">Earn Links</a>
+      <a href="game.html">Game</a>
+      <a href="about.html" class="active">About</a>
+      <a href="#" id="logout-btn" class="logout-btn">🚪 Logout</a>
+    </div>
+  </nav>
+  
+  <!-- Crypto Animation -->
+  <div class="crypto-animation">
+    <div class="coin">₿</div>
+    <div class="coin">Ξ</div>
+    <div class="coin">$</div>
+    <div class="coin">€</div>
+    <div class="coin">£</div>
+    <div class="coin">¥</div>
+  </div>
+
+  <div class="container">
+    <div class="about-card">
+      <div class="logo-large">
+        <div class="logo-mark-large">MT</div>
+        <h1>About MoneyTalks</h1>
+      </div>
+      
+      <div class="mission-box">
+        <h2 style="color:#00E676; margin-top:0;">🎯 Our Mission</h2>
+        <p style="font-size: 18px;">To make cryptocurrency earning accessible, transparent, and rewarding for everyone, everywhere.</p>
+      </div>
+      
+      <h2>📖 Our Story</h2>
+      <p>MoneyTalks was founded in 2024 with a simple idea: cryptocurrency earning should be easy, transparent, and actually work for real people. We saw too many "get rich quick" scams and confusing platforms that made crypto seem complicated.</p>
+      
+      <p>Starting as a small collection of trusted faucet links shared among friends, MoneyTalks grew into a comprehensive platform serving thousands of users worldwide. Today, we're proud to be one of the most trusted names in crypto earning.</p>
+      
+      <h2>📊 MoneyTalks by Numbers</h2>
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-number">5,000+</div>
+          <div class="stat-label">Active Users</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">30+</div>
+          <div class="stat-label">Trusted Sites</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">50+</div>
+          <div class="stat-label">Countries</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">$50K+</div>
+          <div class="stat-label">Paid to Users</div>
+        </div>
+      </div>
+      
+      <h2>✨ What Makes Us Different</h2>
+      <div class="feature-list">
+        <div class="feature">
+          <div class="feature-icon">🔍</div>
+          <div class="feature-title">Curated Links</div>
+          <p>We personally test every site before adding it. No scams, no waste of time.</p>
+        </div>
+        
+        <div class="feature">
+          <div class="feature-icon">💰</div>
+          <div class="feature-title">Real Payments</div>
+          <p>All linked sites actually pay. We verify withdrawals regularly.</p>
+        </div>
+        
+        <div class="feature">
+          <div class="feature-icon">🎮</div>
+          <div class="feature-title">Fun + Earnings</div>
+          <p>Our casino game makes earning fun, not boring.</p>
+        </div>
+        
+        <div class="feature">
+          <div class="feature-icon">🤝</div>
+          <div class="feature-title">Community First</div>
+          <p>We grow with our users. Your success is our success.</p>
+        </div>
+        
+        <div class="feature">
+          <div class="feature-icon">🔒</div>
+          <div class="feature-title">Secure & Transparent</div>
+          <p>No hidden fees. No tricks. Just honest earnings.</p>
+        </div>
+        
+        <div class="feature">
+          <div class="feature-icon">🌍</div>
+          <div class="feature-title">Global Access</div>
+          <p>Works worldwide with multiple payment options.</p>
+        </div>
+      </div>
+      
+      <h2>👥 Meet Our Team</h2>
+      <div class="team-grid">
+        <div class="team-member">
+          <div class="member-avatar">👨‍💻</div>
+          <div class="member-name">Saad</div>
+          <div class="member-role">Founder & CEO</div>
+          <p style="font-size: 13px;">Crypto enthusiast since 2017. Building tools for financial freedom.</p>
+        </div>
+        
+        <div class="team-member">
+          <div class="member-avatar">👩‍💻</div>
+          <div class="member-name">Alex</div>
+          <div class="member-role">Lead Developer</div>
+          <p style="font-size: 13px;">Full-stack developer passionate about DeFi and web3.</p>
+        </div>
+        
+        <div class="team-member">
+          <div class="member-avatar">👨‍🎨</div>
+          <div class="member-name">Maria</div>
+          <div class="member-role">Community Manager</div>
+          <p style="font-size: 13px;">Helping users succeed and building our community.</p>
+        </div>
+      </div>
+      
+      <h2>💬 What Our Users Say</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 30px 0;">
+        <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 15px; border-left: 4px solid var(--green);">
+          <p style="font-style: italic;">"Made my first $50 in crypto using MoneyTalks. The curated links saved me hours of searching."</p>
+          <p style="color: var(--green); margin-top: 10px;">— Rahul, India</p>
+        </div>
+        
+        <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 15px; border-left: 4px solid var(--green);">
+          <p style="font-style: italic;">"The casino game is so fun! I've won multiple site links and even some cash prizes."</p>
+          <p style="color: var(--green); margin-top: 10px;">— Sarah, UK</p>
+        </div>
+        
+        <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 15px; border-left: 4px solid var(--green);">
+          <p style="font-style: italic;">"Best referral program I've seen. Already brought 15 friends to the platform."</p>
+          <p style="color: var(--green); margin-top: 10px;">— Mike, USA</p>
+        </div>
+      </div>
+      
+      <h2>📞 Get In Touch</h2>
+      <p>We'd love to hear from you! Whether you have questions, feedback, or just want to say hi:</p>
+      
+      <div style="display: flex; flex-direction: column; gap: 10px; margin: 20px 0;">
+        <p><strong>📧 Email:</strong> <a href="mailto:themoneytalks.web@gmail.com" style="color: var(--green);">themoneytalks.web@gmail.com</a></p>
+        <p><strong>📱 Telegram:</strong> <a href="#" style="color: var(--green);">@MONEYTALKS_OFFICAL</a></p>
+        <p><strong>🐦 Twitter:</strong> <a href="#" style="color: var(--green);">@MoneyTalks</a></p>
+      </div>
+      
+      <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-top: 30px;">
+        <a href="index.html" class="btn-back">← Back to Home</a>
+        <a href="faq.html" class="btn-back" style="background: transparent; border: 1px solid var(--green);">View FAQ</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="main-footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>MoneyTalks</h4>
+        <a href="about.html" class="active">About Us</a>
+        <a href="faq.html">FAQ</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-section">
+        <h4>Legal</h4>
+        <a href="terms.html">Terms of Service</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="disclaimer.html">Earnings Disclaimer</a>
+        <a href="policy.html">Official Policy</a>
+      </div>
+      <div class="footer-section">
+        <h4>Resources</h4>
+        <a href="plans.html">Plans & Pricing</a>
+        <a href="links.html">Earning Links</a>
+        <a href="game.html">Casino Game</a>
+        <a href="dashboard.html">Dashboard</a>
+      </div>
+      <div class="footer-section">
+        <h4>Connect</h4>
+        <a href="mailto:themoneytalks.web@gmail.com">📧 themoneytalks.web@gmail.com</a>
+        <a href="#">📱 Telegram: @MONEYTALKS_OFFICAL</a>
+        <p style="color: var(--muted); font-size: 13px; margin-top: 10px;">© <span id="year"></span> MoneyTalks</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>💰 Crypto earning platform • Best faucet links • Daily payouts</p>
+    </div>
+  </footer>
+
+  <script>
+    // Set current year
+    document.getElementById('year').textContent = new Date().getFullYear();
+    
+    // Mobile Menu Toggle
+    document.getElementById('menu-toggle').addEventListener('click', function() {
+      document.getElementById('nav-links').classList.toggle('show');
+    });
+    
+    // Close menu when clicking outside
+    document.addEventListener('click', function(event) {
+      const navLinks = document.getElementById('nav-links');
+      const menuToggle = document.getElementById('menu-toggle');
+      
+      if (!navLinks.contains(event.target) && !menuToggle.contains(event.target) && navLinks.classList.contains('show')) {
+        navLinks.classList.remove('show');
+      }
+    });
+    
+    // Country Detection
+    async function detectCountry() {
+      try {
+        const response = await fetch('https://ipapi.co/json/');
+        const data = await response.json();
+        const countryDisplay = document.getElementById('country-display');
+        
+        if (data.country_name) {
+          const flag = data.country_code === 'IN' ? '🇮🇳' : '🌍';
+          countryDisplay.innerHTML = `${flag} ${data.country_name} (${data.currency || 'USD'})`;
+          localStorage.setItem('user_country', data.country_code || 'US');
+        } else {
+          countryDisplay.innerHTML = '🌍 International';
+        }
+      } catch (error) {
+        document.getElementById('country-display').innerHTML = '🌍 International';
+      }
+    }
+    detectCountry();
+    
+    // Logout Function
+    document.getElementById('logout-btn').addEventListener('click', function(e) {
+      e.preventDefault();
+      localStorage.removeItem('userLoggedIn');
+      localStorage.removeItem('mt_username');
+      localStorage.removeItem('mt_balance');
+      localStorage.removeItem('mt_activePlan');
+      window.location.href = 'auth.html';
+    });
+  </script>
+</body>
+</html>

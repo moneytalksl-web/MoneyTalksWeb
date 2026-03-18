@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoneyTalks - Security Monitor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background: #0d0221;
+            color: white;
+            padding: 30px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #8E2DE2, #00E676);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .security-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .security-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid #8E2DE2;
+            border-radius: 15px;
+            padding: 20px;
+        }
+
+        .security-card.warning {
+            border-color: #ff4757;
+            background: rgba(255,71,87,0.05);
+        }
+
+        .security-card.success {
+            border-color: #00E676;
+            background: rgba(0,230,118,0.05);
+        }
+
+        .card-title {
+            font-size: 14px;
+            color: #cbd5e1;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card-value {
+            font-size: 36px;
+            font-weight: 900;
+        }
+
+        .threat-level {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        .threat-high {
+            background: rgba(255,71,87,0.2);
+            color: #ff4757;
+        }
+
+        .threat-medium {
+            background: rgba(255,193,7,0.2);
+            color: #ffc107;
+        }
+
+        .threat-low {
+            background: rgba(0,230,118,0.2);
+            color: #00E676;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .tab {
+            padding: 12px 24px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 10px;
+            color: white;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .tab.active {
+            background: #8E2DE2;
+            border-color: #8E2DE2;
+        }
+
+        .tab.warning.active {
+            background: #ff4757;
+        }
+
+        .chart-container {
+            background: rgba(255,255,255,0.03);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(142,45,226,0.2);
+            height: 300px;
+            display: flex;
+            align-items: flex-end;
+            gap: 10px;
+        }
+
+        .bar {
+            flex: 1;
+            background: linear-gradient(180deg, #8E2DE2, #00E676);
+            border-radius: 5px 5px 0 0;
+            position: relative;
+            min-height: 2px;
+            transition: height 0.3s ease;
+        }
+
+        .bar-label {
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 12px;
+            color: #cbd5e1;
+            white-space: nowrap;
+        }
+
+        .table-container {
+            background: rgba(255,255,255,0.03);
+            border-radius: 15px;
+            padding: 20px;
+            overflow-x: auto;
+            border: 1px solid rgba(142,45,226,0.2);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 800px;
+        }
+
+        th {
+            text-align: left;
+            padding: 15px;
+            background: rgba(142,45,226,0.2);
+            color: white;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            color: #cbd5e1;
+        }
+
+        .ip-badge {
+            font-family: monospace;
+            background: rgba(0,0,0,0.3);
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+
+        .refresh-btn {
+            padding: 10px 20px;
+            background: #8E2DE2;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .refresh-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(142,45,226,0.3);
+        }
+
+        .back-btn {
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid #8E2DE2;
+            color: white;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: #8E2DE2;
+        }
+
+        @media (max-width: 768px) {
+            body { padding: 20px; }
+            .chart-container { height: 200px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div>
+                <h1>🛡️ Security Monitor</h1>
+                <p style="color: #cbd5e1;">Real-time threat detection and monitoring</p>
+            </div>
+            <div style="display: flex; gap: 10px;">
+                <button class="refresh-btn" onclick="refreshData()">🔄 Refresh</button>
+                <a href="admin.html" class="back-btn">← Back to Admin</a>
+            </div>
+        </div>
+
+        <!-- Security Stats -->
+        <div class="security-grid">
+            <div class="security-card warning">
+                <div class="card-title">
+                    <span>🚨</span> Active Threats
+                </div>
+                <div class="card-value" id="activeThreats">0</div>
+                <span class="threat-level threat-high" id="threatLevel">LOW</span>
+            </div>
+            <div class="security-card">
+                <div class="card-title">
+                    <span>🤖</span> Bot Detections
+                </div>
+                <div class="card-value" id="botDetections">0</div>
+            </div>
+            <div class="security-card">
+                <div class="card-title">
+                    <span>🔨</span> Cheat Attempts
+                </div>
+                <div class="card-value" id="cheatAttempts">0</div>
+            </div>
+            <div class="security-card success">
+                <div class="card-title">
+                    <span>✅</span> System Status
+                </div>
+                <div class="card-value" id="systemStatus">Online</div>
+            </div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="tabs">
+            <button class="tab active" onclick="switchMonitorTab('realtime')">📊 Real-Time</button>
+            <button class="tab" onclick="switchMonitorTab('users')">👥 Suspicious Users</button>
+            <button class="tab" onclick="switchMonitorTab('ips')">🌍 IP Analysis</button>
+            <button class="tab warning" onclick="switchMonitorTab('threats')">⚠️ Active Threats</button>
+        </div>
+
+        <!-- Chart -->
+        <div class="chart-container" id="chartContainer">
+            <!-- Bars will be added by JS -->
+        </div>
+
+        <!-- Monitor Tables -->
+        <div class="table-container" id="monitorTable"></div>
+    </div>
+
+    <script>
+        let monitorData = {
+            realtime: [],
+            users: [],
+            ips: [],
+            threats: []
+        };
+
+        let currentMonitorTab = 'realtime';
+
+        function switchMonitorTab(tab) {
+            currentMonitorTab = tab;
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+            renderMonitorTable();
+            renderChart();
+        }
+
+        function renderChart() {
+            const container = document.getElementById('chartContainer');
+            const hours = ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11'];
+            
+            let bars = '';
+            hours.forEach((hour, i) => {
+                const height = Math.floor(Math.random() * 80) + 20; // Random height for demo
+                bars += `
+                    <div class="bar" style="height: ${height}%;">
+                        <span class="bar-label">${hour}:00</span>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = bars;
+        }
+
+        function renderMonitorTable() {
+            const container = document.getElementById('monitorTable');
+            
+            switch(currentMonitorTab) {
+                case 'realtime':
+                    container.innerHTML = renderRealtimeTable();
+                    break;
+                case 'users':
+                    container.innerHTML = renderSuspiciousUsersTable();
+                    break;
+                case 'ips':
+                    container.innerHTML = renderIPTable();
+                    break;
+                case 'threats':
+                    container.innerHTML = renderThreatsTable();
+                    break;
+            }
+        }
+
+        function renderRealtimeTable() {
+            return `
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Time</th>
+                            <th>Event</th>
+                            <th>User</th>
+                            <th>IP</th>
+                            <th>Location</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${monitorData.realtime.map(event => `
+                            <tr>
+                                <td>${new Date().toLocaleTimeString()}</td>
+                                <td>${event.type}</td>
+                                <td>${event.user}</td>
+                                <td class="ip-badge">${event.ip}</td>
+                                <td>${event.location}</td>
+                                <td><span class="threat-level threat-${event.status}">${event.status}</span></td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            `;
+        }
+
+        function renderSuspiciousUsersTable() {
+            return `
+                <table>
+                    <thead>
+                        <tr>
+                            <th>User</th>
+                            <th>Email</th>
+                            <th>Risk Score</th>
+                            <th>Detections</th>
+                            <th>Last Activity</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${monitorData.users.map(user => `
+                            <tr>
+                                <td>${user.id}</td>
+                                <td>${user.email}</td>
+                                <td><span class="threat-level threat-${user.risk}">${user.score}%</span></td>
+                                <td>${user.detections}</td>
+                                <td>${user.lastActivity}</td>
+                                <td><button class="refresh-btn" style="padding: 5px 10px;" onclick="investigateUser('${user.id}')">Investigate</button></td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            `;
+        }
+
+        function renderIPTable() {
+            return `
+                <table>
+                    <thead>
+                        <tr>
+                            <th>IP Address</th>
+                            <th>Location</th>
+                            <th>Users</th>
+                            <th>Attempts</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${monitorData.ips.map(ip => `
+                            <tr>
+                                <td class="ip-badge">${ip.address}</td>
+                                <td>${ip.location}</td>
+                                <td>${ip.users}</td>
+                                <td>${ip.attempts}</td>
+                                <td><span class="threat-level threat-${ip.status}">${ip.status}</span></td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            `;
+        }
+
+        function renderThreatsTable() {
+            return `
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Severity</th>
+                            <th>Threat Type</th>
+                            <th>Source</th>
+                            <th>Target</th>
+                            <th>Time</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${monitorData.threats.map(threat => `
+                            <tr>
+                                <td><span class="threat-level threat-${threat.severity}">${threat.severity}</span></td>
+                                <td>${threat.type}</td>
+                                <td>${threat.source}</td>
+                                <td>${threat.target}</td>
+                                <td>${threat.time}</td>
+                                <td><button class="refresh-btn" style="padding: 5px 10px; background: #ff4757;" onclick="blockThreat('${threat.id}')">Block</button></td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            `;
+        }
+
+        function refreshData() {
+            // Generate sample data
+            monitorData.realtime = [
+                { type: 'Login Attempt', user: 'user123', ip: '192.168.1.1', location: 'US', status: 'low' },
+                { type: 'Game Spin', user: 'crypto123', ip: '10.0.0.1', location: 'IN', status: 'low' },
+                { type: '⚠️ Cheat Detection', user: 'hacker999', ip: '45.33.22.1', location: 'RU', status: 'high' },
+            ];
+
+            monitorData.users = [
+                { id: 'user123', email: 'test@test.com', score: 85, risk: 'high', detections: 12, lastActivity: '2 min ago' },
+                { id: 'crypto456', email: 'crypto@test.com', score: 45, risk: 'medium', detections: 3, lastActivity: '15 min ago' },
+                { id: 'newbie789', email: 'new@test.com', score: 15, risk: 'low', detections: 1, lastActivity: '1 hour ago' },
+            ];
+
+            monitorData.ips = [
+                { address: '192.168.1.1', location: 'United States', users: 3, attempts: 45, status: 'high' },
+                { address: '10.0.0.1', location: 'India', users: 2, attempts: 12, status: 'medium' },
+                { address: '45.33.22.1', location: 'Russia', users: 1, attempts: 67, status: 'high' },
+            ];
+
+            monitorData.threats = [
+                { severity: 'high', type: 'Multiple Account Creation', source: '192.168.1.1', target: 'Registration', time: '2 min ago', id: 'threat1' },
+                { severity: 'medium', type: 'Rapid Game Spins', source: 'user123', target: 'Game API', time: '5 min ago', id: 'threat2' },
+                { severity: 'low', type: 'Suspicious Referrals', source: 'crypto456', target: 'Referral System', time: '10 min ago', id: 'threat3' },
+            ];
+
+            updateStats();
+            renderMonitorTable();
+        }
+
+        function updateStats() {
+            document.getElementById('activeThreats').textContent = '3';
+            document.getElementById('botDetections').textContent = '127';
+            document.getElementById('cheatAttempts').textContent = '89';
+            
+            const threatLevel = document.getElementById('threatLevel');
+            threatLevel.textContent = 'MEDIUM';
+            threatLevel.className = 'threat-level threat-medium';
+        }
+
+        function investigateUser(userId) {
+            alert(`Investigating user: ${userId}`);
+        }
+
+        function blockThreat(threatId) {
+            alert(`Blocking threat: ${threatId}`);
+        }
+
+        // Initialize
+        refreshData();
+        renderChart();
+
+        // Auto-refresh every 30 seconds
+        setInterval(refreshData, 30000);
+    </script>
+
+    <!-- Firebase Integration -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { 
+            getAuth, 
+            onAuthStateChanged 
+        } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+        import { 
+            getFirestore, 
+            collection, 
+            getDocs, 
+            query, 
+            orderBy, 
+            limit,
+            where 
+        } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCgakUnf1xeAy5tU-oQQs84609wnMukNBE",
+            authDomain: "moneytalks-a9329.firebaseapp.com",
+            projectId: "moneytalks-a9329",
+            storageBucket: "moneytalks-a9329.firebasestorage.app",
+            messagingSenderId: "865902355512",
+            appId: "1:865902355512:web:f67bddc159776db34d72cd"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        const ADMIN_EMAIL = "themoneytalks.web@gmail.com";
+
+        onAuthStateChanged(auth, async (user) => {
+            if (!user || user.email !== ADMIN_EMAIL) {
+                window.location.href = "auth.html";
+                return;
+            }
+
+            await loadRealData();
+        });
+
+        async function loadRealData() {
+            try {
+                // Load cheat logs for stats
+                const cheatSnap = await getDocs(query(collection(db, "cheat_logs"), orderBy("time", "desc"), limit(100)));
+                const cheatLogs = cheatSnap.docs.map(doc => doc.data());
+                
+                // Load bot logs
+                const botSnap = await getDocs(query(collection(db, "bot_logs"), orderBy("time", "desc"), limit(100)));
+                const botLogs = botSnap.docs.map(doc => doc.data());
+
+                document.getElementById('cheatAttempts').textContent = cheatLogs.length;
+                document.getElementById('botDetections').textContent = botLogs.length;
+
+                // Check for banned users
+                const usersSnap = await getDocs(query(collection(db, "users"), where("banned", "==", true)));
+                document.getElementById('activeThreats').textContent = usersSnap.size;
+
+            } catch (error) {
+                console.error("Error loading security data:", error);
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,1474 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+  <title>MONEYTALKS — Dashboard</title>
+  <meta name="description" content="Your MoneyTalks dashboard - track earnings, manage referrals, and access premium crypto earning links." />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+  
+  <!-- GLOBAL CSS -->
+  <style>
+    /* shared.css - Global styles */
+    .btn { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important; position: relative; overflow: hidden; }
+    .btn:active { transform: translateY(2px) !important; }
+    .card { transition: transform 0.3s ease, box-shadow 0.3s ease !important; }
+    .card:hover { transform: translateY(-5px) !important; box-shadow: 0 20px 40px rgba(0,0,0,0.3) !important; }
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: rgba(0,0,0,0.1); }
+    ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #8E2DE2, #00E676); border-radius: 4px; }
+    ::selection { background: rgba(142, 45, 226, 0.3); color: white; }
+    :focus { outline: 2px solid #8E2DE2; outline-offset: 2px; }
+    .loading-spinner { width: 40px; height: 40px; border: 4px solid rgba(255,255,255,0.1); border-top-color: #8E2DE2; border-radius: 50%; animation: spin 1s linear infinite; margin: 20px auto; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .gradient-text { background: linear-gradient(90deg, #8E2DE2, #00E676); -webkit-background-clip: text; background-clip: text; color: transparent; display: inline-block; }
+    .pulse { animation: pulse 2s infinite; }
+    @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.7; } 100% { opacity: 1; } }
+    .fade-in { animation: fadeIn 0.5s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    @media (max-width: 768px) { .hide-mobile { display: none !important; } .mobile-stack { flex-direction: column !important; } .mobile-center { text-align: center !important; } }
+    @media print { .no-print { display: none !important; } }
+    @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+    @keyframes slideOut { from { transform: translateX(0); opacity: 1; } to { transform: translateX(100%); opacity: 0; } }
+    [data-tooltip] { position: relative; }
+    [data-tooltip]:hover::after { content: attr(data-tooltip); position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.8); color: white; padding: 6px 12px; border-radius: 6px; font-size: 12px; white-space: nowrap; z-index: 1000; pointer-events: none; }
+  </style>
+  
+  <style>
+    :root{
+      --purple:#8E2DE2; 
+      --green:#00E676;
+      --text:#ffffff; 
+      --muted:#cbd5e1;
+      --btn-blue:#eaf2ff; 
+      --btn-blue-border:#c7dbff;
+      --card-bg:rgba(255,255,255,.05);
+      --bg-dark: #0d0221;
+      --bg-mid: #0a0f2c;
+      --bg-light: #051f1b;
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      margin: 0; 
+      color: var(--text);
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+      background:
+        radial-gradient(1200px 600px at 80% -10%, rgba(142,45,226,.28), transparent 60%),
+        radial-gradient(1000px 600px at -10% 90%, rgba(0,230,118,.25), transparent 60%),
+        linear-gradient(120deg, var(--bg-dark) 0%, var(--bg-mid) 35%, var(--bg-light) 100%);
+      position: relative;
+      overflow-x: hidden;
+      min-height: 100vh;
+      padding: 0;
+    }
+    
+    /* Country Detector Banner */
+    .country-banner {
+      background: rgba(0,0,0,0.3);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding: 8px 20px;
+      text-align: center;
+      font-size: 14px;
+      color: var(--muted);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    .country-banner span {
+      color: var(--green);
+      font-weight: 600;
+    }
+    
+    /* Navigation Bar */
+    .navbar {
+      background: rgba(13, 2, 33, 0.8);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(142, 45, 226, 0.2);
+      padding: 12px 24px;
+      position: sticky;
+      top: 40px;
+      z-index: 99;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+    
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .nav-logo-mark {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: conic-gradient(from 180deg, var(--purple), var(--green) 60%, var(--purple));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 16px;
+    }
+    
+    .nav-logo-mark span {
+      color: white;
+    }
+    
+    .nav-logo-text {
+      font-weight: 800;
+      font-size: 18px;
+      background: linear-gradient(90deg, var(--purple), var(--green));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 15px;
+      transition: color 0.3s ease;
+      padding: 8px 12px;
+      border-radius: 8px;
+    }
+    
+    .nav-links a:hover {
+      color: white;
+      background: rgba(255,255,255,0.05);
+    }
+    
+    .nav-links a.active {
+      color: white;
+      background: rgba(142, 45, 226, 0.2);
+      border-bottom: 2px solid var(--green);
+    }
+    
+    .logout-btn {
+      background: rgba(255, 71, 87, 0.1);
+      color: #ff4757 !important;
+      border: 1px solid rgba(255, 71, 87, 0.3);
+    }
+    
+    .logout-btn:hover {
+      background: rgba(255, 71, 87, 0.2) !important;
+      color: #ff6b81 !important;
+    }
+    
+    .mobile-menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+    }
+    
+    /* Animated Background Elements */
+    .bg-animation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+      pointer-events: none;
+    }
+    
+    .bg-element {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(60px);
+      opacity: 0.1;
+    }
+    
+    .bg-1 {
+      width: min(400px, 80vw);
+      height: min(400px, 80vw);
+      background: var(--purple);
+      top: -150px;
+      right: -100px;
+      animation: float 18s ease-in-out infinite;
+    }
+    
+    .bg-2 {
+      width: min(500px, 90vw);
+      height: min(500px, 90vw);
+      background: var(--green);
+      bottom: -200px;
+      left: -150px;
+      animation: float 22s ease-in-out infinite reverse;
+    }
+    
+    .container { 
+      max-width: 1200px; 
+      margin: 0 auto;
+      padding: 20px 24px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.8s ease-out 0.3s forwards;
+    }
+    
+    .logo{ 
+      display:flex; 
+      align-items:center; 
+      gap:12px; 
+      margin-bottom:20px;
+    }
+    
+    .logo-mark{ 
+      width:50px; 
+      height:50px; 
+      border-radius:14px; 
+      display:grid; 
+      place-items:center;
+      background:conic-gradient(from 180deg, var(--purple), var(--green) 60%, var(--purple));
+      box-shadow:0 6px 14px rgba(0,230,118,.22), 0 5px 14px rgba(142,45,226,.22);
+      animation: logoPulse 3s ease-in-out infinite;
+    }
+    
+    .logo-mark span{ 
+      font-weight:900; 
+      font-size:20px; 
+      color:#fff;
+    }
+    
+    .logo-text{ 
+      font-weight:900; 
+      font-size:22px; 
+      letter-spacing:.1em;
+      background:linear-gradient(90deg, var(--purple), var(--green));
+      -webkit-background-clip:text; 
+      background-clip:text; 
+      color:transparent;
+    }
+    
+    h1{ 
+      font-size: clamp(22px, 4vw, 26px); 
+      margin:0 0 30px;
+    }
+
+    .grid{ 
+      display:grid; 
+      gap:24px;
+    }
+    
+    @media(min-width:768px){
+      .grid-2{ grid-template-columns:1fr 1fr; }
+      .grid-3{ grid-template-columns:1fr 1fr 1fr; }
+    }
+
+    .card{
+      background:var(--card-bg); 
+      backdrop-filter:blur(12px);
+      border:1px solid rgba(255,255,255,.15);
+      border-radius:20px; 
+      padding: clamp(16px, 3vw, 24px);
+      box-shadow:0 12px 28px rgba(0,0,0,.25);
+      transition: transform .3s ease, box-shadow .3s ease;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: cardEntrance 0.6s ease-out forwards;
+    }
+    
+    .card:nth-child(1) { animation-delay: 0.9s; }
+    .card:nth-child(2) { animation-delay: 1.0s; }
+    .card:nth-child(3) { animation-delay: 1.1s; }
+    .card:nth-child(4) { animation-delay: 1.2s; }
+    .card:nth-child(5) { animation-delay: 1.3s; }
+    .card:nth-child(6) { animation-delay: 1.4s; }
+    
+    .card:hover{ 
+      transform:translateY(-5px);
+      box-shadow: 0 16px 32px rgba(0,0,0,.3), 0 0 20px rgba(142,45,226,.15);
+    }
+    
+    .card h2{ 
+      font-size: clamp(18px, 3vw, 20px); 
+      margin:0 0 16px; 
+      font-weight:800;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .card h2::before {
+      content: '';
+      width: 6px;
+      height: 20px;
+      background: linear-gradient(to bottom, var(--purple), var(--green));
+      border-radius: 3px;
+    }
+
+    .stat-row{ 
+      display:flex; 
+      flex-wrap:wrap; 
+      gap:16px;
+    }
+    
+    .stat{ 
+      flex:1; 
+      min-width: 100px; 
+      background:rgba(255,255,255,.08);
+      border-radius:12px; 
+      padding:16px; 
+      text-align:center;
+      transition: transform .2s ease, background .3s ease;
+    }
+    
+    .stat:hover {
+      transform: translateY(-3px);
+      background: rgba(255,255,255,.12);
+    }
+    
+    .stat strong{ 
+      display:block; 
+      font-size: clamp(18px, 3vw, 20px); 
+      margin-bottom:6px;
+      background: linear-gradient(90deg, var(--purple), var(--green));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .btn{ 
+      --radius:999px; 
+      display:inline-block;
+      padding: 12px 18px; 
+      border-radius:var(--radius);
+      font-weight:800; 
+      text-align:center; 
+      text-decoration:none;
+      border:1px solid transparent; 
+      cursor:pointer;
+      transition:all .3s ease; 
+      margin:6px 0; 
+      width:100%;
+      position: relative;
+      overflow: hidden;
+      font-size: clamp(14px, 2.5vw, 16px);
+    }
+    
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s ease;
+    }
+    
+    .btn:hover::before {
+      left: 100%;
+    }
+    
+    .btn-primary{ 
+      background:linear-gradient(180deg,#ffffff,var(--btn-blue));
+      color:#0b3b8d; 
+      border-color:var(--btn-blue-border);
+      box-shadow: 0 6px 16px rgba(13,59,141,.25);
+    }
+    
+    .btn-primary:hover{ 
+      filter:brightness(1.05);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(13,59,141,.4);
+    }
+    
+    .btn-ghost{ 
+      background:transparent; 
+      color:#fff; 
+      border:1px solid rgba(255,255,255,.4);
+      transition: all 0.3s ease;
+    }
+    
+    .btn-ghost:hover{ 
+      background:rgba(255,255,255,.1);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(255,255,255,.1);
+    }
+    
+    .btn-small {
+      padding: 8px 16px;
+      font-size: 14px;
+      width: auto;
+    }
+
+    /* Crypto Animation */
+    .crypto-animation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+    
+    .coin {
+      position: absolute;
+      width: clamp(15px, 3vw, 18px);
+      height: clamp(15px, 3vw, 18px);
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--purple), var(--green));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: clamp(7px, 1.5vw, 8px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      opacity: 0.6;
+      animation: coinFloat 10s ease-in-out infinite;
+    }
+    
+    .coin:nth-child(1) { top: 10%; left: 5%; animation-delay: 0s; }
+    .coin:nth-child(2) { top: 20%; left: 90%; animation-delay: 1s; }
+    .coin:nth-child(3) { top: 60%; left: 8%; animation-delay: 2s; }
+    .coin:nth-child(4) { top: 80%; left: 85%; animation-delay: 3s; }
+    .coin:nth-child(5) { top: 40%; left: 92%; animation-delay: 4s; }
+    .coin:nth-child(6) { top: 30%; left: 3%; animation-delay: 5s; }
+    .coin:nth-child(7) { top: 85%; left: 50%; animation-delay: 6s; }
+    .coin:nth-child(8) { top: 15%; left: 70%; animation-delay: 7s; }
+
+    /* Sparkle Effect */
+    .sparkle{ 
+      position: fixed; 
+      inset: 0; 
+      pointer-events:none; 
+      opacity:.3; 
+      mix-blend-mode:screen;
+      z-index: -1;
+    }
+    
+    .sparkle i{ 
+      position:absolute; 
+      width: 3px; 
+      height: 3px; 
+      background:#fff; 
+      border-radius:50%; 
+      filter:blur(.5px);
+      animation: sparkleTwinkle 4s ease-in-out infinite;
+    }
+    
+    .sparkle i:nth-child(1) { top: 15%; left: 25%; animation-delay: 0s; }
+    .sparkle i:nth-child(2) { top: 65%; left: 85%; animation-delay: 0.5s; }
+    .sparkle i:nth-child(3) { top: 80%; left: 35%; animation-delay: 1s; }
+    .sparkle i:nth-child(4) { top: 45%; left: 65%; animation-delay: 1.5s; }
+    .sparkle i:nth-child(5) { top: 75%; left: 15%; animation-delay: 2s; }
+    .sparkle i:nth-child(6) { top: 35%; left: 95%; animation-delay: 2.5s; }
+    .sparkle i:nth-child(7) { top: 10%; left: 55%; animation-delay: 3s; }
+    .sparkle i:nth-child(8) { top: 90%; left: 75%; animation-delay: 3.5s; }
+
+    /* Animations */
+    @keyframes cardEntrance {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-20px) scale(1.05); }
+    }
+    
+    @keyframes logoPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    
+    @keyframes coinFloat {
+      0%, 100% { 
+        transform: translateY(0) rotate(0deg) scale(1); 
+        opacity: 0.4; 
+      }
+      25% { 
+        transform: translateY(-20px) rotate(90deg) scale(1.1); 
+        opacity: 0.7; 
+      }
+      50% { 
+        transform: translateY(-40px) rotate(180deg) scale(1.2); 
+        opacity: 1; 
+      }
+      75% { 
+        transform: translateY(-20px) rotate(270deg) scale(1.1); 
+        opacity: 0.7; 
+      }
+    }
+    
+    @keyframes sparkleTwinkle { 
+      0%, 100% { opacity: 0.1; transform: scale(0.8); }
+      50% { opacity: 1; transform: scale(1.2); }
+    }
+    
+    /* Dashboard specific styles */
+    .profile-info p {
+      margin: 8px 0;
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding-bottom: 8px;
+      font-size: clamp(14px, 2.5vw, 16px);
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    
+    .profile-info strong {
+      color: var(--muted);
+    }
+    
+    .links-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+    
+    .referral-rewards {
+      background: rgba(255,255,255,0.05);
+      border-radius: 12px;
+      padding: 16px;
+      margin-top: 12px;
+    }
+    
+    .referral-rewards li {
+      margin: 8px 0;
+      padding-left: 20px;
+      position: relative;
+      list-style: none;
+      font-size: clamp(13px, 2.5vw, 14px);
+    }
+    
+    .referral-rewards li::before {
+      content: '💰';
+      position: absolute;
+      left: 0;
+    }
+    
+    .copy-btn {
+      background: rgba(255,255,255,0.1);
+      border: none;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      margin-left: 8px;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+    }
+    
+    .copy-btn:hover {
+      background: rgba(255,255,255,0.2);
+    }
+    
+    .notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: linear-gradient(90deg, var(--purple), var(--green));
+      color: white;
+      padding: 12px 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      font-weight: 600;
+      transform: translateX(100%);
+      transition: transform 0.5s ease;
+      z-index: 1000;
+      max-width: 90vw;
+      font-size: clamp(13px, 3vw, 14px);
+    }
+    
+    .notification.show {
+      transform: translateX(0);
+    }
+    
+    .streak-days {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 5px;
+      margin: 15px 0;
+    }
+    
+    .day {
+      background: rgba(255,255,255,0.1);
+      color: var(--muted);
+      width: 100%;
+      aspect-ratio: 1/1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      font-weight: bold;
+      font-size: clamp(12px, 2.5vw, 14px);
+    }
+    
+    .day.active {
+      background: var(--green);
+      color: black;
+    }
+    
+    .ref-input-group {
+      display: flex;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    
+    .ref-input-group input {
+      flex: 1;
+      min-width: 200px;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.2);
+      background: rgba(0,0,0,0.2);
+      color: white;
+      font-size: clamp(13px, 2.5vw, 14px);
+    }
+    
+    /* Loading Spinner */
+    .loading-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 200px;
+    }
+    
+    /* Mobile Navigation */
+    @media (max-width: 768px) {
+      .navbar {
+        padding: 10px 16px;
+      }
+      
+      .mobile-menu-toggle {
+        display: block;
+      }
+      
+      .nav-links {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        gap: 10px;
+        padding: 15px 0;
+      }
+      
+      .nav-links.show {
+        display: flex;
+      }
+      
+      .nav-links a {
+        width: 100%;
+        text-align: center;
+      }
+      
+      .country-banner {
+        font-size: 12px;
+        padding: 6px 12px;
+      }
+      
+      .ref-input-group {
+        flex-direction: column;
+      }
+      
+      .ref-input-group input {
+        border-radius: 8px;
+      }
+      
+      .copy-btn {
+        margin-left: 0;
+        width: 100%;
+      }
+      
+      .container {
+        padding: 15px 16px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .navbar {
+        padding: 8px 12px;
+      }
+      
+      .nav-logo-text {
+        font-size: 16px;
+      }
+      
+      .nav-logo-mark {
+        width: 35px;
+        height: 35px;
+        font-size: 14px;
+      }
+      
+      .stat {
+        min-width: 80px;
+        padding: 12px;
+      }
+      
+      .stat strong {
+        font-size: 18px;
+      }
+    }
+    
+    /* Footer */
+    .main-footer {
+      margin-top: 60px;
+      padding: 30px 20px 20px;
+      background: rgba(0,0,0,0.3);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid rgba(142,45,226,0.2);
+    }
+    
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+    }
+    
+    .footer-section h4 {
+      color: var(--green);
+      margin-bottom: 15px;
+      font-size: 16px;
+    }
+    
+    .footer-section a {
+      color: var(--muted);
+      text-decoration: none;
+      display: block;
+      margin-bottom: 8px;
+      font-size: 14px;
+      transition: color 0.3s ease;
+    }
+    
+    .footer-section a:hover {
+      color: white;
+    }
+    
+    .footer-bottom {
+      text-align: center;
+      padding-top: 20px;
+      margin-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      color: var(--muted);
+      font-size: 13px;
+    }
+    
+    .footer-bottom a {
+      color: var(--muted);
+      text-decoration: none;
+    }
+    
+    .footer-bottom a:hover {
+      color: var(--green);
+    }
+
+    /* Plan badge styles */
+    .plan-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      margin-left: 8px;
+    }
+    
+    .plan-badge.basic { background: #6c757d; }
+    .plan-badge.starter { background: #17a2b8; }
+    .plan-badge.standard { background: #ffc107; color: #000; }
+    .plan-badge.advanced { background: #fd7e14; }
+    .plan-badge.premium { background: linear-gradient(90deg, #ffd700, #ffa500); color: #000; }
+    .plan-badge.free { background: #28a745; }
+  </style>
+</head>
+<body>
+  <!-- Country Detector Banner -->
+  <div class="country-banner" id="country-banner">
+    Detecting your location... <span id="country-display"></span>
+  </div>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="nav-logo">
+      <div class="nav-logo-mark">MT</div>
+      <div class="nav-logo-text">MoneyTalks</div>
+    </div>
+    
+    <button class="mobile-menu-toggle" id="menu-toggle" aria-label="Toggle menu">☰</button>
+    
+    <div class="nav-links" id="nav-links">
+      <a href="index.html">Home</a>
+      <a href="dashboard.html" class="active">Dashboard</a>
+      <a href="plans.html">Plans</a>
+      <a href="links.html">Earn Links</a>
+      <a href="game.html">Game</a>
+      <a href="#" id="logout-btn" class="logout-btn">🚪 Logout</a>
+    </div>
+  </nav>
+  
+  <!-- Animated Background -->
+  <div class="bg-animation">
+    <div class="bg-element bg-1"></div>
+    <div class="bg-element bg-2"></div>
+  </div>
+  
+  <!-- Crypto Animation -->
+  <div class="crypto-animation">
+    <div class="coin">₿</div>
+    <div class="coin">Ξ</div>
+    <div class="coin">$</div>
+    <div class="coin">€</div>
+    <div class="coin">£</div>
+    <div class="coin">¥</div>
+    <div class="coin">₿</div>
+    <div class="coin">Ξ</div>
+  </div>
+  
+  <!-- Sparkle Effect -->
+  <div class="sparkle" aria-hidden="true">
+    <i></i>
+    <i></i>
+    <i></i>
+    <i></i>
+    <i></i>
+    <i></i>
+    <i></i>
+    <i></i>
+  </div>
+
+  <div class="container">
+    <!-- Logo + Welcome -->
+    <div class="logo">
+      <div class="logo-mark"><span>MT</span></div>
+      <div class="logo-text">MoneyTalks</div>
+    </div>
+    
+    <h1>Welcome back, <span id="username">Loading...</span> 👋</h1>
+
+    <!-- Loading Spinner (hidden by default) -->
+    <div id="loading-spinner" class="loading-container" style="display: none;">
+      <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Stats Row -->
+    <div class="grid grid-3" style="margin-bottom: 24px;">
+      <div class="card">
+        <h2>🎮 Game Credits</h2>
+        <div style="font-size: clamp(24px, 5vw, 28px); font-weight: 800; margin: 10px 0; background: linear-gradient(90deg, var(--purple), var(--green)); -webkit-background-clip: text; background-clip: text; color: transparent;">
+          $<span id="game-credits">0.00</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-top: 10px;">
+          <span style="color: var(--muted);">Active Plan:</span>
+          <span id="active-plan" style="font-weight: 700; color: var(--green);">Free</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-top: 5px;">
+          <span style="color: var(--muted);">Multiplier:</span>
+          <span id="plan-multiplier" style="font-weight: 700;">1x</span>
+        </div>
+        <a href="plans.html" class="btn btn-primary" style="margin-top: 15px;">Upgrade Plan</a>
+      </div>
+
+      <div class="card">
+        <h2>🔥 Login Streak</h2>
+        <div class="streak-days" id="streak-days">
+          <!-- Will be populated by JS -->
+        </div>
+        <div style="text-align: center; color: var(--muted); font-size: 14px;" id="streak-text">
+          Loading streak...
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>📊 Your Stats</h2>
+        <div class="stat-row">
+          <div class="stat">
+            <strong id="sites-accessed">0</strong>
+            Sites Used
+          </div>
+          <div class="stat">
+            <strong id="total-referrals">0</strong>
+            Referrals
+          </div>
+          <div class="stat">
+            <strong id="total-spins">0</strong>
+            Total Spins
+          </div>
+        </div>
+        <div style="margin-top: 15px; text-align: center;">
+          <span style="color: var(--green);">💰 Total Won: $<span id="total-won">0.00</span></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Grid -->
+    <div class="grid grid-2">
+      <!-- Profile Card -->
+      <div class="card">
+        <h2>👤 Profile</h2>
+        <div class="profile-info">
+          <p><strong>Username:</strong> <span id="p-username">Loading...</span></p>
+          <p><strong>Email:</strong> <span id="user-email">Loading...</span></p>
+          <p><strong>Member Since:</strong> <span id="member-since">Loading...</span></p>
+          <p><strong>Account Status:</strong> <span id="account-status" style="color: var(--green);">Active</span></p>
+          <p><strong>Last Login:</strong> <span id="last-login">Today</span></p>
+        </div>
+      </div>
+
+      <!-- Earning Sites Card -->
+      <div class="card">
+        <h2>🚀 Your Earning Sites</h2>
+        <div id="no-plan-message">
+          <p style="color: var(--muted); margin-bottom: 15px;">You don't have any earning sites unlocked yet.</p>
+          <a href="plans.html" class="btn btn-primary">Buy a Plan to Start Earning</a>
+        </div>
+        <div id="plan-links" style="display: none;">
+          <div class="links-grid" id="sites-grid">
+            <!-- Will be populated by JS -->
+          </div>
+          <p style="color: var(--muted); font-size: 12px; margin-top: 15px; text-align: center;">
+            Click any link to visit earning site. You'll earn real crypto there!
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Referral Card -->
+    <div class="card">
+      <h2>👥 Referral Program</h2>
+      <p><strong>Your Referral Link:</strong></p>
+      <div class="ref-input-group">
+        <input type="text" id="ref-link" value="https://moneytalks.com/ref/..." readonly>
+        <button class="copy-btn" id="copy-ref">📋 Copy Link</button>
+      </div>
+      
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 20px 0;">
+        <div style="background: rgba(0,230,118,0.1); padding: 15px; border-radius: 10px; text-align: center;">
+          <div style="font-size: 28px; font-weight: 900; color: var(--green);" id="referral-count">0</div>
+          <div style="color: var(--muted); font-size: 14px;">Total Referrals</div>
+        </div>
+        <div style="background: rgba(142,45,226,0.1); padding: 15px; border-radius: 10px; text-align: center;">
+          <div style="font-size: 28px; font-weight: 900; color: var(--purple);" id="referral-earnings">$0.00</div>
+          <div style="color: var(--muted); font-size: 14px;">Referral Earnings</div>
+        </div>
+      </div>
+
+      <div class="referral-rewards">
+        <h3 style="color: var(--green); margin-bottom: 10px;">🎁 Referral Rewards</h3>
+        <ul>
+          <li><strong>5 referrals</strong> → 1 Free Game Spin</li>
+          <li><strong>10 referrals</strong> → $0.50 Bonus Credits</li>
+          <li><strong>20 referrals</strong> → Free Basic Plan</li>
+          <li><strong>50 referrals</strong> → Free Premium Plan</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Game Stats Card -->
+    <div class="card">
+      <h2>🎰 Game Statistics</h2>
+      <div class="grid grid-3" style="margin-top: 16px;">
+        <div class="stat">
+          <strong id="game-spins-today">0</strong>
+          Spins Today
+        </div>
+        <div class="stat">
+          <strong id="games-won">0</strong>
+          Games Won
+        </div>
+        <div class="stat">
+          <strong id="win-rate">0%</strong>
+          Win Rate
+        </div>
+      </div>
+      <div style="margin-top: 15px;">
+        <div style="background: rgba(0,0,0,0.3); height: 10px; border-radius: 5px; overflow: hidden;">
+          <div id="win-progress" style="height: 100%; width: 0%; background: linear-gradient(90deg, var(--purple), var(--green));"></div>
+        </div>
+      </div>
+      <a href="game.html" class="btn btn-primary" style="margin-top: 20px;">🎮 Play Now</a>
+    </div>
+
+    <!-- Recent Activity Card -->
+    <div class="card">
+      <h2>📝 Recent Activity</h2>
+      <div id="recent-activity" style="max-height: 200px; overflow-y: auto;">
+        <p style="color: var(--muted); text-align: center;">Loading activity...</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="main-footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>MoneyTalks</h4>
+        <a href="about.html">About Us</a>
+        <a href="faq.html">FAQ</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-section">
+        <h4>Legal</h4>
+        <a href="terms.html">Terms of Service</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="disclaimer.html">Earnings Disclaimer</a>
+        <a href="policy.html">Official Policy</a>
+      </div>
+      <div class="footer-section">
+        <h4>Resources</h4>
+        <a href="plans.html">Plans & Pricing</a>
+        <a href="links.html">Earning Links</a>
+        <a href="game.html">Casino Game</a>
+        <a href="dashboard.html">Dashboard</a>
+      </div>
+      <div class="footer-section">
+        <h4>Connect</h4>
+        <a href="mailto:themoneytalks.web@gmail.com">📧 themoneytalks.web@gmail.com</a>
+        <a href="#">📱 Telegram: @MONEYTALKS_OFFICAL</a>
+        <p style="color: var(--muted); font-size: 13px; margin-top: 10px;">© <span id="year"></span> MoneyTalks. All rights reserved.</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>💰 Crypto earning platform • Best faucet links • Daily payouts</p>
+    </div>
+  </footer>
+  
+  <!-- Notification -->
+  <div class="notification" id="notification">Copied to clipboard!</div>
+
+  <script>
+    // Set current year
+    document.getElementById('year').textContent = new Date().getFullYear();
+    
+    // Mobile Menu Toggle
+    document.getElementById('menu-toggle').addEventListener('click', function() {
+      document.getElementById('nav-links').classList.toggle('show');
+    });
+    
+    // Close menu when clicking outside
+    document.addEventListener('click', function(event) {
+      const navLinks = document.getElementById('nav-links');
+      const menuToggle = document.getElementById('menu-toggle');
+      
+      if (!navLinks.contains(event.target) && !menuToggle.contains(event.target) && navLinks.classList.contains('show')) {
+        navLinks.classList.remove('show');
+      }
+    });
+
+    // Notification function
+    function showNotification(message, type = 'success') {
+      const colors = {
+        success: '#00E676',
+        error: '#ff4757',
+        info: '#8E2DE2'
+      };
+      
+      const notification = document.getElementById('notification');
+      notification.textContent = message;
+      notification.style.background = colors[type];
+      notification.classList.add('show');
+      
+      setTimeout(() => {
+        notification.classList.remove('show');
+      }, 3000);
+    }
+
+    // Add animation styles
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes slideIn {
+        from { transform: translateX(100%); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
+      }
+      @keyframes slideOut {
+        from { transform: translateX(0); opacity: 1; }
+        to { transform: translateX(100%); opacity: 0; }
+      }
+    `;
+    document.head.appendChild(style);
+
+    // Country Detection
+    async function detectCountry() {
+      try {
+        const response = await fetch('https://ipapi.co/json/');
+        const data = await response.json();
+        const countryDisplay = document.getElementById('country-display');
+        
+        if (data.country_name) {
+          const flag = data.country_code === 'IN' ? '🇮🇳' : '🌍';
+          countryDisplay.innerHTML = `${flag} ${data.country_name} (${data.currency || 'USD'})`;
+          localStorage.setItem('user_country', data.country_code || 'US');
+        } else {
+          countryDisplay.innerHTML = '🌍 International';
+        }
+      } catch (error) {
+        document.getElementById('country-display').innerHTML = '🌍 International';
+      }
+    }
+    detectCountry();
+  </script>
+
+  <!-- Firebase Integration -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { 
+      getAuth, 
+      onAuthStateChanged,
+      signOut 
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    import { 
+      getFirestore, 
+      doc, 
+      getDoc, 
+      collection, 
+      query, 
+      where, 
+      getDocs,
+      orderBy,
+      limit 
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCgakUnf1xeAy5tU-oQQs84609wnMukNBE",
+      authDomain: "moneytalks-a9329.firebaseapp.com",
+      projectId: "moneytalks-a9329",
+      storageBucket: "moneytalks-a9329.firebasestorage.app",
+      messagingSenderId: "865902355512",
+      appId: "1:865902355512:web:f67bddc159776db34d72cd",
+      measurementId: "G-TLGCP9C4FD"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    // Plan definitions
+    const plans = {
+      basic: { name: 'Basic', multiplier: 1, sites: 1, color: 'basic' },
+      starter: { name: 'Starter', multiplier: 1.2, sites: 2, color: 'starter' },
+      standard: { name: 'Standard', multiplier: 1.5, sites: 6, color: 'standard' },
+      advanced: { name: 'Advanced', multiplier: 2, sites: 12, color: 'advanced' },
+      premium: { name: 'Premium', multiplier: 2.5, sites: 999, color: 'premium' },
+      free: { name: 'Free', multiplier: 1, sites: 0, color: 'free' }
+    };
+
+    // Site links database
+    const siteLinks = [
+      { name: "AutoFaucet", url: "https://autofaucet.org/r/Saadq123", category: "faucet" },
+      { name: "CryptoFaucet", url: "https://cryptofaucet.one/?ref=saadkhan", category: "faucet" },
+      { name: "FireFaucet", url: "https://firefaucet.win/ref/1423754", category: "faucet" },
+      { name: "FreeBitcoin", url: "https://freebitco.in/?op=signup_page", category: "high" },
+      { name: "FaucetPay", url: "https://faucetpay.io/?r=12345", category: "faucet" },
+      { name: "CoinFaucet", url: "https://coinfaucet.io/?ref=moneytalks", category: "faucet" },
+      { name: "BonusBitcoin", url: "https://bonusbitcoin.co/?ref=mt123", category: "high" },
+      { name: "MoonFaucet", url: "https://moonfaucet.com/?ref=moneytalks", category: "faucet" },
+      { name: "PTCWork", url: "https://ptcwork.xyz?ref=dCH38CiMbQKE", category: "ptc" },
+      { name: "EarnTrump", url: "https://earn-trump.com/?ref=oGzRa", category: "ptc" },
+      { name: "CashBux", url: "https://cashbux.work/?r=64476", category: "ptc" },
+      { name: "FreeCash", url: "https://freecash.com/r/JC7VL", category: "high" },
+      { name: "Lootizy", url: "https://lootizy.com/?r=6863f8ebbec1ddf16595872a", category: "high" },
+      { name: "TronStar", url: "https://tronstar.top/?r=6032", category: "high" },
+      { name: "PayUp", url: "https://payup.video/u/3008524", category: "ptc" },
+      { name: "SimpleBits", url: "https://simplebits.io/ref/p3YjAsIbIoixV7BW_0DUJ", category: "high" }
+    ];
+
+    // Format date
+    function formatDate(date) {
+      if (!date) return 'Unknown';
+      if (date.toDate) date = date.toDate();
+      return new Date(date).toLocaleDateString('en-US', { 
+        year: 'numeric', 
+        month: 'short', 
+        day: 'numeric' 
+      });
+    }
+
+    // Update streak display
+    function updateStreak(lastLogin) {
+      const streakDays = document.getElementById('streak-days');
+      const streakText = document.getElementById('streak-text');
+      
+      let days = [];
+      const today = new Date().getDay();
+      const weekDays = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+      
+      // Calculate streak (simplified)
+      let streak = 1;
+      if (lastLogin) {
+        const last = lastLogin.toDate ? lastLogin.toDate() : new Date(lastLogin);
+        const diff = Math.floor((new Date() - last) / (1000 * 60 * 60 * 24));
+        streak = diff <= 1 ? 3 : 1; // If logged in yesterday, streak continues
+      }
+      
+      // Generate days
+      for (let i = 0; i < 7; i++) {
+        const isActive = i < streak;
+        days.push(`<span class="day ${isActive ? 'active' : ''}">${weekDays[i]}</span>`);
+      }
+      
+      streakDays.innerHTML = days.join('');
+      streakText.textContent = `${streak} day streak! 🔥`;
+    }
+
+    // Load user data
+    async function loadUserData(user) {
+      try {
+        const userRef = doc(db, "users", user.uid);
+        const userSnap = await getDoc(userRef);
+        
+        if (!userSnap.exists()) {
+          window.location.href = "auth.html";
+          return;
+        }
+
+        const userData = userSnap.data();
+        
+        // Update basic info
+        document.getElementById('username').textContent = userData.username || 'User';
+        document.getElementById('p-username').textContent = userData.username || 'User';
+        document.getElementById('user-email').textContent = user.email;
+        document.getElementById('member-since').textContent = formatDate(userData.createdAt);
+        document.getElementById('last-login').textContent = formatDate(userData.lastLogin) || 'Today';
+        
+        // Update game credits
+        document.getElementById('game-credits').textContent = (userData.credits || 0).toFixed(2);
+        
+        // Update plan info
+        const activePlan = userData.activePlan || 'free';
+        const plan = plans[activePlan] || plans.free;
+        
+        document.getElementById('active-plan').innerHTML = `${plan.name} <span class="plan-badge ${plan.color}">${plan.multiplier}x</span>`;
+        document.getElementById('plan-multiplier').textContent = `${plan.multiplier}x`;
+        
+        // Update referral info
+        document.getElementById('referral-count').textContent = userData.referrals || 0;
+        document.getElementById('referral-earnings').textContent = '$' + ((userData.referrals || 0) * 0.25).toFixed(2);
+        
+        // Generate referral link
+        const baseUrl = window.location.origin;
+        const refCode = userData.referralCode || user.uid.slice(0,6).toUpperCase();
+        document.getElementById('ref-link').value = `${baseUrl}/auth.html?ref=${refCode}`;
+        
+        // Update game stats
+        document.getElementById('total-won').textContent = (userData.totalWins || 0).toFixed(2);
+        document.getElementById('total-spins').textContent = userData.totalSpins || 0;
+        
+        // Calculate win rate
+        const totalSpins = userData.totalSpins || 0;
+        const gamesWon = userData.gamesWon || 0;
+        const winRate = totalSpins > 0 ? Math.round((gamesWon / totalSpins) * 100) : 0;
+        
+        document.getElementById('games-won').textContent = gamesWon;
+        document.getElementById('win-rate').textContent = winRate + '%';
+        document.getElementById('win-progress').style.width = winRate + '%';
+        
+        // Load spin history for today
+        await loadTodaySpins(user.uid);
+        
+        // Load earning sites based on plan
+        await loadEarningSites(plan);
+        
+        // Load recent activity
+        await loadRecentActivity(user.uid);
+        
+        // Update streak
+        updateStreak(userData.lastLogin);
+        
+        // Update sites accessed count
+        document.getElementById('sites-accessed').textContent = userData.sitesAccessed || 0;
+        
+      } catch (error) {
+        console.error("Error loading user data:", error);
+        showNotification("Error loading dashboard data", "error");
+      }
+    }
+
+    // Load today's spins
+    async function loadTodaySpins(userId) {
+      try {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        
+        const gameLogsRef = collection(db, "game_logs");
+        const q = query(
+          gameLogsRef, 
+          where("userId", "==", userId),
+          where("time", ">=", today),
+          orderBy("time", "desc")
+        );
+        
+        const querySnapshot = await getDocs(q);
+        document.getElementById('game-spins-today').textContent = querySnapshot.size;
+        
+      } catch (error) {
+        console.error("Error loading spins:", error);
+      }
+    }
+
+    // Load earning sites based on plan
+    async function loadEarningSites(plan) {
+      const noPlanMsg = document.getElementById('no-plan-message');
+      const planLinks = document.getElementById('plan-links');
+      const sitesGrid = document.getElementById('sites-grid');
+      
+      if (plan.sites === 0 || plan.name === 'Free') {
+        noPlanMsg.style.display = 'block';
+        planLinks.style.display = 'none';
+        return;
+      }
+      
+      noPlanMsg.style.display = 'none';
+      planLinks.style.display = 'block';
+      
+      // Shuffle and limit sites based on plan
+      const shuffled = [...siteLinks].sort(() => Math.random() - 0.5);
+      const availableSites = shuffled.slice(0, Math.min(plan.sites, siteLinks.length));
+      
+      sitesGrid.innerHTML = '';
+      availableSites.forEach(site => {
+        const link = document.createElement('a');
+        link.href = site.url;
+        link.target = '_blank';
+        link.className = 'btn btn-primary btn-small';
+        link.textContent = site.name;
+        link.style.margin = '2px';
+        
+        // Track click
+        link.addEventListener('click', () => trackSiteClick(site.name));
+        
+        sitesGrid.appendChild(link);
+      });
+    }
+
+    // Track site clicks
+    async function trackSiteClick(siteName) {
+      const user = auth.currentUser;
+      if (!user) return;
+      
+      try {
+        const userRef = doc(db, "users", user.uid);
+        const userSnap = await getDoc(userRef);
+        const sitesAccessed = (userSnap.data().sitesAccessed || 0) + 1;
+        
+        await updateDoc(userRef, {
+          sitesAccessed: sitesAccessed
+        });
+        
+        document.getElementById('sites-accessed').textContent = sitesAccessed;
+        
+      } catch (error) {
+        console.error("Error tracking site click:", error);
+      }
+    }
+
+    // Load recent activity
+    async function loadRecentActivity(userId) {
+      try {
+        const activityRef = collection(db, "game_logs");
+        const q = query(
+          activityRef, 
+          where("userId", "==", userId),
+          orderBy("time", "desc"),
+          limit(10)
+        );
+        
+        const querySnapshot = await getDocs(q);
+        const activityDiv = document.getElementById('recent-activity');
+        
+        if (querySnapshot.empty) {
+          activityDiv.innerHTML = '<p style="color: var(--muted); text-align: center;">No recent activity</p>';
+          return;
+        }
+        
+        let html = '';
+        querySnapshot.forEach(doc => {
+          const data = doc.data();
+          const time = data.time?.toDate() || new Date();
+          const timeStr = time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+          
+          let outcomeText = '';
+          if (data.outcome === 'cash_win') {
+            outcomeText = `💰 Won $${data.winAmount}`;
+          } else if (data.outcome === 'site_win') {
+            outcomeText = '🎁 Won a site link';
+          } else {
+            outcomeText = '😅 Try again';
+          }
+          
+          html += `<div style="padding: 8px; border-bottom: 1px solid rgba(255,255,255,0.05);">
+            <span style="color: var(--muted);">${timeStr}</span> - ${outcomeText}
+          </div>`;
+        });
+        
+        activityDiv.innerHTML = html;
+        
+      } catch (error) {
+        console.error("Error loading activity:", error);
+      }
+    }
+
+    // Auth state observer
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        window.location.href = "auth.html";
+        return;
+      }
+      
+      // Load user data
+      await loadUserData(user);
+    });
+
+    // Copy referral link
+    document.getElementById('copy-ref').addEventListener('click', () => {
+      const input = document.getElementById('ref-link');
+      input.select();
+      input.setSelectionRange(0, 99999);
+      navigator.clipboard.writeText(input.value);
+      showNotification('Referral link copied!', 'success');
+    });
+
+    // Logout
+    document.getElementById('logout-btn').addEventListener('click', async (e) => {
+      e.preventDefault();
+      
+      try {
+        await signOut(auth);
+        localStorage.removeItem('userLoggedIn');
+        showNotification('Logged out successfully!', 'success');
+        setTimeout(() => {
+          window.location.href = 'auth.html';
+        }, 1500);
+      } catch (error) {
+        console.error("Logout error:", error);
+      }
+    });
+  </script>
+</body>
+</html>

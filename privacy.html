@@ -1,0 +1,623 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>Privacy Policy - MoneyTalks</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  
+  <!-- GLOBAL CSS -->
+  <style>
+    .btn { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important; }
+    .btn:active { transform: translateY(2px) !important; }
+    .card { transition: transform 0.3s ease, box-shadow 0.3s ease !important; }
+    .card:hover { transform: translateY(-5px) !important; box-shadow: 0 20px 40px rgba(0,0,0,0.3) !important; }
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: rgba(0,0,0,0.1); }
+    ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #8E2DE2, #00E676); border-radius: 4px; }
+    ::selection { background: rgba(142, 45, 226, 0.3); color: white; }
+    :focus { outline: 2px solid #8E2DE2; outline-offset: 2px; }
+    .gradient-text { background: linear-gradient(90deg, #8E2DE2, #00E676); -webkit-background-clip: text; background-clip: text; color: transparent; display: inline-block; }
+  </style>
+  
+  <style>
+    :root {
+      --purple: #8E2DE2;
+      --green: #00E676;
+      --text: #ffffff;
+      --muted: #cbd5e1;
+      --bg-dark: #0d0221;
+      --bg-mid: #0a0f2c;
+      --bg-light: #051f1b;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background:
+        radial-gradient(1200px 600px at 80% -10%, rgba(142,45,226,.28), transparent 60%),
+        radial-gradient(1000px 600px at -10% 90%, rgba(0,230,118,.25), transparent 60%),
+        linear-gradient(120deg, var(--bg-dark) 0%, var(--bg-mid) 35%, var(--bg-light) 100%);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
+      position: relative;
+      overflow-x: hidden;
+    }
+    
+    /* Country Detector Banner */
+    .country-banner {
+      background: rgba(0,0,0,0.3);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding: 8px 20px;
+      text-align: center;
+      font-size: 14px;
+      color: var(--muted);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    .country-banner span {
+      color: var(--green);
+      font-weight: 600;
+    }
+    
+    /* Navigation Bar */
+    .navbar {
+      background: rgba(13, 2, 33, 0.8);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(142, 45, 226, 0.2);
+      padding: 12px 24px;
+      position: sticky;
+      top: 40px;
+      z-index: 99;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+    
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .nav-logo-mark {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: conic-gradient(from 180deg, var(--purple), var(--green) 60%, var(--purple));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 16px;
+      box-shadow: 0 4px 12px rgba(142,45,226,0.3);
+    }
+    
+    .nav-logo-mark span {
+      color: white;
+    }
+    
+    .nav-logo-text {
+      font-weight: 800;
+      font-size: 18px;
+      background: linear-gradient(90deg, var(--purple), var(--green));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 15px;
+      transition: all 0.3s ease;
+      padding: 8px 12px;
+      border-radius: 8px;
+    }
+    
+    .nav-links a:hover {
+      color: white;
+      background: rgba(255,255,255,0.05);
+    }
+    
+    .nav-links a.active {
+      color: white;
+      background: rgba(142, 45, 226, 0.2);
+      border-bottom: 2px solid var(--green);
+    }
+    
+    .logout-btn {
+      background: rgba(255, 71, 87, 0.1);
+      color: #ff4757 !important;
+      border: 1px solid rgba(255, 71, 87, 0.3);
+    }
+    
+    .logout-btn:hover {
+      background: rgba(255, 71, 87, 0.2) !important;
+      color: #ff6b81 !important;
+    }
+    
+    .mobile-menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+    }
+    
+    .container {
+      max-width: 900px;
+      margin: 30px auto 50px;
+      padding: 0 20px;
+    }
+    
+    .legal-card {
+      background: rgba(255,255,255,0.03);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: clamp(25px, 4vw, 40px);
+      border: 1px solid rgba(142,45,226,0.2);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+      position: relative;
+      animation: fadeIn 0.8s ease-out;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .legal-card::before {
+      content: "";
+      display: block;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--purple), var(--green));
+      border-radius: 20px 20px 0 0;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    
+    h1 {
+      color: var(--purple);
+      margin-bottom: 10px;
+      font-size: clamp(24px, 5vw, 32px);
+      font-weight: 800;
+    }
+    
+    .last-updated {
+      color: var(--muted);
+      margin-bottom: 30px;
+      font-size: 14px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    h2 {
+      color: var(--green);
+      margin: 30px 0 15px 0;
+      font-size: clamp(18px, 4vw, 22px);
+      font-weight: 700;
+    }
+    
+    h3 {
+      color: var(--purple);
+      margin: 20px 0 10px;
+      font-size: clamp(16px, 3.5vw, 18px);
+    }
+    
+    p {
+      margin-bottom: 15px;
+      color: var(--text);
+    }
+    
+    ul, ol {
+      margin: 15px 0 15px 30px;
+    }
+    
+    li {
+      margin-bottom: 8px;
+      color: var(--muted);
+    }
+    
+    a {
+      color: var(--green);
+      text-decoration: none;
+    }
+    
+    a:hover {
+      text-decoration: underline;
+    }
+    
+    .btn-back {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 12px 24px;
+      background: linear-gradient(90deg, var(--purple), var(--green));
+      color: white;
+      text-decoration: none;
+      border-radius: 999px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-back:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(142,45,226,0.3);
+      text-decoration: none;
+    }
+    
+    .crypto-animation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+    
+    .coin {
+      position: absolute;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--purple), var(--green));
+      opacity: 0.1;
+      animation: float 20s linear infinite;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 8px;
+    }
+    
+    @keyframes float {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 0.1; }
+      100% { transform: translateY(-100px) rotate(360deg); opacity: 0.3; }
+    }
+    
+    .main-footer {
+      margin-top: 60px;
+      padding: 40px 20px 20px;
+      background: rgba(0,0,0,0.3);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid rgba(142,45,226,0.2);
+    }
+    
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+    }
+    
+    .footer-section h4 {
+      color: var(--green);
+      margin-bottom: 15px;
+      font-size: 16px;
+    }
+    
+    .footer-section a {
+      color: var(--muted);
+      text-decoration: none;
+      display: block;
+      margin-bottom: 8px;
+      font-size: 14px;
+      transition: color 0.3s ease;
+    }
+    
+    .footer-section a:hover {
+      color: white;
+    }
+    
+    .footer-section a.active {
+      color: var(--green);
+    }
+    
+    .footer-bottom {
+      text-align: center;
+      padding-top: 20px;
+      margin-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      color: var(--muted);
+      font-size: 13px;
+    }
+    
+    @media (max-width: 768px) {
+      .navbar {
+        padding: 10px 16px;
+      }
+      
+      .mobile-menu-toggle {
+        display: block;
+      }
+      
+      .nav-links {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        gap: 10px;
+        padding: 15px 0;
+      }
+      
+      .nav-links.show {
+        display: flex;
+      }
+      
+      .nav-links a {
+        width: 100%;
+        text-align: center;
+      }
+      
+      .country-banner {
+        font-size: 12px;
+        padding: 6px 12px;
+      }
+      
+      .legal-card {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Country Detector Banner -->
+  <div class="country-banner" id="country-banner">
+    Detecting your location... <span id="country-display"></span>
+  </div>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="nav-logo">
+      <div class="nav-logo-mark"><span>MT</span></div>
+      <div class="nav-logo-text">MoneyTalks</div>
+    </div>
+    
+    <button class="mobile-menu-toggle" id="menu-toggle">☰</button>
+    
+    <div class="nav-links" id="nav-links">
+      <a href="index.html">Home</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="plans.html">Plans</a>
+      <a href="links.html">Earn Links</a>
+      <a href="game.html">Game</a>
+      <a href="#" id="logout-btn" class="logout-btn">🚪 Logout</a>
+    </div>
+  </nav>
+  
+  <!-- Crypto Animation -->
+  <div class="crypto-animation">
+    <div class="coin">₿</div>
+    <div class="coin">Ξ</div>
+    <div class="coin">$</div>
+    <div class="coin">€</div>
+    <div class="coin">£</div>
+    <div class="coin">¥</div>
+  </div>
+
+  <div class="container">
+    <div class="legal-card">
+      <h1>Privacy Policy</h1>
+      <p class="last-updated"><strong>Last Updated:</strong> March 2025</p>
+      
+      <p>At MoneyTalks, we take your privacy seriously. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or use our services.</p>
+      
+      <h2>1. Information We Collect</h2>
+      
+      <h3>1.1 Personal Information</h3>
+      <p>We may collect personal information that you voluntarily provide to us when you register for an account, purchase a plan, or contact us. This includes:</p>
+      <ul>
+        <li><strong>Email address</strong> - Used for account verification and communication</li>
+        <li><strong>Username</strong> - Displayed on your profile and leaderboards</li>
+        <li><strong>Payment information</strong> - Processed securely by PayPal and Razorpay (we never store full payment details)</li>
+        <li><strong>Referral information</strong> - Who referred you and who you refer</li>
+      </ul>
+      
+      <h3>1.2 Automatically Collected Information</h3>
+      <p>When you visit our website, we automatically collect certain information about your device and usage:</p>
+      <ul>
+        <li><strong>IP address</strong> - Used for country detection and fraud prevention</li>
+        <li><strong>Browser type and version</strong> - To optimize your experience</li>
+        <li><strong>Device information</strong> - Mobile/desktop, operating system</li>
+        <li><strong>Usage data</strong> - Pages visited, time spent, clicks</li>
+        <li><strong>Game statistics</strong> - Spins, wins, credits used</li>
+        <li><strong>Link clicks</strong> - Which earning sites you visit</li>
+      </ul>
+      
+      <h2>2. How We Use Your Information</h2>
+      <p>We use the information we collect for various purposes:</p>
+      <ul>
+        <li><strong>Account Management</strong> - Create and manage your account</li>
+        <li><strong>Service Provision</strong> - Provide access to earning links and games</li>
+        <li><strong>Payment Processing</strong> - Process your plan purchases</li>
+        <li><strong>Fraud Prevention</strong> - Detect and prevent cheating, bots, and abuse</li>
+        <li><strong>Communication</strong> - Send verification codes, password resets, and updates</li>
+        <li><strong>Analytics</strong> - Improve our services and user experience</li>
+        <li><strong>Legal Compliance</strong> - Comply with applicable laws and regulations</li>
+      </ul>
+      
+      <h2>3. Cookies and Tracking Technologies</h2>
+      <p>We use cookies and similar tracking technologies to:</p>
+      <ul>
+        <li><strong>Essential cookies</strong> - Keep you logged in, maintain your session</li>
+        <li><strong>Analytics cookies</strong> - Understand how users interact with our site</li>
+        <li><strong>Preference cookies</strong> - Remember your settings and preferences</li>
+        <li><strong>Security cookies</strong> - Detect suspicious activity</li>
+      </ul>
+      <p>You can control cookies through your browser settings. However, disabling essential cookies may affect your ability to use our services.</p>
+      
+      <h2>4. Third-Party Services</h2>
+      <p>We use several third-party services that may collect information:</p>
+      
+      <h3>4.1 Firebase (Google)</h3>
+      <p>We use Firebase for authentication and database storage. Firebase's privacy policy applies to data stored on their servers. Learn more at <a href="https://firebase.google.com/support/privacy" target="_blank">Firebase Privacy Policy</a>.</p>
+      
+      <h3>4.2 PayPal</h3>
+      <p>We use PayPal for payment processing. When you make a payment, PayPal collects your payment information. We never store your full payment details. See <a href="https://www.paypal.com/privacy" target="_blank">PayPal Privacy Policy</a>.</p>
+      
+      <h3>4.3 Razorpay</h3>
+      <p>For Indian users, we use Razorpay. Your payment information is processed by Razorpay. See <a href="https://razorpay.com/privacy/" target="_blank">Razorpay Privacy Policy</a>.</p>
+      
+      <h3>4.4 EmailJS</h3>
+      <p>We use EmailJS to send verification emails. Your email address is shared with EmailJS for this purpose. See <a href="https://www.emailjs.com/legal/privacy/" target="_blank">EmailJS Privacy Policy</a>.</p>
+      
+      <h3>4.5 IP Geolocation (ipapi.co)</h3>
+      <p>We use ipapi.co to detect your country for payment method selection. Your IP address is sent to ipapi.co for this purpose.</p>
+      
+      <h2>5. Data Storage and Security</h2>
+      <p>We implement appropriate technical and organizational security measures to protect your information:</p>
+      <ul>
+        <li><strong>Encryption</strong> - Data transmitted via HTTPS</li>
+        <li><strong>Authentication</strong> - Firebase secure authentication</li>
+        <li><strong>Access controls</strong> - Only authorized personnel can access user data</li>
+        <li><strong>Monitoring</strong> - We monitor for suspicious activity and unauthorized access</li>
+      </ul>
+      <p>However, no method of transmission over the Internet is 100% secure. While we strive to protect your information, we cannot guarantee absolute security.</p>
+      
+      <h2>6. Data Retention</h2>
+      <p>We retain your information for as long as your account is active or as needed to provide services. If you delete your account, we will delete your personal information within 30 days, except where retention is required for legal purposes.</p>
+      
+      <h2>7. Your Rights</h2>
+      <p>Depending on your location, you may have certain rights regarding your personal information:</p>
+      <ul>
+        <li><strong>Access</strong> - Request a copy of your data</li>
+        <li><strong>Correction</strong> - Update inaccurate information</li>
+        <li><strong>Deletion</strong> - Request account deletion</li>
+        <li><strong>Opt-out</strong> - Object to certain data processing</li>
+        <li><strong>Data portability</strong> - Receive your data in a portable format</li>
+      </ul>
+      <p>To exercise these rights, contact us at <a href="mailto:themoneytalks.web@gmail.com">themoneytalks.web@gmail.com</a>.</p>
+      
+      <h2>8. Children's Privacy</h2>
+      <p>Our services are not intended for individuals under the age of 18. We do not knowingly collect information from children under 18. If we become aware that a child under 18 has provided us with personal information, we will delete it.</p>
+      
+      <h2>9. International Data Transfers</h2>
+      <p>Your information may be transferred to and processed in countries other than your own. Firebase servers are located in the United States. By using our services, you consent to the transfer of your information to the United States and other countries where we operate.</p>
+      
+      <h2>10. Changes to This Privacy Policy</h2>
+      <p>We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Last Updated" date. You are advised to review this Privacy Policy periodically for any changes.</p>
+      
+      <h2>11. Contact Us</h2>
+      <p>If you have questions about this Privacy Policy, please contact us:</p>
+      <p><strong>Email:</strong> <a href="mailto:themoneytalks.web@gmail.com">themoneytalks.web@gmail.com</a></p>
+      <p><strong>Telegram:</strong> @MONEYTALKS_OFFICAL</p>
+      
+      <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+        <a href="index.html" class="btn-back">← Back to Home</a>
+        <a href="terms.html" class="btn-back" style="background: transparent; border: 1px solid var(--green);">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="main-footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>MoneyTalks</h4>
+        <a href="about.html">About Us</a>
+        <a href="faq.html">FAQ</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-section">
+        <h4>Legal</h4>
+        <a href="terms.html">Terms of Service</a>
+        <a href="privacy.html" class="active">Privacy Policy</a>
+        <a href="disclaimer.html">Earnings Disclaimer</a>
+        <a href="policy.html">Official Policy</a>
+      </div>
+      <div class="footer-section">
+        <h4>Resources</h4>
+        <a href="plans.html">Plans & Pricing</a>
+        <a href="links.html">Earning Links</a>
+        <a href="game.html">Casino Game</a>
+        <a href="dashboard.html">Dashboard</a>
+      </div>
+      <div class="footer-section">
+        <h4>Connect</h4>
+        <a href="mailto:themoneytalks.web@gmail.com">📧 themoneytalks.web@gmail.com</a>
+        <a href="#">📱 Telegram: @MONEYTALKS_OFFICAL</a>
+        <p style="color: var(--muted); font-size: 13px; margin-top: 10px;">© <span id="year"></span> MoneyTalks. All rights reserved.</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>💰 Crypto earning platform • Best faucet links • Daily payouts</p>
+    </div>
+  </footer>
+
+  <script>
+    // Set current year
+    document.getElementById('year').textContent = new Date().getFullYear();
+    
+    // Mobile Menu Toggle
+    document.getElementById('menu-toggle').addEventListener('click', function() {
+      document.getElementById('nav-links').classList.toggle('show');
+    });
+    
+    // Close menu when clicking outside
+    document.addEventListener('click', function(event) {
+      const navLinks = document.getElementById('nav-links');
+      const menuToggle = document.getElementById('menu-toggle');
+      
+      if (!navLinks.contains(event.target) && !menuToggle.contains(event.target) && navLinks.classList.contains('show')) {
+        navLinks.classList.remove('show');
+      }
+    });
+    
+    // Country Detection
+    async function detectCountry() {
+      try {
+        const response = await fetch('https://ipapi.co/json/');
+        const data = await response.json();
+        const countryDisplay = document.getElementById('country-display');
+        
+        if (data.country_name) {
+          const flag = data.country_code === 'IN' ? '🇮🇳' : '🌍';
+          const currency = data.currency || 'USD';
+          countryDisplay.innerHTML = `${flag} ${data.country_name} (${currency})`;
+          localStorage.setItem('user_country', data.country_code || 'US');
+          localStorage.setItem('user_currency', currency);
+        } else {
+          countryDisplay.innerHTML = '🌍 International (USD)';
+        }
+      } catch (error) {
+        document.getElementById('country-display').innerHTML = '🌍 International (USD)';
+      }
+    }
+    detectCountry();
+    
+    // Logout Function
+    document.getElementById('logout-btn').addEventListener('click', function(e) {
+      e.preventDefault();
+      localStorage.removeItem('userLoggedIn');
+      localStorage.removeItem('mt_username');
+      localStorage.removeItem('mt_balance');
+      localStorage.removeItem('mt_activePlan');
+      localStorage.removeItem('mt_email');
+      window.location.href = 'auth.html';
+    });
+  </script>
+</body>
+</html>

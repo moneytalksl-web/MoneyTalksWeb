@@ -1,0 +1,528 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>Terms of Service - MoneyTalks</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  
+  <!-- GLOBAL CSS (same as privacy.html) -->
+  <style>
+    .btn { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important; }
+    .btn:active { transform: translateY(2px) !important; }
+    .card { transition: transform 0.3s ease, box-shadow 0.3s ease !important; }
+    .card:hover { transform: translateY(-5px) !important; box-shadow: 0 20px 40px rgba(0,0,0,0.3) !important; }
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: rgba(0,0,0,0.1); }
+    ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #8E2DE2, #00E676); border-radius: 4px; }
+    ::selection { background: rgba(142, 45, 226, 0.3); color: white; }
+    :focus { outline: 2px solid #8E2DE2; outline-offset: 2px; }
+    .gradient-text { background: linear-gradient(90deg, #8E2DE2, #00E676); -webkit-background-clip: text; background-clip: text; color: transparent; display: inline-block; }
+  </style>
+  
+  <style>
+    /* Copy all base styles from privacy.html */
+    :root {
+      --purple: #8E2DE2;
+      --green: #00E676;
+      --text: #ffffff;
+      --muted: #cbd5e1;
+      --bg-dark: #0d0221;
+      --bg-mid: #0a0f2c;
+      --bg-light: #051f1b;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background:
+        radial-gradient(1200px 600px at 80% -10%, rgba(142,45,226,.28), transparent 60%),
+        radial-gradient(1000px 600px at -10% 90%, rgba(0,230,118,.25), transparent 60%),
+        linear-gradient(120deg, var(--bg-dark) 0%, var(--bg-mid) 35%, var(--bg-light) 100%);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
+      position: relative;
+      overflow-x: hidden;
+    }
+    
+    /* Copy all navigation styles from privacy.html */
+    .country-banner { background: rgba(0,0,0,0.3); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,0.1); padding: 8px 20px; text-align: center; font-size: 14px; color: var(--muted); position: sticky; top: 0; z-index: 100; }
+    .country-banner span { color: var(--green); font-weight: 600; }
+    .navbar { background: rgba(13, 2, 33, 0.8); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(142, 45, 226, 0.2); padding: 12px 24px; position: sticky; top: 40px; z-index: 99; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 15px; }
+    .nav-logo { display: flex; align-items: center; gap: 10px; }
+    .nav-logo-mark { width: 40px; height: 40px; border-radius: 10px; background: conic-gradient(from 180deg, var(--purple), var(--green) 60%, var(--purple)); display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 16px; box-shadow: 0 4px 12px rgba(142,45,226,0.3); }
+    .nav-logo-mark span { color: white; }
+    .nav-logo-text { font-weight: 800; font-size: 18px; background: linear-gradient(90deg, var(--purple), var(--green)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .nav-links { display: flex; gap: 20px; flex-wrap: wrap; align-items: center; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-weight: 600; font-size: 15px; transition: all 0.3s ease; padding: 8px 12px; border-radius: 8px; }
+    .nav-links a:hover { color: white; background: rgba(255,255,255,0.05); }
+    .nav-links a.active { color: white; background: rgba(142, 45, 226, 0.2); border-bottom: 2px solid var(--green); }
+    .logout-btn { background: rgba(255, 71, 87, 0.1); color: #ff4757 !important; border: 1px solid rgba(255, 71, 87, 0.3); }
+    .logout-btn:hover { background: rgba(255, 71, 87, 0.2) !important; color: #ff6b81 !important; }
+    .mobile-menu-toggle { display: none; background: none; border: none; color: white; font-size: 24px; cursor: pointer; }
+    .container { max-width: 900px; margin: 30px auto 50px; padding: 0 20px; }
+    .legal-card { background: rgba(255,255,255,0.03); backdrop-filter: blur(10px); border-radius: 20px; padding: clamp(25px, 4vw, 40px); border: 1px solid rgba(142,45,226,0.2); box-shadow: 0 20px 40px rgba(0,0,0,0.3); position: relative; animation: fadeIn 0.8s ease-out; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .legal-card::before { content: ""; display: block; width: 100%; height: 4px; background: linear-gradient(90deg, var(--purple), var(--green)); border-radius: 20px 20px 0 0; position: absolute; top: 0; left: 0; }
+    
+    /* Terms specific styles */
+    h1 {
+      color: #ff4757;
+      margin-bottom: 10px;
+      font-size: clamp(24px, 5vw, 32px);
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    h1::before {
+      content: "📜";
+    }
+    
+    .last-updated {
+      color: var(--muted);
+      margin-bottom: 30px;
+      font-size: 14px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    h2 {
+      color: var(--purple);
+      margin: 30px 0 15px 0;
+      font-size: clamp(18px, 4vw, 22px);
+      font-weight: 700;
+    }
+    
+    h3 {
+      color: var(--green);
+      margin: 20px 0 10px;
+      font-size: clamp(16px, 3.5vw, 18px);
+    }
+    
+    p {
+      margin-bottom: 15px;
+      color: var(--text);
+    }
+    
+    ul, ol {
+      margin: 15px 0 15px 30px;
+    }
+    
+    li {
+      margin-bottom: 8px;
+      color: var(--muted);
+    }
+    
+    a {
+      color: var(--green);
+      text-decoration: none;
+    }
+    
+    a:hover {
+      text-decoration: underline;
+    }
+    
+    .warning-box {
+      background: rgba(255,71,87,0.1);
+      padding: 20px;
+      border-radius: 10px;
+      border-left: 4px solid #ff4757;
+      margin: 20px 0;
+    }
+    
+    .btn-back {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 12px 24px;
+      background: linear-gradient(90deg, var(--purple), var(--green));
+      color: white;
+      text-decoration: none;
+      border-radius: 999px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-back:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(142,45,226,0.3);
+      text-decoration: none;
+    }
+    
+    .crypto-animation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+    
+    .coin {
+      position: absolute;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--purple), var(--green));
+      opacity: 0.1;
+      animation: float 20s linear infinite;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 8px;
+    }
+    
+    @keyframes float {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 0.1; }
+      100% { transform: translateY(-100px) rotate(360deg); opacity: 0.3; }
+    }
+    
+    .main-footer {
+      margin-top: 60px;
+      padding: 40px 20px 20px;
+      background: rgba(0,0,0,0.3);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid rgba(142,45,226,0.2);
+    }
+    
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+    }
+    
+    .footer-section h4 {
+      color: var(--green);
+      margin-bottom: 15px;
+      font-size: 16px;
+    }
+    
+    .footer-section a {
+      color: var(--muted);
+      text-decoration: none;
+      display: block;
+      margin-bottom: 8px;
+      font-size: 14px;
+      transition: color 0.3s ease;
+    }
+    
+    .footer-section a:hover {
+      color: white;
+    }
+    
+    .footer-section a.active {
+      color: var(--green);
+    }
+    
+    .footer-bottom {
+      text-align: center;
+      padding-top: 20px;
+      margin-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      color: var(--muted);
+      font-size: 13px;
+    }
+    
+    @media (max-width: 768px) {
+      .navbar {
+        padding: 10px 16px;
+      }
+      
+      .mobile-menu-toggle {
+        display: block;
+      }
+      
+      .nav-links {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        gap: 10px;
+        padding: 15px 0;
+      }
+      
+      .nav-links.show {
+        display: flex;
+      }
+      
+      .nav-links a {
+        width: 100%;
+        text-align: center;
+      }
+      
+      .country-banner {
+        font-size: 12px;
+        padding: 6px 12px;
+      }
+      
+      .legal-card {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Country Detector Banner -->
+  <div class="country-banner" id="country-banner">
+    Detecting your location... <span id="country-display"></span>
+  </div>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="nav-logo">
+      <div class="nav-logo-mark"><span>MT</span></div>
+      <div class="nav-logo-text">MoneyTalks</div>
+    </div>
+    
+    <button class="mobile-menu-toggle" id="menu-toggle">☰</button>
+    
+    <div class="nav-links" id="nav-links">
+      <a href="index.html">Home</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="plans.html">Plans</a>
+      <a href="links.html">Earn Links</a>
+      <a href="game.html">Game</a>
+      <a href="#" id="logout-btn" class="logout-btn">🚪 Logout</a>
+    </div>
+  </nav>
+  
+  <!-- Crypto Animation -->
+  <div class="crypto-animation">
+    <div class="coin">₿</div>
+    <div class="coin">Ξ</div>
+    <div class="coin">$</div>
+    <div class="coin">€</div>
+    <div class="coin">£</div>
+    <div class="coin">¥</div>
+  </div>
+
+  <div class="container">
+    <div class="legal-card">
+      <h1>Terms of Service</h1>
+      <p class="last-updated"><strong>Last Updated:</strong> March 2025</p>
+      
+      <div class="warning-box">
+        <p><strong>PLEASE READ THESE TERMS CAREFULLY BEFORE USING OUR SERVICES.</strong> By accessing or using MoneyTalks, you agree to be bound by these Terms of Service.</p>
+      </div>
+      
+      <h2>1. Acceptance of Terms</h2>
+      <p>By creating an account, purchasing a plan, or using any MoneyTalks service, you agree to these Terms of Service. If you do not agree, please do not use our services.</p>
+      
+      <h2>2. Eligibility</h2>
+      <p>You must be at least 18 years old to use MoneyTalks. By using our services, you represent and warrant that you are 18 or older and have the legal capacity to enter into these Terms.</p>
+      
+      <h2>3. Account Registration</h2>
+      <h3>3.1 Account Creation</h3>
+      <p>To use certain features, you must create an account. You agree to provide accurate and complete information and keep it updated.</p>
+      
+      <h3>3.2 Account Security</h3>
+      <p>You are responsible for maintaining the security of your account credentials. MoneyTalks is not liable for any loss or damage arising from unauthorized access to your account.</p>
+      
+      <h3>3.3 One Account Per User</h3>
+      <p>Each user may only have one account. Creating multiple accounts is prohibited and may result in all accounts being terminated.</p>
+      
+      <h2>4. Prohibited Activities</h2>
+      <p>You agree NOT to:</p>
+      <ul>
+        <li><strong>Cheat or exploit</strong> - Manipulate game outcomes, hack the system, or use automation tools/bots</li>
+        <li><strong>Create multiple accounts</strong> - One person, one account</li>
+        <li><strong>Self-referrals</strong> - Refer yourself or use fake accounts to earn referral bonuses</li>
+        <li><strong>Fraudulent payments</strong> - Use stolen credit cards, chargebacks, or fake payments</li>
+        <li><strong>Abuse the system</strong> - Click links excessively, use VPNs to bypass limits, or exploit loopholes</li>
+        <li><strong>Harass others</strong> - Threaten, abuse, or harass other users or staff</li>
+        <li><strong>Impersonate</strong> - Pretend to be someone else or MoneyTalks staff</li>
+        <li><strong>Reverse engineer</strong> - Attempt to decompile or reverse engineer our code</li>
+      </ul>
+      
+      <h2>5. Purchases and Payments</h2>
+      <h3>5.1 Plan Purchases</h3>
+      <p>When you purchase a plan, you agree to pay the specified price. All payments are final and non-refundable except as required by law or as stated in our refund policy.</p>
+      
+      <h3>5.2 Payment Processors</h3>
+      <p>We use third-party payment processors (PayPal and Razorpay). By making a purchase, you agree to their terms and privacy policies.</p>
+      
+      <h3>5.3 Pricing Changes</h3>
+      <p>We may change plan prices at any time. Price changes will not affect existing purchases.</p>
+      
+      <h2>6. Game Credits and Virtual Items</h2>
+      <h3>6.1 Virtual Currency</h3>
+      <p>Game credits are virtual items with no real-world value. They cannot be exchanged for real money, transferred, or withdrawn.</p>
+      
+      <h3>6.2 No Cash Value</h3>
+      <p>Game credits are for entertainment purposes only and have no cash value.</p>
+      
+      <h3>6.3 Non-Transferable</h3>
+      <p>Credits are tied to your account and cannot be transferred to other users.</p>
+      
+      <h2>7. Earning Links</h2>
+      <h3>7.1 Third-Party Sites</h3>
+      <p>Our earning links lead to third-party websites. MoneyTalks is not responsible for:</p>
+      <ul>
+        <li>The content, policies, or practices of third-party sites</li>
+        <li>Their payment reliability or terms</li>
+        <li>Any issues you encounter on those sites</li>
+      </ul>
+      
+      <h3>7.2 Affiliate Disclosure</h3>
+      <p>MoneyTalks earns commissions when you sign up or make purchases through our links. This does not affect your experience or costs.</p>
+      
+      <h2>8. Referral Program</h2>
+      <h3>8.1 How It Works</h3>
+      <p>You may earn referral bonuses when new users sign up using your unique referral link and purchase a plan.</p>
+      
+      <h3>8.2 Restrictions</h3>
+      <ul>
+        <li>Self-referrals are prohibited</li>
+        <li>Referral fraud (fake accounts, bot signups) will result in termination</li>
+        <li>We may withhold referral bonuses if fraud is detected</li>
+        <li>Referral rewards are at our discretion and may change</li>
+      </ul>
+      
+      <h2>9. Termination</h2>
+      <p>We may terminate or suspend your account immediately, without prior notice, for:</p>
+      <ul>
+        <li>Violation of these Terms</li>
+        <li>Fraudulent or illegal activity</li>
+        <li>Abusive behavior toward staff or users</li>
+        <li>Any reason we deem appropriate</li>
+      </ul>
+      <p>Upon termination, your right to use the services ceases immediately, and any credits or benefits are forfeited.</p>
+      
+      <h2>10. Intellectual Property</h2>
+      <p>All content on MoneyTalks (code, design, graphics, logos) is our property and protected by copyright laws. You may not copy, modify, distribute, or reproduce any part without our written consent.</p>
+      
+      <h2>11. Disclaimer of Warranties</h2>
+      <div class="warning-box">
+        <p><strong>OUR SERVICES ARE PROVIDED "AS IS" AND "AS AVAILABLE" WITHOUT WARRANTIES OF ANY KIND.</strong></p>
+      </div>
+      <p>We do not warrant that:</p>
+      <ul>
+        <li>The service will be uninterrupted or error-free</li>
+        <li>Defects will be corrected</li>
+        <li>The service is free of viruses or harmful components</li>
+        <li>Third-party sites will pay as promised</li>
+      </ul>
+      
+      <h2>12. Limitation of Liability</h2>
+      <p>To the maximum extent permitted by law, MoneyTalks shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including loss of profits, data, or goodwill, arising from your use of our services.</p>
+      
+      <h2>13. Indemnification</h2>
+      <p>You agree to indemnify and hold MoneyTalks harmless from any claims, damages, losses, liabilities, costs, or expenses arising from your violation of these Terms or your use of our services.</p>
+      
+      <h2>14. Changes to Terms</h2>
+      <p>We may update these Terms from time to time. We will notify you of changes by posting the new Terms on this page and updating the "Last Updated" date. Your continued use after changes constitutes acceptance.</p>
+      
+      <h2>15. Governing Law</h2>
+      <p>These Terms shall be governed by the laws of the jurisdiction in which MoneyTalks operates, without regard to conflict of law principles.</p>
+      
+      <h2>16. Contact Information</h2>
+      <p>For questions about these Terms, contact us:</p>
+      <p><strong>Email:</strong> <a href="mailto:themoneytalks.web@gmail.com">themoneytalks.web@gmail.com</a></p>
+      <p><strong>Telegram:</strong> @MONEYTALKS_OFFICAL</p>
+      
+      <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+        <a href="index.html" class="btn-back">← Back to Home</a>
+        <a href="privacy.html" class="btn-back" style="background: transparent; border: 1px solid var(--green);">Privacy Policy</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="main-footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>MoneyTalks</h4>
+        <a href="about.html">About Us</a>
+        <a href="faq.html">FAQ</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-section">
+        <h4>Legal</h4>
+        <a href="terms.html" class="active">Terms of Service</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="disclaimer.html">Earnings Disclaimer</a>
+        <a href="policy.html">Official Policy</a>
+      </div>
+      <div class="footer-section">
+        <h4>Resources</h4>
+        <a href="plans.html">Plans & Pricing</a>
+        <a href="links.html">Earning Links</a>
+        <a href="game.html">Casino Game</a>
+        <a href="dashboard.html">Dashboard</a>
+      </div>
+      <div class="footer-section">
+        <h4>Connect</h4>
+        <a href="mailto:themoneytalks.web@gmail.com">📧 themoneytalks.web@gmail.com</a>
+        <a href="#">📱 Telegram: @MONEYTALKS_OFFICAL</a>
+        <p style="color: var(--muted); font-size: 13px; margin-top: 10px;">© <span id="year"></span> MoneyTalks. All rights reserved.</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>💰 Crypto earning platform • Best faucet links • Daily payouts</p>
+    </div>
+  </footer>
+
+  <script>
+    // Set current year
+    document.getElementById('year').textContent = new Date().getFullYear();
+    
+    // Mobile Menu Toggle
+    document.getElementById('menu-toggle').addEventListener('click', function() {
+      document.getElementById('nav-links').classList.toggle('show');
+    });
+    
+    // Close menu when clicking outside
+    document.addEventListener('click', function(event) {
+      const navLinks = document.getElementById('nav-links');
+      const menuToggle = document.getElementById('menu-toggle');
+      
+      if (!navLinks.contains(event.target) && !menuToggle.contains(event.target) && navLinks.classList.contains('show')) {
+        navLinks.classList.remove('show');
+      }
+    });
+    
+    // Country Detection
+    async function detectCountry() {
+      try {
+        const response = await fetch('https://ipapi.co/json/');
+        const data = await response.json();
+        const countryDisplay = document.getElementById('country-display');
+        
+        if (data.country_name) {
+          const flag = data.country_code === 'IN' ? '🇮🇳' : '🌍';
+          const currency = data.currency || 'USD';
+          countryDisplay.innerHTML = `${flag} ${data.country_name} (${currency})`;
+          localStorage.setItem('user_country', data.country_code || 'US');
+          localStorage.setItem('user_currency', currency);
+        } else {
+          countryDisplay.innerHTML = '🌍 International (USD)';
+        }
+      } catch (error) {
+        document.getElementById('country-display').innerHTML = '🌍 International (USD)';
+      }
+    }
+    detectCountry();
+    
+    // Logout Function
+    document.getElementById('logout-btn').addEventListener('click', function(e) {
+      e.preventDefault();
+      localStorage.removeItem('userLoggedIn');
+      localStorage.removeItem('mt_username');
+      localStorage.removeItem('mt_balance');
+      localStorage.removeItem('mt_activePlan');
+      localStorage.removeItem('mt_email');
+      window.location.href = 'auth.html';
+    });
+  </script>
+</body>
+</html>

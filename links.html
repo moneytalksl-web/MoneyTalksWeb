@@ -1,0 +1,1239 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MoneyTalks - Earning Links</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+  
+  <!-- GLOBAL CSS -->
+  <style>
+    /* shared.css - Global styles */
+    .btn { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important; position: relative; overflow: hidden; }
+    .btn:active { transform: translateY(2px) !important; }
+    .card { transition: transform 0.3s ease, box-shadow 0.3s ease !important; }
+    .card:hover { transform: translateY(-5px) !important; box-shadow: 0 20px 40px rgba(0,0,0,0.3) !important; }
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: rgba(0,0,0,0.1); }
+    ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #8E2DE2, #00E676); border-radius: 4px; }
+    ::selection { background: rgba(142, 45, 226, 0.3); color: white; }
+    :focus { outline: 2px solid #8E2DE2; outline-offset: 2px; }
+    .loading-spinner { width: 40px; height: 40px; border: 4px solid rgba(255,255,255,0.1); border-top-color: #8E2DE2; border-radius: 50%; animation: spin 1s linear infinite; margin: 20px auto; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .gradient-text { background: linear-gradient(90deg, #8E2DE2, #00E676); -webkit-background-clip: text; background-clip: text; color: transparent; display: inline-block; }
+    .pulse { animation: pulse 2s infinite; }
+    @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.7; } 100% { opacity: 1; } }
+    .fade-in { animation: fadeIn 0.5s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    @media (max-width: 768px) { .hide-mobile { display: none !important; } .mobile-stack { flex-direction: column !important; } .mobile-center { text-align: center !important; } }
+    @media print { .no-print { display: none !important; } }
+    @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+    @keyframes slideOut { from { transform: translateX(0); opacity: 1; } to { transform: translateX(100%); opacity: 0; } }
+    [data-tooltip] { position: relative; }
+    [data-tooltip]:hover::after { content: attr(data-tooltip); position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.8); color: white; padding: 6px 12px; border-radius: 6px; font-size: 12px; white-space: nowrap; z-index: 1000; pointer-events: none; }
+  </style>
+  
+  <style>
+    :root {
+      --purple: #8E2DE2;
+      --green: #00E676;
+      --text: #ffffff;
+      --muted: #cbd5e1;
+      --bg-dark: #0d0221;
+      --bg-mid: #0a0f2c;
+      --bg-light: #051f1b;
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: Inter, system-ui, Segoe UI, Roboto;
+      background:
+        radial-gradient(1200px 600px at 80% -10%, rgba(142,45,226,.28), transparent 60%),
+        radial-gradient(1000px 600px at -10% 90%, rgba(0,230,118,.25), transparent 60%),
+        linear-gradient(120deg, var(--bg-dark) 0%, var(--bg-mid) 35%, var(--bg-light) 100%);
+      color: var(--text);
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+    }
+    
+    /* Country Detector Banner */
+    .country-banner {
+      background: rgba(0,0,0,0.3);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding: 8px 20px;
+      text-align: center;
+      font-size: 14px;
+      color: var(--muted);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    .country-banner span {
+      color: var(--green);
+      font-weight: 600;
+    }
+    
+    /* Navigation Bar */
+    .navbar {
+      background: rgba(13, 2, 33, 0.8);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(142, 45, 226, 0.2);
+      padding: 12px 24px;
+      position: sticky;
+      top: 40px;
+      z-index: 99;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+    
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .nav-logo-mark {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: conic-gradient(from 180deg, var(--purple), var(--green) 60%, var(--purple));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 16px;
+    }
+    
+    .nav-logo-mark span {
+      color: white;
+    }
+    
+    .nav-logo-text {
+      font-weight: 800;
+      font-size: 18px;
+      background: linear-gradient(90deg, var(--purple), var(--green));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 15px;
+      transition: color 0.3s ease;
+      padding: 8px 12px;
+      border-radius: 8px;
+    }
+    
+    .nav-links a:hover {
+      color: white;
+      background: rgba(255,255,255,0.05);
+    }
+    
+    .nav-links a.active {
+      color: white;
+      background: rgba(142, 45, 226, 0.2);
+      border-bottom: 2px solid var(--green);
+    }
+    
+    .logout-btn {
+      background: rgba(255, 71, 87, 0.1);
+      color: #ff4757 !important;
+      border: 1px solid rgba(255, 71, 87, 0.3);
+    }
+    
+    .logout-btn:hover {
+      background: rgba(255, 71, 87, 0.2) !important;
+      color: #ff6b81 !important;
+    }
+    
+    .mobile-menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+    }
+    
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 30px 24px 50px;
+    }
+    
+    /* Header with Plan Badge */
+    .plan-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+      padding: 15px 20px;
+      background: rgba(0,0,0,0.3);
+      border-radius: 15px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+    
+    .plan-badge {
+      padding: 8px 20px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--purple), var(--green));
+      color: white;
+      font-weight: bold;
+      font-size: 14px;
+    }
+    
+    .plan-badge.free {
+      background: rgba(255,255,255,0.2);
+    }
+    
+    .plan-badge.premium {
+      background: linear-gradient(90deg, #ffd700, #ffa500);
+      color: #000;
+    }
+    
+    h1 {
+      font-size: clamp(28px, 5vw, 32px);
+      margin-bottom: 5px;
+      background: linear-gradient(90deg, var(--purple), var(--green));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      display: inline-block;
+    }
+    
+    #desc {
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+    
+    /* Affiliate Disclosure */
+    .affiliate-disclosure {
+      background: rgba(0,230,118,0.1);
+      border-left: 4px solid var(--green);
+      padding: 12px 20px;
+      border-radius: 8px;
+      margin-bottom: 25px;
+      font-size: 14px;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    
+    .affiliate-disclosure strong {
+      color: var(--green);
+    }
+    
+    /* Stats Bar */
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+    
+    .stat-card {
+      background: rgba(255,255,255,0.05);
+      padding: 15px;
+      border-radius: 12px;
+      text-align: center;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .stat-value {
+      font-size: 24px;
+      font-weight: 900;
+      background: linear-gradient(90deg, var(--purple), var(--green));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    .stat-label {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 5px;
+    }
+    
+    /* Category Filters */
+    .link-categories {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 25px;
+      flex-wrap: wrap;
+    }
+    
+    .category-btn {
+      padding: 10px 20px;
+      background: rgba(255,255,255,0.1);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 600;
+      font-size: 14px;
+    }
+    
+    .category-btn.active {
+      background: var(--purple);
+      border-color: var(--purple);
+    }
+    
+    .category-btn:hover {
+      transform: translateY(-2px);
+      background: rgba(255,255,255,0.2);
+    }
+    
+    /* Bulk Actions */
+    .bulk-actions {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+    
+    .bulk-btn {
+      padding: 12px 24px;
+      background: linear-gradient(90deg, #00E676, #8E2DE2);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    
+    .bulk-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(142,45,226,0.3);
+    }
+    
+    .bulk-btn.secondary {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    
+    .bulk-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+    
+    /* Links Grid */
+    #links-wrap {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 20px;
+      margin: 30px 0;
+    }
+    
+    .link-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px 15px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      text-decoration: none;
+      color: white;
+      transition: all 0.3s ease;
+      min-height: 140px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .link-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+      transition: left 0.5s ease;
+    }
+    
+    .link-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(142,45,226,0.2);
+      border-color: var(--purple);
+    }
+    
+    .link-card:hover::before {
+      left: 100%;
+    }
+    
+    .link-icon {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+    
+    .link-title {
+      font-weight: bold;
+      margin-bottom: 5px;
+      font-size: 16px;
+    }
+    
+    .link-payout {
+      font-size: 13px;
+      color: var(--green);
+      margin-bottom: 8px;
+      background: rgba(0,230,118,0.1);
+      padding: 3px 12px;
+      border-radius: 999px;
+    }
+    
+    .link-category-tag {
+      font-size: 11px;
+      color: var(--muted);
+      background: rgba(0,0,0,0.3);
+      padding: 3px 10px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .premium-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: linear-gradient(90deg, #ffd700, #ffa500);
+      color: black;
+      font-size: 10px;
+      font-weight: bold;
+      padding: 3px 8px;
+      border-radius: 20px;
+    }
+    
+    .no-links {
+      grid-column: 1/-1;
+      padding: 60px 20px;
+      text-align: center;
+      background: rgba(255,255,255,0.02);
+      border-radius: 20px;
+    }
+    
+    .no-links p {
+      color: var(--muted);
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+    
+    .cta-button {
+      display: inline-block;
+      padding: 14px 32px;
+      background: linear-gradient(90deg, var(--purple), var(--green));
+      color: white;
+      text-decoration: none;
+      border-radius: 999px;
+      font-weight: 800;
+      transition: all 0.3s ease;
+    }
+    
+    .cta-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 30px rgba(142,45,226,0.4);
+    }
+    
+    /* Performance Tips */
+    .performance-tips {
+      background: rgba(142,45,226,0.1);
+      padding: 20px;
+      border-radius: 15px;
+      margin-top: 40px;
+      border: 1px solid rgba(142,45,226,0.3);
+    }
+    
+    .performance-tips h3 {
+      color: var(--green);
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .tips-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+    }
+    
+    .tip-item {
+      background: rgba(0,0,0,0.2);
+      padding: 12px;
+      border-radius: 10px;
+      font-size: 14px;
+    }
+    
+    .tip-item strong {
+      color: var(--green);
+    }
+    
+    /* Footer */
+    .main-footer {
+      margin-top: 60px;
+      padding: 40px 20px 20px;
+      background: rgba(0,0,0,0.3);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+    
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+    }
+    
+    .footer-section h4 {
+      color: var(--green);
+      margin-bottom: 15px;
+      font-size: 16px;
+    }
+    
+    .footer-section a {
+      color: var(--muted);
+      text-decoration: none;
+      display: block;
+      margin-bottom: 8px;
+      font-size: 14px;
+      transition: color 0.3s ease;
+    }
+    
+    .footer-section a:hover {
+      color: white;
+    }
+    
+    .footer-bottom {
+      text-align: center;
+      padding-top: 20px;
+      margin-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      color: var(--muted);
+      font-size: 13px;
+    }
+    
+    /* Mobile */
+    @media (max-width: 768px) {
+      body { padding: 0; }
+      .plan-header { flex-direction: column; gap: 10px; text-align: center; }
+      .bulk-actions { flex-direction: column; }
+      .bulk-btn { width: 100%; justify-content: center; }
+      .stats-bar { grid-template-columns: 1fr 1fr; }
+      
+      .mobile-menu-toggle {
+        display: block;
+      }
+      
+      .nav-links {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        gap: 10px;
+        padding: 15px 0;
+      }
+      
+      .nav-links.show {
+        display: flex;
+      }
+      
+      .nav-links a {
+        width: 100%;
+        text-align: center;
+      }
+      
+      .country-banner {
+        font-size: 12px;
+        padding: 6px 12px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .stats-bar { grid-template-columns: 1fr; }
+    }
+    
+    /* Loading Spinner */
+    .loading-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 200px;
+    }
+    
+    /* Notification */
+    .notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 15px 25px;
+      border-radius: 8px;
+      color: white;
+      font-weight: 600;
+      z-index: 10000;
+      animation: slideIn 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    
+    .notification.success { background: linear-gradient(90deg, #00E676, #00b050); }
+    .notification.error { background: linear-gradient(90deg, #ff4757, #ff6b81); }
+    .notification.info { background: linear-gradient(90deg, #8E2DE2, #00E676); }
+  </style>
+</head>
+<body>
+  <!-- Country Detector Banner -->
+  <div class="country-banner" id="country-banner">
+    Detecting your location... <span id="country-display"></span>
+  </div>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="nav-logo">
+      <div class="nav-logo-mark">MT</div>
+      <div class="nav-logo-text">MoneyTalks</div>
+    </div>
+    
+    <button class="mobile-menu-toggle" id="menu-toggle">☰</button>
+    
+    <div class="nav-links" id="nav-links">
+      <a href="index.html">Home</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="plans.html">Plans</a>
+      <a href="links.html" class="active">Earn Links</a>
+      <a href="game.html">Game</a>
+      <a href="#" id="logout-btn" class="logout-btn">🚪 Logout</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <!-- Plan Header -->
+    <div class="plan-header">
+      <div>
+        <h1>Your Earning Links</h1>
+        <p id="desc">Click any link to start earning real cryptocurrency</p>
+      </div>
+      <div>
+        <div class="plan-badge" id="plan-badge">🔓 Loading plan...</div>
+      </div>
+    </div>
+    
+    <!-- Affiliate Disclosure (LEGAL REQUIREMENT) -->
+    <div class="affiliate-disclosure">
+      <span>💰</span>
+      <span><strong>Affiliate Disclosure:</strong> MoneyTalks earns commissions when you sign up or make purchases through our links. This helps us keep the platform running at no extra cost to you.</span>
+    </div>
+    
+    <!-- Stats Bar -->
+    <div class="stats-bar">
+      <div class="stat-card">
+        <div class="stat-value" id="stat-total">0</div>
+        <div class="stat-label">Total Links</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="stat-available">0</div>
+        <div class="stat-label">Available Today</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="stat-clicks">0</div>
+        <div class="stat-label">Clicks Today</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="stat-earned">$0.00</div>
+        <div class="stat-label">Est. Earnings</div>
+      </div>
+    </div>
+    
+    <!-- Link Categories -->
+    <div class="link-categories">
+      <button class="category-btn active" data-category="all">🔗 All Links</button>
+      <button class="category-btn" data-category="faucet">💧 Faucets</button>
+      <button class="category-btn" data-category="ptc">📺 PTC Sites</button>
+      <button class="category-btn" data-category="high">⭐ High Paying</button>
+    </div>
+    
+    <!-- Bulk Actions -->
+    <div class="bulk-actions" id="bulk-actions">
+      <button onclick="openAllLinks()" class="bulk-btn" id="open-all-btn">🌐 Open All in Tabs</button>
+      <button onclick="copyAllLinks()" class="bulk-btn secondary" id="copy-all-btn">📋 Copy All URLs</button>
+      <button onclick="refreshLinks()" class="bulk-btn secondary" id="refresh-btn">🔄 Refresh Rotation</button>
+    </div>
+    
+    <!-- Loading Spinner -->
+    <div id="loading-spinner" class="loading-container" style="display: none;">
+      <div class="loading-spinner"></div>
+    </div>
+    
+    <!-- Links Container -->
+    <div id="links-wrap"></div>
+    
+    <!-- Performance Tips -->
+    <div class="performance-tips">
+      <h3>💡 Maximize Your Earnings</h3>
+      <div class="tips-grid">
+        <div class="tip-item"><strong>📱 Multiple Devices:</strong> Use phone + PC to claim from different IPs</div>
+        <div class="tip-item"><strong>👥 Refer Friends:</strong> Unlock more links with referrals</div>
+        <div class="tip-item"><strong>🎮 Play Casino:</strong> Win bonus links and credits</div>
+        <div class="tip-item"><strong>💰 Upgrade Plan:</strong> Higher multiplier = more earnings</div>
+        <div class="tip-item"><strong>⏰ Daily Reset:</strong> New links available every 24 hours</div>
+        <div class="tip-item"><strong>🔔 Notifications:</strong> Turn on for new link alerts</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="main-footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>MoneyTalks</h4>
+        <a href="about.html">About Us</a>
+        <a href="faq.html">FAQ</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-section">
+        <h4>Legal</h4>
+        <a href="terms.html">Terms of Service</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="disclaimer.html">Earnings Disclaimer</a>
+        <a href="policy.html">Official Policy</a>
+      </div>
+      <div class="footer-section">
+        <h4>Resources</h4>
+        <a href="plans.html">Plans & Pricing</a>
+        <a href="links.html">Earning Links</a>
+        <a href="game.html">Casino Game</a>
+        <a href="dashboard.html">Dashboard</a>
+      </div>
+      <div class="footer-section">
+        <h4>Connect</h4>
+        <a href="mailto:themoneytalks.web@gmail.com">📧 themoneytalks.web@gmail.com</a>
+        <a href="#">📱 Telegram: @MONEYTALKS_OFFICAL</a>
+        <p style="color: var(--muted); font-size: 13px; margin-top: 10px;">© <span id="year"></span> MoneyTalks. All rights reserved.</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>💰 Crypto earning platform • Best faucet links • Daily payouts</p>
+    </div>
+  </footer>
+
+  <script>
+    // Set current year
+    document.getElementById('year').textContent = new Date().getFullYear();
+    
+    // Mobile Menu Toggle
+    document.getElementById('menu-toggle').addEventListener('click', function() {
+      document.getElementById('nav-links').classList.toggle('show');
+    });
+    
+    // Close menu when clicking outside
+    document.addEventListener('click', function(event) {
+      const navLinks = document.getElementById('nav-links');
+      const menuToggle = document.getElementById('menu-toggle');
+      
+      if (!navLinks.contains(event.target) && !menuToggle.contains(event.target) && navLinks.classList.contains('show')) {
+        navLinks.classList.remove('show');
+      }
+    });
+    
+    // Notification function
+    function showNotification(message, type = 'success') {
+      const colors = {
+        success: '#00E676',
+        error: '#ff4757',
+        info: '#8E2DE2'
+      };
+      
+      const notification = document.createElement('div');
+      notification.className = `notification ${type}`;
+      notification.textContent = message;
+      notification.style.background = colors[type];
+      document.body.appendChild(notification);
+      
+      setTimeout(() => {
+        notification.style.animation = 'slideOut 0.3s ease';
+        setTimeout(() => notification.remove(), 300);
+      }, 3000);
+    }
+    
+    // Add animation styles
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes slideIn {
+        from { transform: translateX(100%); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
+      }
+      @keyframes slideOut {
+        from { transform: translateX(0); opacity: 1; }
+        to { transform: translateX(100%); opacity: 0; }
+      }
+    `;
+    document.head.appendChild(style);
+    
+    // Country Detection
+    async function detectCountry() {
+      try {
+        const response = await fetch('https://ipapi.co/json/');
+        const data = await response.json();
+        const countryDisplay = document.getElementById('country-display');
+        
+        if (data.country_name) {
+          const flag = data.country_code === 'IN' ? '🇮🇳' : '🌍';
+          countryDisplay.innerHTML = `${flag} ${data.country_name} (${data.currency || 'USD'})`;
+          localStorage.setItem('user_country', data.country_code || 'US');
+        } else {
+          countryDisplay.innerHTML = '🌍 International';
+        }
+      } catch (error) {
+        document.getElementById('country-display').innerHTML = '🌍 International';
+      }
+    }
+    detectCountry();
+  </script>
+
+  <!-- Firebase Integration -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { 
+      getAuth, 
+      onAuthStateChanged,
+      signOut 
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    import { 
+      getFirestore, 
+      doc, 
+      getDoc, 
+      updateDoc,
+      increment,
+      collection,
+      addDoc,
+      serverTimestamp,
+      query,
+      where,
+      getDocs,
+      orderBy
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCgakUnf1xeAy5tU-oQQs84609wnMukNBE",
+      authDomain: "moneytalks-a9329.firebaseapp.com",
+      projectId: "moneytalks-a9329",
+      storageBucket: "moneytalks-a9329.firebasestorage.app",
+      messagingSenderId: "865902355512",
+      appId: "1:865902355512:web:f67bddc159776db34d72cd",
+      measurementId: "G-TLGCP9C4FD"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    // ============================================
+    // AFFILIATE LINKS DATABASE
+    // ============================================
+    const cryptoLinks = [
+      // Faucets (micro-earnings, high frequency)
+      { url: "https://autofaucet.org/r/Saadq123", category: "faucet", payout: "$0.001-0.01", name: "AutoFaucet", tier: "free", icon: "💧" },
+      { url: "https://cryptofaucet.one/?ref=saadkhan", category: "faucet", payout: "$0.001-0.01", name: "CryptoFaucet", tier: "free", icon: "💧" },
+      { url: "https://firefaucet.win/ref/1423754", category: "faucet", payout: "$0.002-0.015", name: "FireFaucet", tier: "free", icon: "💧" },
+      { url: "https://faucetearning.com/?r=6007", category: "faucet", payout: "$0.001-0.01", name: "FaucetEarning", tier: "free", icon: "💧" },
+      { url: "https://viefaucet.com?r=684fe2f354708b256c247d24", category: "faucet", payout: "$0.001-0.02", name: "VieFaucet", tier: "free", icon: "💧" },
+      { url: "https://coinarns.com/?r=22873", category: "faucet", payout: "$0.005-0.02", name: "CoinArns", tier: "free", icon: "💧" },
+      { url: "https://free-bonk.com/?r=144207", category: "faucet", payout: "$0.001-0.01", name: "FreeBonk", tier: "free", icon: "💧" },
+      { url: "https://top1faucet.site/?r=2298", category: "faucet", payout: "$0.001-0.02", name: "Top1Faucet", tier: "free", icon: "💧" },
+      
+      // PTC Sites (click ads)
+      { url: "https://earn-trump.com/?ref=oGzRa", category: "ptc", payout: "$0.01-0.05", name: "EarnTrump", tier: "free", icon: "📺" },
+      { url: "https://ptcwork.xyz?ref=dCH38CiMbQKE", category: "ptc", payout: "$0.01-0.03", name: "PTCWork", tier: "free", icon: "📺" },
+      { url: "https://cashbux.work/?r=64476", category: "ptc", payout: "$0.02-0.10", name: "CashBux", tier: "premium", icon: "📺" },
+      { url: "https://earn-pepe.com/?ref=Q6tp", category: "ptc", payout: "$0.01-0.04", name: "EarnPepe", tier: "free", icon: "📺" },
+      { url: "https://bitupdate.info/?r=6061", category: "ptc", payout: "$0.01-0.05", name: "BitUpdate", tier: "free", icon: "📺" },
+      { url: "https://ourcoincash.xyz/?r=145379", category: "ptc", payout: "$0.02-0.08", name: "OurCoinCash", tier: "premium", icon: "📺" },
+      { url: "https://aruble.net/?r=gEXlky4ikv", category: "ptc", payout: "$0.01-0.03", name: "ARuble", tier: "free", icon: "📺" },
+      
+      // High Paying Sites
+      { url: "https://bubblix.eu/?r=10450", category: "high", payout: "$0.05-0.20", name: "Bubblix", tier: "premium", icon: "⭐" },
+      { url: "https://lootizy.com/?r=6863f8ebbec1ddf16595872a", category: "high", payout: "$0.10-0.50", name: "Lootizy", tier: "premium", icon: "⭐" },
+      { url: "https://tronstar.top/?r=6032", category: "high", payout: "$0.03-0.15", name: "TronStar", tier: "premium", icon: "⭐" },
+      { url: "https://payup.video/u/3008524", category: "high", payout: "$0.05-0.25", name: "PayUp", tier: "premium", icon: "⭐" },
+      { url: "https://simplebits.io/ref/p3YjAsIbIoixV7BW_0DUJ", category: "high", payout: "$0.10-1.00", name: "SimpleBits", tier: "premium", icon: "⭐" },
+      { url: "https://freecash.com/r/JC7VL", category: "high", payout: "$0.50-5.00", name: "FreeCash", tier: "premium", icon: "⭐" },
+      
+      // Bonus Sites
+      { url: "https://freebitco.in/?op=signup_page", category: "high", payout: "Variable", name: "FreeBitcoin", tier: "free", icon: "🎲" },
+      { url: "https://faucetpay.io/?r=12345", category: "faucet", payout: "Micro", name: "FaucetPay", tier: "free", icon: "💧" },
+      { url: "https://moonfaucet.com/?ref=moneytalks", category: "faucet", payout: "$0.001-0.01", name: "MoonFaucet", tier: "free", icon: "🌙" }
+    ];
+
+    // Plan definitions
+    const plans = {
+      basic: { name: 'Basic', multiplier: 1, sites: 1, tier: 'free' },
+      starter: { name: 'Starter', multiplier: 1.2, sites: 2, tier: 'free' },
+      standard: { name: 'Standard', multiplier: 1.5, sites: 6, tier: 'premium' },
+      advanced: { name: 'Advanced', multiplier: 2, sites: 12, tier: 'premium' },
+      premium: { name: 'Premium', multiplier: 2.5, sites: 999, tier: 'premium' },
+      free: { name: 'Free', multiplier: 1, sites: 0, tier: 'free' }
+    };
+
+    let currentUser = null;
+    let userPlan = 'free';
+    let availableLinks = [];
+    let activeCategory = 'all';
+    let clickCount = 0;
+    let totalEarned = 0;
+
+    // DOM Elements
+    const wrap = document.getElementById('links-wrap');
+    const categoryBtns = document.querySelectorAll('.category-btn');
+    const planBadge = document.getElementById('plan-badge');
+    const bulkActions = document.getElementById('bulk-actions');
+    const openAllBtn = document.getElementById('open-all-btn');
+    const copyAllBtn = document.getElementById('copy-all-btn');
+    const refreshBtn = document.getElementById('refresh-btn');
+    const loadingSpinner = document.getElementById('loading-spinner');
+
+    // Check authentication
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        window.location.href = "auth.html";
+        return;
+      }
+
+      currentUser = user;
+      
+      // Load user data
+      await loadUserData();
+      
+      // Load today's clicks
+      await loadTodayClicks();
+      
+      // Initialize links
+      initLinks();
+    });
+
+    // Load user data from Firestore
+    async function loadUserData() {
+      try {
+        const userRef = doc(db, "users", currentUser.uid);
+        const userSnap = await getDoc(userRef);
+        
+        if (userSnap.exists()) {
+          const userData = userSnap.data();
+          userPlan = userData.activePlan || 'free';
+          
+          // Update plan badge
+          const plan = plans[userPlan] || plans.free;
+          if (userPlan === 'premium') {
+            planBadge.innerHTML = '💎 PREMIUM PLAN - UNLIMITED ACCESS';
+            planBadge.className = 'plan-badge premium';
+          } else if (userPlan !== 'free') {
+            planBadge.innerHTML = `🔓 ${plan.name} PLAN - ${plan.sites} SITES`;
+            planBadge.className = 'plan-badge';
+          } else {
+            planBadge.innerHTML = '🔒 FREE PLAN - LIMITED ACCESS';
+            planBadge.className = 'plan-badge free';
+          }
+          
+          // Load user's click stats
+          clickCount = userData.linkClicks || 0;
+          totalEarned = userData.totalEarned || 0;
+          updateStats();
+        }
+      } catch (error) {
+        console.error("Error loading user data:", error);
+      }
+    }
+
+    // Load today's clicks from link_clicks collection
+    async function loadTodayClicks() {
+      try {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        
+        const clicksRef = collection(db, "link_clicks");
+        const q = query(
+          clicksRef,
+          where("userId", "==", currentUser.uid),
+          where("timestamp", ">=", today),
+          orderBy("timestamp", "desc")
+        );
+        
+        const querySnapshot = await getDocs(q);
+        document.getElementById('stat-clicks').textContent = querySnapshot.size;
+        
+        // Calculate estimated earnings (average $0.005 per click)
+        const estimatedEarnings = querySnapshot.size * 0.005 * (plans[userPlan]?.multiplier || 1);
+        document.getElementById('stat-earned').textContent = '$' + estimatedEarnings.toFixed(2);
+        
+      } catch (error) {
+        console.error("Error loading clicks:", error);
+      }
+    }
+
+    // Initialize links based on user's plan
+    function initLinks() {
+      const plan = plans[userPlan] || plans.free;
+      
+      if (plan.sites === 0) {
+        // Free plan - show limited links
+        wrap.innerHTML = `
+          <div class="no-links">
+            <p>🔓 You have limited access. Upgrade to unlock more earning sites!</p>
+            <a href="plans.html" class="cta-button">🚀 Upgrade Now - From $1.50</a>
+            <p style="margin-top: 20px; font-size: 14px;">Free users get 1 rotational site from the casino game!</p>
+          </div>
+        `;
+        
+        // Update stats
+        document.getElementById('stat-total').textContent = cryptoLinks.length;
+        document.getElementById('stat-available').textContent = '0';
+        
+        // Disable bulk actions
+        openAllBtn.disabled = true;
+        copyAllBtn.disabled = true;
+        refreshBtn.disabled = true;
+        return;
+      }
+      
+      // Enable bulk actions
+      openAllBtn.disabled = false;
+      copyAllBtn.disabled = false;
+      refreshBtn.disabled = false;
+      
+      // Filter links based on plan tier
+      let eligibleLinks = cryptoLinks;
+      if (plan.tier === 'free') {
+        eligibleLinks = cryptoLinks.filter(link => link.tier === 'free');
+      }
+      
+      // Randomize and select allowed number
+      const shuffled = [...eligibleLinks].sort(() => Math.random() - 0.5);
+      availableLinks = shuffled.slice(0, Math.min(plan.sites, eligibleLinks.length));
+      
+      // Update stats
+      document.getElementById('stat-total').textContent = cryptoLinks.length;
+      document.getElementById('stat-available').textContent = availableLinks.length;
+      
+      // Render links
+      renderLinks();
+    }
+
+    // Render links based on active category
+    function renderLinks() {
+      wrap.innerHTML = '';
+      
+      const filteredLinks = activeCategory === 'all' 
+        ? availableLinks 
+        : availableLinks.filter(link => link.category === activeCategory);
+      
+      if (filteredLinks.length === 0) {
+        wrap.innerHTML = `
+          <div class="no-links">
+            <p>No links in this category for your current rotation.</p>
+            <button onclick="refreshLinks()" class="bulk-btn" style="display:inline-block;width:auto;">🔄 Refresh Now</button>
+          </div>
+        `;
+        return;
+      }
+      
+      filteredLinks.forEach((link) => {
+        const card = document.createElement('a');
+        card.className = 'link-card';
+        card.href = link.url;
+        card.target = '_blank';
+        card.rel = 'noopener';
+        card.setAttribute('data-site', link.name);
+        card.setAttribute('data-category', link.category);
+        
+        // Add click tracking
+        card.addEventListener('click', (e) => {
+          e.preventDefault();
+          trackLinkClick(link);
+          window.open(link.url, '_blank');
+        });
+        
+        // Premium badge if applicable
+        const premiumBadge = link.tier === 'premium' ? '<div class="premium-badge">⭐ PREMIUM</div>' : '';
+        
+        card.innerHTML = `
+          ${premiumBadge}
+          <div class="link-icon">${link.icon || '🔗'}</div>
+          <div class="link-title">${link.name}</div>
+          <div class="link-payout">${link.payout}</div>
+          <div class="link-category-tag">${link.category}</div>
+        `;
+        
+        wrap.appendChild(card);
+      });
+    }
+
+    // Track link clicks
+    async function trackLinkClick(link) {
+      if (!currentUser) return;
+      
+      try {
+        // Calculate earnings (example: $0.005 per click with multiplier)
+        const plan = plans[userPlan] || plans.free;
+        const earnings = 0.005 * plan.multiplier;
+        
+        // Log click in Firestore
+        await addDoc(collection(db, "link_clicks"), {
+          userId: currentUser.uid,
+          userEmail: currentUser.email,
+          siteName: link.name,
+          siteUrl: link.url,
+          category: link.category,
+          earnings: earnings,
+          timestamp: serverTimestamp()
+        });
+        
+        // Update user's click count and total earned
+        const userRef = doc(db, "users", currentUser.uid);
+        await updateDoc(userRef, {
+          linkClicks: increment(1),
+          totalEarned: increment(earnings)
+        });
+        
+        // Update local stats
+        clickCount++;
+        totalEarned += earnings;
+        updateStats();
+        
+        // Show mini notification
+        showNotification(`+$${earnings.toFixed(3)} earned!`, 'success');
+        
+        // Reload today's clicks
+        await loadTodayClicks();
+        
+      } catch (error) {
+        console.error("Error tracking click:", error);
+        showNotification('Error tracking click', 'error');
+      }
+    }
+
+    // Update stats display
+    function updateStats() {
+      // Stats are updated in loadTodayClicks
+    }
+
+    // Bulk Actions
+    window.openAllLinks = async function() {
+      if (availableLinks.length === 0) {
+        showNotification('No links available to open.', 'error');
+        return;
+      }
+      
+      if (confirm(`Open ${availableLinks.length} links in new tabs?`)) {
+        for (const link of availableLinks) {
+          window.open(link.url, '_blank');
+          await trackLinkClick(link);
+          // Small delay to prevent browser blocking
+          await new Promise(resolve => setTimeout(resolve, 100));
+        }
+      }
+    };
+
+    window.copyAllLinks = function() {
+      if (availableLinks.length === 0) {
+        showNotification('No links available to copy.', 'error');
+        return;
+      }
+      
+      const urls = availableLinks.map(link => link.url).join('\n');
+      navigator.clipboard.writeText(urls).then(() => {
+        showNotification(`✅ Copied ${availableLinks.length} URLs to clipboard!`, 'success');
+      }).catch(() => {
+        showNotification('❌ Failed to copy. Please try manually.', 'error');
+      });
+    };
+
+    window.refreshLinks = function() {
+      if (!currentUser) return;
+      
+      // Show loading
+      loadingSpinner.style.display = 'flex';
+      wrap.innerHTML = '';
+      
+      // Reshuffle links
+      setTimeout(() => {
+        const plan = plans[userPlan] || plans.free;
+        let eligibleLinks = cryptoLinks;
+        if (plan.tier === 'free') {
+          eligibleLinks = cryptoLinks.filter(link => link.tier === 'free');
+        }
+        
+        const shuffled = [...eligibleLinks].sort(() => Math.random() - 0.5);
+        availableLinks = shuffled.slice(0, Math.min(plan.sites, eligibleLinks.length));
+        
+        // Update available count
+        document.getElementById('stat-available').textContent = availableLinks.length;
+        
+        // Re-render
+        renderLinks();
+        
+        // Hide loading
+        loadingSpinner.style.display = 'none';
+        
+        showNotification('🔄 Links refreshed!', 'info');
+      }, 500);
+    };
+
+    // Category filtering
+    categoryBtns.forEach(btn => {
+      btn.addEventListener('click', function() {
+        categoryBtns.forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        activeCategory = this.dataset.category;
+        renderLinks();
+      });
+    });
+
+    // Logout
+    document.getElementById('logout-btn').addEventListener('click', async (e) => {
+      e.preventDefault();
+      
+      try {
+        await signOut(auth);
+        showNotification('Logged out successfully!', 'success');
+        setTimeout(() => {
+          window.location.href = 'auth.html';
+        }, 1500);
+      } catch (error) {
+        console.error("Logout error:", error);
+      }
+    });
+  </script>
+</body>
+</html>

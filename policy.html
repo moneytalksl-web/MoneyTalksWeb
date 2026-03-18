@@ -1,0 +1,790 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>Official Policy - MoneyTalks</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  
+  <!-- GLOBAL CSS -->
+  <style>
+    .btn { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important; }
+    .btn:active { transform: translateY(2px) !important; }
+    .card { transition: transform 0.3s ease, box-shadow 0.3s ease !important; }
+    .card:hover { transform: translateY(-5px) !important; box-shadow: 0 20px 40px rgba(0,0,0,0.3) !important; }
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: rgba(0,0,0,0.1); }
+    ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #8E2DE2, #00E676); border-radius: 4px; }
+    ::selection { background: rgba(142, 45, 226, 0.3); color: white; }
+    :focus { outline: 2px solid #8E2DE2; outline-offset: 2px; }
+    .gradient-text { background: linear-gradient(90deg, #8E2DE2, #00E676); -webkit-background-clip: text; background-clip: text; color: transparent; display: inline-block; }
+  </style>
+  
+  <style>
+    :root {
+      --purple: #8E2DE2;
+      --green: #00E676;
+      --text: #ffffff;
+      --muted: #cbd5e1;
+      --bg-dark: #0d0221;
+      --bg-mid: #0a0f2c;
+      --bg-light: #051f1b;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background:
+        radial-gradient(1200px 600px at 80% -10%, rgba(142,45,226,.28), transparent 60%),
+        radial-gradient(1000px 600px at -10% 90%, rgba(0,230,118,.25), transparent 60%),
+        linear-gradient(120deg, var(--bg-dark) 0%, var(--bg-mid) 35%, var(--bg-light) 100%);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
+      position: relative;
+      overflow-x: hidden;
+    }
+    
+    .country-banner {
+      background: rgba(0,0,0,0.3);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding: 8px 20px;
+      text-align: center;
+      font-size: 14px;
+      color: var(--muted);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    .country-banner span {
+      color: var(--green);
+      font-weight: 600;
+    }
+    
+    .navbar {
+      background: rgba(13, 2, 33, 0.8);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(142, 45, 226, 0.2);
+      padding: 12px 24px;
+      position: sticky;
+      top: 40px;
+      z-index: 99;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+    
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .nav-logo-mark {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: conic-gradient(from 180deg, var(--purple), var(--green) 60%, var(--purple));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 16px;
+      box-shadow: 0 4px 12px rgba(142,45,226,0.3);
+    }
+    
+    .nav-logo-mark span {
+      color: white;
+    }
+    
+    .nav-logo-text {
+      font-weight: 800;
+      font-size: 18px;
+      background: linear-gradient(90deg, var(--purple), var(--green));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 15px;
+      transition: all 0.3s ease;
+      padding: 8px 12px;
+      border-radius: 8px;
+    }
+    
+    .nav-links a:hover {
+      color: white;
+      background: rgba(255,255,255,0.05);
+    }
+    
+    .nav-links a.active {
+      color: white;
+      background: rgba(142, 45, 226, 0.2);
+      border-bottom: 2px solid var(--green);
+    }
+    
+    .logout-btn {
+      background: rgba(255, 71, 87, 0.1);
+      color: #ff4757 !important;
+      border: 1px solid rgba(255, 71, 87, 0.3);
+    }
+    
+    .logout-btn:hover {
+      background: rgba(255, 71, 87, 0.2) !important;
+      color: #ff6b81 !important;
+    }
+    
+    .mobile-menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+    }
+    
+    .container {
+      max-width: 900px;
+      margin: 30px auto 50px;
+      padding: 0 20px;
+    }
+    
+    .legal-card {
+      background: rgba(255,255,255,0.03);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: clamp(25px, 4vw, 40px);
+      border: 1px solid rgba(142,45,226,0.2);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+      position: relative;
+      animation: fadeIn 0.8s ease-out;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .legal-card::before {
+      content: "";
+      display: block;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--purple), var(--green));
+      border-radius: 20px 20px 0 0;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    
+    h1 {
+      color: var(--purple);
+      margin-bottom: 10px;
+      font-size: clamp(24px, 5vw, 32px);
+      font-weight: 800;
+    }
+    
+    .last-updated {
+      color: var(--muted);
+      margin-bottom: 30px;
+      font-size: 14px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    h2 {
+      color: var(--green);
+      margin: 30px 0 15px 0;
+      font-size: clamp(18px, 4vw, 22px);
+      font-weight: 700;
+    }
+    
+    h3 {
+      color: var(--purple);
+      margin: 20px 0 10px;
+      font-size: clamp(16px, 3.5vw, 18px);
+    }
+    
+    p {
+      margin-bottom: 15px;
+      color: var(--text);
+    }
+    
+    ul, ol {
+      margin: 15px 0 15px 30px;
+    }
+    
+    li {
+      margin-bottom: 8px;
+      color: var(--muted);
+    }
+    
+    a {
+      color: var(--green);
+      text-decoration: none;
+    }
+    
+    a:hover {
+      text-decoration: underline;
+    }
+    
+    .policy-section {
+      background: rgba(142,45,226,0.05);
+      padding: 20px;
+      border-radius: 10px;
+      margin: 20px 0;
+      border-left: 4px solid var(--purple);
+    }
+    
+    .btn-back {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 12px 24px;
+      background: linear-gradient(90deg, var(--purple), var(--green));
+      color: white;
+      text-decoration: none;
+      border-radius: 999px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-back:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(142,45,226,0.3);
+      text-decoration: none;
+    }
+    
+    .crypto-animation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+    
+    .coin {
+      position: absolute;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--purple), var(--green));
+      opacity: 0.1;
+      animation: float 20s linear infinite;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 8px;
+    }
+    
+    @keyframes float {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 0.1; }
+      100% { transform: translateY(-100px) rotate(360deg); opacity: 0.3; }
+    }
+    
+    .main-footer {
+      margin-top: 60px;
+      padding: 40px 20px 20px;
+      background: rgba(0,0,0,0.3);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid rgba(142,45,226,0.2);
+    }
+    
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+    }
+    
+    .footer-section h4 {
+      color: var(--green);
+      margin-bottom: 15px;
+      font-size: 16px;
+    }
+    
+    .footer-section a {
+      color: var(--muted);
+      text-decoration: none;
+      display: block;
+      margin-bottom: 8px;
+      font-size: 14px;
+      transition: color 0.3s ease;
+    }
+    
+    .footer-section a:hover {
+      color: white;
+    }
+    
+    .footer-section a.active {
+      color: var(--green);
+    }
+    
+    .footer-bottom {
+      text-align: center;
+      padding-top: 20px;
+      margin-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      color: var(--muted);
+      font-size: 13px;
+    }
+    
+    @media (max-width: 768px) {
+      .navbar {
+        padding: 10px 16px;
+      }
+      
+      .mobile-menu-toggle {
+        display: block;
+      }
+      
+      .nav-links {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        gap: 10px;
+        padding: 15px 0;
+      }
+      
+      .nav-links.show {
+        display: flex;
+      }
+      
+      .nav-links a {
+        width: 100%;
+        text-align: center;
+      }
+      
+      .country-banner {
+        font-size: 12px;
+        padding: 6px 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Country Detector Banner -->
+  <div class="country-banner" id="country-banner">
+    Detecting your location... <span id="country-display"></span>
+  </div>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="nav-logo">
+      <div class="nav-logo-mark"><span>MT</span></div>
+      <div class="nav-logo-text">MoneyTalks</div>
+    </div>
+    
+    <button class="mobile-menu-toggle" id="menu-toggle">☰</button>
+    
+    <div class="nav-links" id="nav-links">
+      <a href="index.html">Home</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="plans.html">Plans</a>
+      <a href="links.html">Earn Links</a>
+      <a href="game.html">Game</a>
+      <a href="about.html">About</a>
+      <a href="faq.html">FAQ</a>
+      <a href="policy.html" class="active">Policy</a>
+      <a href="#" id="logout-btn" class="logout-btn">🚪 Logout</a>
+    </div>
+  </nav>
+  
+  <!-- Crypto Animation -->
+  <div class="crypto-animation">
+    <div class="coin">₿</div>
+    <div class="coin">Ξ</div>
+    <div class="coin">$</div>
+    <div class="coin">€</div>
+    <div class="coin">£</div>
+    <div class="coin">¥</div>
+  </div>
+
+  <div class="container">
+    <div class="legal-card">
+      <h1>📋 Official MoneyTalks Policy</h1>
+      <p class="last-updated"><strong>Last Updated:</strong> March 2025</p>
+      
+      <div class="policy-section">
+        <h2>1. 🎯 Purpose of This Policy</h2>
+        <p>This Official Policy document outlines the comprehensive rules, guidelines, and operational standards for the MoneyTalks platform. It serves as the authoritative reference for how our platform operates, how user accounts are managed, and what standards we maintain.</p>
+        <p>This policy works in conjunction with our Terms of Service, Privacy Policy, and Earnings Disclaimer to provide complete transparency about our operations.</p>
+      </div>
+      
+      <h2>2. 👤 Account Policies</h2>
+      
+      <h3>2.1 Account Creation</h3>
+      <ul>
+        <li>Users must be at least 18 years old to create an account</li>
+        <li>One account per person (no multiple accounts)</li>
+        <li>Accurate information must be provided during registration</li>
+        <li>Email verification is required for all accounts</li>
+        <li>Accounts are non-transferable</li>
+      </ul>
+      
+      <h3>2.2 Account Security</h3>
+      <ul>
+        <li>Users are responsible for maintaining their password security</li>
+        <li>Two-factor authentication is recommended (coming soon)</li>
+        <li>Notify us immediately of any unauthorized access</li>
+        <li>We never ask for your password via email or message</li>
+        <li>Regular security audits are performed on all accounts</li>
+      </ul>
+      
+      <h3>2.3 Account Suspension & Termination</h3>
+      <ul>
+        <li>Violation of terms may result in account suspension</li>
+        <li>Fraudulent activity leads to immediate permanent ban</li>
+        <li>Inactive accounts may be suspended after 12 months</li>
+        <li>Users may request account deletion at any time</li>
+        <li>Banned users forfeit any remaining credits or benefits</li>
+      </ul>
+      
+      <h2>3. 💰 Earning Policies</h2>
+      
+      <h3>3.1 Link Earnings</h3>
+      <ul>
+        <li>Earnings from third-party links are processed by those sites</li>
+        <li>MoneyTalks does not process or hold cryptocurrency</li>
+        <li>Each site has its own minimum payout thresholds</li>
+        <li>Earnings vary based on site rules and user activity</li>
+        <li>We track clicks but not actual earnings from third parties</li>
+      </ul>
+      
+      <h3>3.2 Game Credits</h3>
+      <ul>
+        <li>Game credits purchased via PayPal/Razorpay are non-refundable</li>
+        <li>Credits can only be used for game spins</li>
+        <li>No cash value - credits cannot be withdrawn</li>
+        <li>Bonus credits from game wins are for entertainment only</li>
+        <li>Credits expire after 12 months of inactivity</li>
+      </ul>
+      
+      <h3>3.3 Referral Program</h3>
+      <ul>
+        <li>Referral credits are awarded when referred users purchase plans</li>
+        <li>Self-referrals are strictly prohibited</li>
+        <li>Referral fraud results in immediate account termination</li>
+        <li>Referral bonuses are credited within 24 hours</li>
+        <li>Maximum referral earnings are unlimited (fair play only)</li>
+      </ul>
+      
+      <h2>4. 💳 Payment Policies</h2>
+      
+      <h3>4.1 Plan Purchases</h3>
+      <ul>
+        <li>All plan purchases are final and non-refundable</li>
+        <li>Payments processed via PayPal (international) or Razorpay (India)</li>
+        <li>Plan features activate immediately upon successful payment</li>
+        <li>Prices are in USD (converted to local currency by payment processors)</li>
+        <li>We do not store payment information on our servers</li>
+      </ul>
+      
+      <h3>4.2 Refund Policy</h3>
+      <ul>
+        <li>No refunds for change of mind</li>
+        <li>Technical issues preventing access may qualify for refund within 7 days</li>
+        <li>Refund requests must be submitted via email</li>
+        <li>Approved refunds are processed within 5-10 business days</li>
+        <li>Payment processor fees are non-refundable</li>
+      </ul>
+      
+      <h3>4.3 Chargebacks</h3>
+      <ul>
+        <li>Chargebacks result in immediate account suspension</li>
+        <li>Disputed transactions are investigated thoroughly</li>
+        <li>False chargebacks may result in legal action</li>
+        <li>Accounts with chargebacks lose all access and benefits</li>
+        <li>Reinstatement requires full payment plus fees</li>
+      </ul>
+      
+      <h2>5. 🎮 Game Policies</h2>
+      
+      <h3>5.1 Fair Play</h3>
+      <ul>
+        <li>All game outcomes are determined by random number generation</li>
+        <li>Exploiting bugs or glitches is strictly prohibited</li>
+        <li>Automated scripts or bots are not allowed</li>
+        <li>Multiple accounts to gain extra spins is forbidden</li>
+        <li>Fair play monitoring is active on all games</li>
+      </ul>
+      
+      <h3>5.2 Spin Mechanics</h3>
+      <ul>
+        <li>Each spin costs $0.25 from credit balance</li>
+        <li>Win rates: 60% lose, 20% site win, 20% cash win</li>
+        <li>Site wins provide affiliate links (real earning opportunities)</li>
+        <li>Cash wins add bonus credits to balance (for entertainment)</li>
+        <li>Spin history is recorded for all users</li>
+      </ul>
+      
+      <h3>5.3 Cheating Prevention</h3>
+      <ul>
+        <li>DevTools detection is active</li>
+        <li>Abnormal click patterns are monitored</li>
+        <li>VPN/proxy abuse is tracked</li>
+        <li>Cheaters are permanently banned</li>
+        <li>Cheat logs are reviewed by administrators</li>
+      </ul>
+      
+      <h2>6. 🔒 Privacy & Data Policies</h2>
+      
+      <h3>6.1 Data Collection</h3>
+      <ul>
+        <li>Email addresses for account creation and communication</li>
+        <li>Username for public profile identification</li>
+        <li>Payment information (not stored by us, processed by PayPal/Razorpay)</li>
+        <li>Game activity for fair play monitoring</li>
+        <li>IP addresses for security and fraud prevention</li>
+        <li>Device information for platform optimization</li>
+      </ul>
+      
+      <h3>6.2 Data Usage</h3>
+      <ul>
+        <li>Account management and customer support</li>
+        <li>Platform improvement and feature development</li>
+        <li>Security monitoring and fraud prevention</li>
+        <li>Communication about updates and promotions</li>
+        <li>Legal compliance and regulatory requirements</li>
+      </ul>
+      
+      <h3>6.3 Data Protection</h3>
+      <ul>
+        <li>All data encrypted in transit (HTTPS)</li>
+        <li>Firebase security rules protect database access</li>
+        <li>Regular security audits performed</li>
+        <li>No selling of user data to third parties</li>
+        <li>Data retained only as long as necessary</li>
+      </ul>
+      
+      <h2>7. 🚫 Prohibited Activities</h2>
+      
+      <h3>7.1 Absolutely Forbidden:</h3>
+      <ul>
+        <li><strong>Multiple Accounts:</strong> Creating more than one account</li>
+        <li><strong>Automation:</strong> Using bots, scripts, or automated tools</li>
+        <li><strong>Fraud:</strong> Fake referrals, payment fraud, or chargeback abuse</li>
+        <li><strong>Cheating:</strong> Exploiting bugs or manipulating game outcomes</li>
+        <li><strong>Abuse:</strong> Harassing other users or staff</li>
+        <li><strong>Illegal Activity:</strong> Money laundering or illegal transactions</li>
+        <li><strong>Impersonation:</strong> Pretending to be someone else</li>
+        <li><strong>Scraping:</strong> Copying content without permission</li>
+      </ul>
+      
+      <h3>7.2 Consequences of Violations</h3>
+      <ul>
+        <li>First offense: Warning (for minor issues)</li>
+        <li>Second offense: Temporary suspension</li>
+        <li>Severe violations: Permanent ban without warning</li>
+        <li>Fraud: Immediate permanent ban and legal action possible</li>
+        <li>Banned users forfeit all credits and plan benefits</li>
+      </ul>
+      
+      <h2>8. ⚖️ Legal Compliance</h2>
+      
+      <h3>8.1 Regulatory Compliance</h3>
+      <ul>
+        <li>MoneyTalks operates as a directory and educational platform</li>
+        <li>We are not a financial institution or cryptocurrency exchange</li>
+        <li>Users are responsible for compliance with local laws</li>
+        <li>We comply with applicable data protection regulations</li>
+        <li>Affiliate relationships are disclosed as required by law</li>
+      </ul>
+      
+      <h3>8.2 Tax Responsibility</h3>
+      <ul>
+        <li>Users are solely responsible for reporting earnings</li>
+        <li>We do not provide tax advice or documentation</li>
+        <li>Consult a tax professional for your jurisdiction</li>
+        <li>Cryptocurrency earnings may be taxable</li>
+        <li>Keep records of your own earnings and transactions</li>
+      </ul>
+      
+      <h2>9. 📞 Support & Communication</h2>
+      
+      <h3>9.1 Support Channels</h3>
+      <ul>
+        <li>Email: themoneytalks.web@gmail.com (24-48 hour response)</li>
+        <li>Telegram: @MONEYTALKS_OFFICAL (faster response)</li>
+        <li>FAQ section for common questions</li>
+        <li>Support tickets for account issues</li>
+      </ul>
+      
+      <h3>9.2 Response Times</h3>
+      <ul>
+        <li>Email inquiries: within 24-48 hours</li>
+        <li>Telegram messages: within 12 hours</li>
+        <li>Urgent issues: flagged for priority response</li>
+        <li>Technical problems: addressed as quickly as possible</li>
+      </ul>
+      
+      <h3>9.3 What We Can Help With:</h3>
+      <ul>
+        <li>Account access issues</li>
+        <li>Payment questions</li>
+        <li>Technical problems</li>
+        <li>General inquiries about platform features</li>
+      </ul>
+      
+      <h3>9.4 What We Cannot Help With:</h3>
+      <ul>
+        <li>Third-party site issues or payouts</li>
+        <li>Cryptocurrency wallet problems</li>
+        <li>Tax or legal advice</li>
+        <li>Password recovery (use Firebase's system)</li>
+      </ul>
+      
+      <h2>10. 🔄 Platform Changes & Updates</h2>
+      
+      <h3>10.1 Policy Updates</h3>
+      <ul>
+        <li>This policy may be updated periodically</li>
+        <li>Users will be notified of significant changes</li>
+        <li>Continued use implies acceptance of updates</li>
+        <li>Major changes will have 30-day notice</li>
+        <li>Archived versions available on request</li>
+      </ul>
+      
+      <h3>10.2 Feature Changes</h3>
+      <ul>
+        <li>We reserve the right to modify or discontinue features</li>
+        <li>Paid plan features are guaranteed for active subscription period</li>
+        <li>Free features may change without notice</li>
+        <li>Game mechanics may be adjusted for fairness</li>
+        <li>Link availability may vary based on partnerships</li>
+      </ul>
+      
+      <h2>11. 📋 Acceptance of Policy</h2>
+      <p>By using MoneyTalks, you acknowledge that you have read, understood, and agree to be bound by this Official Policy. If you do not agree with any part of this policy, you must discontinue use of our platform immediately.</p>
+      
+      <div class="policy-section">
+        <h2>📬 Contact Information</h2>
+        <p><strong>Email:</strong> <a href="mailto:themoneytalks.web@gmail.com">themoneytalks.web@gmail.com</a></p>
+        <p><strong>Telegram:</strong> @MONEYTALKS_OFFICAL</p>
+        <p><strong>Response Time:</strong> Within 24-48 hours</p>
+        <p><strong>Address:</strong> (For legal correspondence only - available upon request)</p>
+      </div>
+      
+      <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-top: 30px;">
+        <a href="index.html" class="btn-back">← Back to Home</a>
+        <a href="terms.html" class="btn-back" style="background: transparent; border: 1px solid var(--green);">Terms of Service</a>
+        <a href="privacy.html" class="btn-back" style="background: transparent; border: 1px solid var(--green);">Privacy Policy</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="main-footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>MoneyTalks</h4>
+        <a href="about.html">About Us</a>
+        <a href="faq.html">FAQ</a>
+      </div>
+      <div class="footer-section">
+        <h4>Legal</h4>
+        <a href="terms.html">Terms of Service</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="disclaimer.html">Earnings Disclaimer</a>
+        <a href="policy.html" class="active">Official Policy</a>
+      </div>
+      <div class="footer-section">
+        <h4>Resources</h4>
+        <a href="plans.html">Plans & Pricing</a>
+        <a href="links.html">Earning Links</a>
+        <a href="game.html">Casino Game</a>
+        <a href="dashboard.html">Dashboard</a>
+      </div>
+      <div class="footer-section">
+        <h4>Connect</h4>
+        <a href="mailto:themoneytalks.web@gmail.com">📧 themoneytalks.web@gmail.com</a>
+        <a href="#">📱 Telegram: @MONEYTALKS_OFFICAL</a>
+        <p style="color: var(--muted); font-size: 13px; margin-top: 10px;">© <span id="year"></span> MoneyTalks</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>💰 Crypto earning platform • Best faucet links • Daily payouts</p>
+    </div>
+  </footer>
+
+  <script>
+    // Set current year
+    document.getElementById('year').textContent = new Date().getFullYear();
+    
+    // Mobile Menu Toggle
+    document.getElementById('menu-toggle').addEventListener('click', function() {
+      document.getElementById('nav-links').classList.toggle('show');
+    });
+    
+    // Close menu when clicking outside
+    document.addEventListener('click', function(event) {
+      const navLinks = document.getElementById('nav-links');
+      const menuToggle = document.getElementById('menu-toggle');
+      
+      if (!navLinks.contains(event.target) && !menuToggle.contains(event.target) && navLinks.classList.contains('show')) {
+        navLinks.classList.remove('show');
+      }
+    });
+    
+    // Country Detection
+    async function detectCountry() {
+      try {
+        const response = await fetch('https://ipapi.co/json/');
+        const data = await response.json();
+        const countryDisplay = document.getElementById('country-display');
+        
+        if (data.country_name) {
+          const flag = data.country_code === 'IN' ? '🇮🇳' : '🌍';
+          const currency = data.currency || 'USD';
+          countryDisplay.innerHTML = `${flag} ${data.country_name} (${currency})`;
+          localStorage.setItem('user_country', data.country_code || 'US');
+        } else {
+          countryDisplay.innerHTML = '🌍 International (USD)';
+        }
+      } catch (error) {
+        document.getElementById('country-display').innerHTML = '🌍 International (USD)';
+      }
+    }
+    detectCountry();
+    
+    // Logout Function
+    document.getElementById('logout-btn').addEventListener('click', function(e) {
+      e.preventDefault();
+      
+      // Clear local storage
+      localStorage.removeItem('userLoggedIn');
+      localStorage.removeItem('mt_username');
+      localStorage.removeItem('mt_email');
+      localStorage.removeItem('mt_activePlan');
+      localStorage.removeItem('mt_balance');
+      
+      // Show message and redirect
+      alert('Logged out successfully!');
+      window.location.href = 'auth.html';
+    });
+  </script>
+</body>
+</html>

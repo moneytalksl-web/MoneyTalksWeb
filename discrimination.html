@@ -1,0 +1,684 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>Earnings Disclaimer - MoneyTalks</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  
+  <!-- GLOBAL CSS -->
+  <style>
+    .btn { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important; }
+    .btn:active { transform: translateY(2px) !important; }
+    .card { transition: transform 0.3s ease, box-shadow 0.3s ease !important; }
+    .card:hover { transform: translateY(-5px) !important; box-shadow: 0 20px 40px rgba(0,0,0,0.3) !important; }
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: rgba(0,0,0,0.1); }
+    ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #8E2DE2, #00E676); border-radius: 4px; }
+    ::selection { background: rgba(142, 45, 226, 0.3); color: white; }
+    :focus { outline: 2px solid #8E2DE2; outline-offset: 2px; }
+    .gradient-text { background: linear-gradient(90deg, #8E2DE2, #00E676); -webkit-background-clip: text; background-clip: text; color: transparent; display: inline-block; }
+  </style>
+  
+  <style>
+    :root {
+      --purple: #8E2DE2;
+      --green: #00E676;
+      --text: #ffffff;
+      --muted: #cbd5e1;
+      --bg-dark: #0d0221;
+      --bg-mid: #0a0f2c;
+      --bg-light: #051f1b;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background:
+        radial-gradient(1200px 600px at 80% -10%, rgba(142,45,226,.28), transparent 60%),
+        radial-gradient(1000px 600px at -10% 90%, rgba(0,230,118,.25), transparent 60%),
+        linear-gradient(120deg, var(--bg-dark) 0%, var(--bg-mid) 35%, var(--bg-light) 100%);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
+      position: relative;
+      overflow-x: hidden;
+    }
+    
+    .country-banner {
+      background: rgba(0,0,0,0.3);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding: 8px 20px;
+      text-align: center;
+      font-size: 14px;
+      color: var(--muted);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    .country-banner span {
+      color: var(--green);
+      font-weight: 600;
+    }
+    
+    .navbar {
+      background: rgba(13, 2, 33, 0.8);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(142, 45, 226, 0.2);
+      padding: 12px 24px;
+      position: sticky;
+      top: 40px;
+      z-index: 99;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+    
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .nav-logo-mark {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: conic-gradient(from 180deg, var(--purple), var(--green) 60%, var(--purple));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 16px;
+    }
+    
+    .nav-logo-mark span {
+      color: white;
+    }
+    
+    .nav-logo-text {
+      font-weight: 800;
+      font-size: 18px;
+      background: linear-gradient(90deg, var(--purple), var(--green));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 15px;
+      transition: all 0.3s ease;
+      padding: 8px 12px;
+      border-radius: 8px;
+    }
+    
+    .nav-links a:hover {
+      color: white;
+      background: rgba(255,255,255,0.05);
+    }
+    
+    .nav-links a.active {
+      color: white;
+      background: rgba(142, 45, 226, 0.2);
+      border-bottom: 2px solid var(--green);
+    }
+    
+    .logout-btn {
+      background: rgba(255, 71, 87, 0.1);
+      color: #ff4757 !important;
+      border: 1px solid rgba(255, 71, 87, 0.3);
+    }
+    
+    .logout-btn:hover {
+      background: rgba(255, 71, 87, 0.2) !important;
+      color: #ff6b81 !important;
+    }
+    
+    .mobile-menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+    }
+    
+    .container {
+      max-width: 900px;
+      margin: 30px auto 50px;
+      padding: 0 20px;
+    }
+    
+    .legal-card {
+      background: rgba(255,255,255,0.03);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: clamp(25px, 4vw, 40px);
+      border: 1px solid rgba(142,45,226,0.2);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+      position: relative;
+      animation: fadeIn 0.8s ease-out;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .legal-card::before {
+      content: "";
+      display: block;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--purple), var(--green));
+      border-radius: 20px 20px 0 0;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    
+    h1 {
+      color: #ff4757;
+      margin-bottom: 10px;
+      font-size: clamp(24px, 5vw, 32px);
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    h1::before {
+      content: "⚠️";
+    }
+    
+    .last-updated {
+      color: var(--muted);
+      margin-bottom: 30px;
+      font-size: 14px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    h2 {
+      color: var(--purple);
+      margin: 30px 0 15px 0;
+      font-size: clamp(18px, 4vw, 22px);
+      font-weight: 700;
+    }
+    
+    h3 {
+      color: var(--green);
+      margin: 20px 0 10px;
+      font-size: clamp(16px, 3.5vw, 18px);
+    }
+    
+    p {
+      margin-bottom: 15px;
+      color: var(--text);
+    }
+    
+    ul, ol {
+      margin: 15px 0 15px 30px;
+    }
+    
+    li {
+      margin-bottom: 8px;
+      color: var(--muted);
+    }
+    
+    a {
+      color: var(--green);
+      text-decoration: none;
+    }
+    
+    a:hover {
+      text-decoration: underline;
+    }
+    
+    .warning-box {
+      background: rgba(255,71,87,0.1);
+      padding: 25px;
+      border-radius: 15px;
+      border-left: 4px solid #ff4757;
+      margin: 25px 0;
+    }
+    
+    .btn-back {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 12px 24px;
+      background: linear-gradient(90deg, var(--purple), var(--green));
+      color: white;
+      text-decoration: none;
+      border-radius: 999px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-back:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(142,45,226,0.3);
+      text-decoration: none;
+    }
+    
+    .crypto-animation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+    
+    .coin {
+      position: absolute;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--purple), var(--green));
+      opacity: 0.1;
+      animation: float 20s linear infinite;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 8px;
+    }
+    
+    @keyframes float {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 0.1; }
+      100% { transform: translateY(-100px) rotate(360deg); opacity: 0.3; }
+    }
+    
+    .main-footer {
+      margin-top: 60px;
+      padding: 40px 20px 20px;
+      background: rgba(0,0,0,0.3);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid rgba(142,45,226,0.2);
+    }
+    
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+    }
+    
+    .footer-section h4 {
+      color: var(--green);
+      margin-bottom: 15px;
+      font-size: 16px;
+    }
+    
+    .footer-section a {
+      color: var(--muted);
+      text-decoration: none;
+      display: block;
+      margin-bottom: 8px;
+      font-size: 14px;
+      transition: color 0.3s ease;
+    }
+    
+    .footer-section a:hover {
+      color: white;
+    }
+    
+    .footer-section a.active {
+      color: var(--green);
+    }
+    
+    .footer-bottom {
+      text-align: center;
+      padding-top: 20px;
+      margin-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      color: var(--muted);
+      font-size: 13px;
+    }
+    
+    .comparison {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin: 25px 0;
+    }
+    
+    .real, .simulated {
+      padding: 20px;
+      border-radius: 10px;
+    }
+    
+    .real {
+      background: rgba(0,230,118,0.1);
+      border: 1px solid rgba(0,230,118,0.3);
+    }
+    
+    .simulated {
+      background: rgba(255,71,87,0.1);
+      border: 1px solid rgba(255,71,87,0.3);
+    }
+    
+    @media (max-width: 768px) {
+      .navbar {
+        padding: 10px 16px;
+      }
+      
+      .mobile-menu-toggle {
+        display: block;
+      }
+      
+      .nav-links {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        gap: 10px;
+        padding: 15px 0;
+      }
+      
+      .nav-links.show {
+        display: flex;
+      }
+      
+      .nav-links a {
+        width: 100%;
+        text-align: center;
+      }
+      
+      .country-banner {
+        font-size: 12px;
+        padding: 6px 12px;
+      }
+      
+      .comparison {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Country Detector Banner -->
+  <div class="country-banner" id="country-banner">
+    Detecting your location... <span id="country-display"></span>
+  </div>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="nav-logo">
+      <div class="nav-logo-mark"><span>MT</span></div>
+      <div class="nav-logo-text">MoneyTalks</div>
+    </div>
+    
+    <button class="mobile-menu-toggle" id="menu-toggle">☰</button>
+    
+    <div class="nav-links" id="nav-links">
+      <a href="index.html">Home</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="plans.html">Plans</a>
+      <a href="links.html">Earn Links</a>
+      <a href="game.html">Game</a>
+      <a href="about.html">About</a>
+      <a href="disclaimer.html" class="active">Disclaimer</a>
+      <a href="#" id="logout-btn" class="logout-btn">🚪 Logout</a>
+    </div>
+  </nav>
+  
+  <!-- Crypto Animation -->
+  <div class="crypto-animation">
+    <div class="coin">₿</div>
+    <div class="coin">Ξ</div>
+    <div class="coin">$</div>
+    <div class="coin">€</div>
+    <div class="coin">£</div>
+    <div class="coin">¥</div>
+  </div>
+
+  <div class="container">
+    <div class="legal-card">
+      <h1>IMPORTANT EARNINGS DISCLAIMER</h1>
+      <p class="last-updated"><strong>Last Updated:</strong> March 2025</p>
+      
+      <div class="warning-box">
+        <h2 style="color:#ff4757; margin-top:0;">⚠️ PLEASE READ THIS CAREFULLY</h2>
+        <p><strong>The earnings displayed in your MoneyTalks dashboard are based on REAL affiliate commissions from third-party sites.</strong></p>
+        <p>However, it's important to understand exactly how MoneyTalks works.</p>
+      </div>
+      
+      <h2>📋 How MoneyTalks Actually Works</h2>
+      <p>MoneyTalks has TWO types of features that work differently:</p>
+      
+      <div class="comparison">
+        <div class="real">
+          <h3 style="color:#00E676; margin-top:0;">✅ REAL FEATURES</h3>
+          <p>These involve actual money/value:</p>
+          <ul>
+            <li><strong>Plan Purchases:</strong> You pay real money via PayPal/Razorpay</li>
+            <li><strong>Affiliate Links:</strong> You earn REAL cryptocurrency from third-party sites</li>
+            <li><strong>Referral Commissions:</strong> Real earnings when friends join</li>
+            <li><strong>Game Credits:</strong> Purchased with real money, used for spins</li>
+          </ul>
+        </div>
+        
+        <div class="simulated">
+          <h3 style="color:#ff4757; margin-top:0;">🎮 GAMIFICATION FEATURES</h3>
+          <p>These are for entertainment:</p>
+          <ul>
+            <li><strong>Game Wins:</strong> Bonus credits (can't withdraw, only use for more spins)</li>
+            <li><strong>Free Spins:</strong> Bonus game plays</li>
+            <li><strong>Streak Days:</strong> Visual progress tracking</li>
+          </ul>
+        </div>
+      </div>
+      
+      <h2>💰 Understanding Your REAL Earnings</h2>
+      <p>When you click links from MoneyTalks to third-party sites:</p>
+      <ul>
+        <li><strong>You earn REAL cryptocurrency</strong> from those external sites based on their terms</li>
+        <li><strong>MoneyTalks earns affiliate commissions</strong> when you sign up or complete actions</li>
+        <li><strong>We use these commissions</strong> to maintain the platform and offer free features</li>
+        <li><strong>Earnings vary greatly</strong> based on time invested, location, site rules, and market conditions</li>
+      </ul>
+      
+      <h2>📈 Factors Affecting Real Earnings</h2>
+      
+      <h3>✅ Things That May Increase Earnings:</h3>
+      <ul>
+        <li>Time invested in completing tasks and offers</li>
+        <li>Geographic location (some sites pay more in certain countries)</li>
+        <li>Using multiple earning methods and sites</li>
+        <li>Building a referral network</li>
+        <li>Higher tier plans (more sites, better multipliers)</li>
+        <li>Favorable cryptocurrency market conditions</li>
+      </ul>
+      
+      <h3>❌ Things That May Decrease Earnings:</h3>
+      <ul>
+        <li>Faucet withdrawal limits and minimum payout thresholds</li>
+        <li>Transaction fees on blockchain networks</li>
+        <li>Site-specific rule changes or closures</li>
+        <li>Cryptocurrency price fluctuations</li>
+        <li>Technical issues or downtime</li>
+        <li>Geographic restrictions on certain sites</li>
+      </ul>
+      
+      <div class="warning-box">
+        <h2 style="color:#ff4757;">⚠️ NO GUARANTEES</h2>
+        <p><strong>We make NO promises about:</strong></p>
+        <ul>
+          <li>Specific earnings amounts or timeframes</li>
+          <li>Return on investment for plan purchases</li>
+          <li>Profitability of any earning strategy</li>
+          <li>Future cryptocurrency prices or values</li>
+          <li>Third-party site uptime or payment reliability</li>
+        </ul>
+        <p><strong>Cryptocurrency involves significant risk.</strong> Prices go up AND down. You could lose money. Never invest more than you can afford to lose.</p>
+      </div>
+      
+      <h2>🏢 Our Role vs. Third-Party Sites</h2>
+      <p><strong>MoneyTalks is a directory and educational platform.</strong> We:</p>
+      <ul>
+        <li>Curate and organize earning sites</li>
+        <li>Provide convenient access to opportunities</li>
+        <li>Offer educational resources and guidance</li>
+        <li>Create engaging gamification elements</li>
+        <li>Earn affiliate commissions to support the platform</li>
+      </ul>
+      
+      <p><strong>We are NOT:</strong></p>
+      <ul>
+        <li>A cryptocurrency exchange or wallet provider</li>
+        <li>Your employer or business partner</li>
+        <li>A financial advisor or investment firm</li>
+        <li>Responsible for third-party site terms or payouts</li>
+        <li>Guaranteeing any specific results</li>
+      </ul>
+      
+      <h2>🎯 For Educational & Entertainment Purposes</h2>
+      <p>MoneyTalks is designed to:</p>
+      <ul>
+        <li>Educate about cryptocurrency earning opportunities</li>
+        <li>Provide entertainment through gamification</li>
+        <li>Simplify discovery of legitimate earning sites</li>
+        <li>Demonstrate potential earning concepts</li>
+        <li>Build a community of crypto enthusiasts</li>
+      </ul>
+      
+      <p><strong>NOT as a "get-rich-quick" scheme.</strong> Real earnings require real time and effort.</p>
+      
+      <h2>👤 Your Responsibility</h2>
+      <p>By using MoneyTalks, you acknowledge:</p>
+      <ul>
+        <li>You understand the distinction between our features</li>
+        <li>You are solely responsible for your own earnings and decisions</li>
+        <li>You have read and agreed to third-party site terms</li>
+        <li>You accept all risks associated with cryptocurrency</li>
+        <li>You are at least 18 years old</li>
+        <li>You are responsible for any taxes on your earnings</li>
+      </ul>
+      
+      <div class="warning-box">
+        <h2 style="color:#ff4757;">⚖️ LEGAL DISCLAIMER</h2>
+        <p><strong>This is not financial advice.</strong> The information provided on MoneyTalks is for general informational and entertainment purposes only. Consult a qualified financial professional before making any investment decisions.</p>
+        <p><strong>Past performance does not guarantee future results.</strong> Cryptocurrency markets are highly volatile.</p>
+        <p><strong>Only invest what you can afford to lose.</strong> Never use money needed for essential expenses.</p>
+        <p><strong>Regional restrictions may apply.</strong> Some features may not be available in your country.</p>
+      </div>
+      
+      <h2>📬 Contact Us</h2>
+      <p>If you have questions about this disclaimer:</p>
+      <p><strong>Email:</strong> <a href="mailto:themoneytalks.web@gmail.com">themoneytalks.web@gmail.com</a></p>
+      <p><strong>Telegram:</strong> @MONEYTALKS_OFFICAL</p>
+      
+      <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+        <a href="index.html" class="btn-back">← Back to Homepage</a>
+        <a href="terms.html" class="btn-back" style="background: transparent; border: 1px solid var(--green);">View Terms of Service</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="main-footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>MoneyTalks</h4>
+        <a href="about.html">About Us</a>
+        <a href="faq.html">FAQ</a>
+      </div>
+      <div class="footer-section">
+        <h4>Legal</h4>
+        <a href="terms.html">Terms of Service</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="disclaimer.html" class="active">Earnings Disclaimer</a>
+        <a href="policy.html">Official Policy</a>
+      </div>
+      <div class="footer-section">
+        <h4>Resources</h4>
+        <a href="plans.html">Plans & Pricing</a>
+        <a href="links.html">Earning Links</a>
+        <a href="game.html">Casino Game</a>
+        <a href="dashboard.html">Dashboard</a>
+      </div>
+      <div class="footer-section">
+        <h4>Connect</h4>
+        <a href="mailto:themoneytalks.web@gmail.com">📧 themoneytalks.web@gmail.com</a>
+        <a href="#">📱 Telegram: @MONEYTALKS_OFFICAL</a>
+        <p style="color: var(--muted); font-size: 13px; margin-top: 10px;">© <span id="year"></span> MoneyTalks</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>💰 Crypto earning platform • Best faucet links • Daily payouts</p>
+    </div>
+  </footer>
+
+  <script>
+    // Set current year
+    document.getElementById('year').textContent = new Date().getFullYear();
+    
+    // Mobile Menu Toggle
+    document.getElementById('menu-toggle').addEventListener('click', function() {
+      document.getElementById('nav-links').classList.toggle('show');
+    });
+    
+    // Close menu when clicking outside
+    document.addEventListener('click', function(event) {
+      const navLinks = document.getElementById('nav-links');
+      const menuToggle = document.getElementById('menu-toggle');
+      
+      if (!navLinks.contains(event.target) && !menuToggle.contains(event.target) && navLinks.classList.contains('show')) {
+        navLinks.classList.remove('show');
+      }
+    });
+    
+    // Country Detection
+    async function detectCountry() {
+      try {
+        const response = await fetch('https://ipapi.co/json/');
+        const data = await response.json();
+        const countryDisplay = document.getElementById('country-display');
+        
+        if (data.country_name) {
+          const flag = data.country_code === 'IN' ? '🇮🇳' : '🌍';
+          countryDisplay.innerHTML = `${flag} ${data.country_name} (${data.currency || 'USD'})`;
+          localStorage.setItem('user_country', data.country_code || 'US');
+        } else {
+          countryDisplay.innerHTML = '🌍 International';
+        }
+      } catch (error) {
+        document.getElementById('country-display').innerHTML = '🌍 International';
+      }
+    }
+    detectCountry();
+    
+    // Logout Function
+    document.getElementById('logout-btn').addEventListener('click', function(e) {
+      e.preventDefault();
+      localStorage.removeItem('userLoggedIn');
+      localStorage.removeItem('mt_username');
+      localStorage.removeItem('mt_balance');
+      localStorage.removeItem('mt_activePlan');
+      window.location.href = 'auth.html';
+    });
+  </script>
+</body>
+</html>
